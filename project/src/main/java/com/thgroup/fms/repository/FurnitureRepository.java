@@ -7,3 +7,4 @@ import com.thgroup.fms.entity.Furniture;
 public interface FurnitureRepository extends JpaRepository<Furniture, Integer> {
 
 }
+
