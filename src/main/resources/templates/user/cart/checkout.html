@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/user-layout}">
+
+     
+<section layout:fragment="content">
+
+
+
+ <div class="page-style-a">
+        <div class="container">
+            <div class="page-intro">
+                <h2>Checkout</h2>
+                <ul class="bread-crumb">
+                    <li class="has-separator">
+                        <i class="ion ion-md-home"></i>
+                        <a th:href="@{/home}">Home</a>
+                    </li>
+                    <li class="is-marked">
+                        <a th:href="@{/shopping-cart/checkout}">Checkout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Page Introduction Wrapper /- -->
+    <!-- Checkout-Page -->
+    <div class="page-checkout u-s-p-t-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    
+                    <div>
+                        <div class="message-open u-s-m-b-24">
+                            Have a coupon?
+                            <strong>
+                                <a class="u-c-brand" data-toggle="collapse" href="#showcoupon">Click here to enter your code</a>
+                            </strong>
+                        </div>
+                        <div class="collapse u-s-m-b-24" id="showcoupon">
+                            <h6 class="collapse-h6">
+                                Enter your coupon code if you have one.
+                            </h6>
+                            <div class="coupon-field">
+                                <label class="sr-only" for="coupon-code">Apply Coupon</label>
+                                <input id="coupon-code" type="text" class="text-field" placeholder="Coupon Code">
+                                <button type="submit" class="button">Apply Coupon</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Second Accordion /- -->
+                   <form th:action="@{/shopping-cart/saveOrder}" th:object="${order}" method="POST">
+                        <div class="row">                     
+                            <!-- Billing-&-Shipping-Details -->
+                            <div class="col-lg-6">
+                                <h4 class="section-h4">ThÃ´ng tin Ä‘Æ¡n</h4>
+                                <!-- Form-Fields -->
+                                <div class="group-inline u-s-m-b-13" th:with ="name=${#strings.arraySplit(userInfo.hoTenKH,' ')} ">
+                                    <div class="group-1 u-s-p-r-16">
+                                        <label for="first-name">First Name
+                                            <span class="astk">*</span>
+                                        </label>
+                                       <input type="text" id="first-name" class="text-field" th:value="${#strings.substringBefore(userInfo.hoTenKH,name[name.length - 1])}">
+                                    </div>
+                                    <div class="group-2">
+                                        <label for="last-name">Last Name                                
+                                            <span class="astk">*</span>
+                                        </label>
+                                        <input type="text" id="last-name" class="text-field" th:value="${name[name.length - 1]}">
+                                    </div>
+                                </div>                           
+                                <div class="street-address u-s-m-b-13">
+                                    <label for="req-st-address">Address
+                                        <span class="astk">*</span>
+                                    </label>
+                                    <input type="text" id="req-st-address" class="text-field" th:value="${userInfo.diaChi}"
+                                    required>                              
+                                </div>                           
+                                <div class="group-inline u-s-m-b-13">
+                                    <div class="group-1 u-s-p-r-16">
+                                        <label for="email">Email
+                                            <span class="astk">*</span>
+                                        </label>
+                                        <input type="text" id="email" class="text-field" required th:value="${userInfo.email}"> 
+                                    </div>
+                                    <div class="group-2">
+                                        <label for="phone">Phone
+                                            <span class="astk">*</span>
+                                        </label>
+                                        <input type="text" id="phone" class="text-field" required th:value="${userInfo.sdt}">
+                                    </div>
+                                </div>                         
+                                
+                                <div>
+                                    <label for="order-notes">Note	</label>
+                                    <textarea class="text-area" th:name="note" th:id ="note" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                </div>
+                            </div>
+                         
+                           
+                            <!-- Billing-&-Shipping-Details /- -->
+                            <!-- Checkout -->
+                            <div class="col-lg-6">
+                                <h4 class="section-h4">Chi tiáº¿t Ä‘Æ¡n</h4>
+                                <div class="order-table">
+                                    <table class="u-s-m-b-13">
+                                        <thead>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="item:${cartItem}">
+                                                <td>
+                                                    <h6 class="order-h6" th:text="${item.name}"></h6>
+                                                    <span class="order-span-quantity" th:text="x + ${item.quantity}"></span>
+                                                </td>
+                                                <td>
+                                                    <h6 class="order-h6" th:inline="text">[[${#numbers.formatDecimal(item.price*item.quantity, 0, 'COMMA', 0, 'POINT')}]] VND</h6>
+                                                </td>
+                                            </tr>
+                                          
+                                             
+                                            <tr>
+                                                <td>
+                                                    <h3 class="order-h3">Subtotal</h3>
+                                                </td>
+                                                <td>
+                                                    <h3 class="order-h3" th:inline="text">[[${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT')}]] VND</h3>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h3 class="order-h3">Shipping</h3>
+                                                </td>
+                                                <td>
+                                                    <h3 class="order-h3">Free Ship</h3>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h3 class="order-h3">Tax</h3>
+                                                </td>
+                                                <td>
+                                                    <h3 class="order-h3">10%</h3>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h3 class="order-h3">Total</h3>
+                                                </td>
+                                                <td>
+                                                    <h3 class="order-h3"  th:inline="text">[[${#numbers.formatDecimal(total + total*0.1, 0, 'COMMA', 0, 'POINT')}]] VND</h3>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="u-s-m-b-13">
+                                        <input type="checkbox" class="check-box" id="accept">
+                                        <label class="label-text no-color" for="accept">Iï¿½ve read and accept the
+                                            <a href="terms-and-conditions.html" class="u-c-brand">terms & conditions</a>
+                                        </label>
+                                    </div>
+                                    <button type="submit" class="button button-outline-secondary">Place Order</button>
+                                </div>
+                            </div>
+                            <!-- Checkout /- -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+</script>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      	layout:decorate="~{layouts/admin-layout}">
+<div layout:fragment="content">
+	<h1 class="h3 mb-2 text-gray-800">Thêm tài khoản</h1>
+	<div class="card shadow mb-4">
+		<div class="card-body">
+			<form action="#" th:action="@{/admin/save-account}" th:object="${account}" method="POST">
+		 		<label>Tài khoản <sup>*</sup></label>
+		 		<input type="text" th:field = "*{tenTaiKhoan}" required
+		 		placeholder="Nhập tài khoản" class="form-control mb-4 col-6">
+		 		
+		 		<label>Mật khẩu <sup>*</sup></label>
+		 		<input type="password" th:field = "*{matKhau}" required
+		 		placeholder="Nhập mật khẩu" class="form-control mb-4 col-6">
+		 		
+		 		<label>Roles</label>
+		 		<div class="mb-4 col-6">
+		 			<div class="custom-control custom-checkbox custom-control-inline"
+		 				th:each="role : ${rolesList}">
+		 				<input type="checkbox" name="roles" class="custom-control-input"
+				            th:value="${role.idVaiTro}"
+				            th:field="*{dsVT}" th:id="${role.idVaiTro}"
+				        />
+				        <label class="custom-control-label" th:for="${role.idVaiTro}"
+				        	th:text="${#strings.substring(role.tenVT, 5)}"></label>
+				    </div>
+		 		</div>
+		 		<button type="submit" class="btn btn-info">Thêm mới</button>
+		 	</form>
+   		</div>
+	</div>
+</div>
+</html>

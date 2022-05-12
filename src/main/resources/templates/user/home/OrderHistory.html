@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/user-layout}">
+
+
+      
+<section layout:fragment="content">
+ <div class="page-style-a">
+        <div class="container">
+            <div class="page-intro">
+                <h2>Detail</h2>
+                <ul class="bread-crumb">
+                    <li class="has-separator">
+                        <i class="ion ion-md-home"></i>
+                        <a th:href="@{/home}">Home</a>
+                    </li>
+                    <li class="is-marked">
+                        <a th:href="@{/home/orderHistory}">My Order</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+  
+
+<div class="container">
+	<div th:if ="${not #lists.isEmpty(orderList)}">
+	<article class="card  my-3" th:each="item: ${orderList}">
+        <header class="card-header"> My Orders / Tracking </header>
+        <div class="card-body">
+            <h6 th:inline="text">OrderId: [[${item.maDH}]]</h6>
+            <article class="card">
+                <div class="card-body row">
+                    <div class="col" th:inline="text"> <strong>Estimated Delivery time:</strong> <br>[[${item.ngayLap}]]</div>
+                    <div class="col" th:inline="text"> <strong>Address:</strong> <br> [[${item.diaChiNhanHang}]]</div>
+                    <div class="col" th:inline="text"> <strong>Phone:</strong><br><i class="fa fa-phone"></i>
+                     [[${item.khachHang.sdt}]]</div>                
+                    <div class="col" th:switch="${item.tinhTrang}"> <strong>Status:</strong> <br>
+                    		<span th:case="false" class="text-warning font-weight-bold">Waiting</span>
+				             <span th:case="true" class="text-info font-weight-bold">Shipping</span>
+                    </div>
+                </div>
+            </article>
+           
+            <hr>                                                         
+                                            <ul class="row list-inline">
+                                            	<li class="col" th:each="item1 :${item.dsCTDH}">
+                                            		<div class="d-flex flex-row">
+                                            			
+															<img style="width:80px;height:80px" th:src="@{/admin/img/} + ${item1.noiThat.hinhAnh}">                                       			
+                                            			
+                                            		<div class="ml-3">
+                                            		<a th:href="@{/detail-furniture/{idNoiThat}(idNoiThat=${item1.noiThat.idNoiThat})}" th:inline="text">[[${item1.noiThat.tenNT}]]</a>
+                                            		</br>
+                                            		<span th:inline="text">x [[${item1.soLuong}]]</span>
+                                            		</br>
+                                            		<span th:inline="text">
+									    				[[${#numbers.formatDecimal(item1.giaMua, 0, 'COMMA', 0, 'POINT')}]] VND</span>
+                                            		</div>
+                                            		</div>
+                                            		
+                                            		
+                                            	</li>
+                                            </ul>
+                                       
+                                        
+                                   
+            <hr>
+            
+           
+                      
+             <span th:inline="text">Total:
+		[[${#numbers.formatDecimal(#aggregates.sum(item.dsCTDH.![soLuong *giaMua]), 0, 'COMMA', 0, 'POINT')}]] VND</span>
+           
+           
+            
+        </div>
+    </article>
+	</div>
+    <div th:if ="${#lists.isEmpty(orderList)}" class="d-flex justify-content-center my-4">
+    
+    		<div class="text-center">
+	                <h1>Em
+	                    <i class="fas fa-child"></i>ty!</h1>
+	                <h5>Your Order is currently empty.</h5>
+	                <div class="redirect-link-wrapper u-s-p-t-25">
+	                    <a class="redirect-link" th:href="@{/home}">
+	                        <span>Return to Shop</span>
+	                    </a>
+	                </div>
+                </div>
+            </div>
+        </div>
+    
+		
+   
+
+</section>
+
+
+<script>
+
+</script>
+</html>
