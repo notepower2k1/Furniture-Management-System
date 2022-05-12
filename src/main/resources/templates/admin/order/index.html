@@ -34,8 +34,8 @@
 						   	<td th:text="${order.maDH}"></td>
 						    <td th:text="${order.ngayLap}"></td>
 						    <td th:text="${order.diaChiNhanHang}"></td>
-						    <td th:text="${order.khachHang.hoTenKH}"></td>
-						    <td th:text="${order.nhanVien.hoTenNV}"></td>
+						    <td th:text="${order.khachHang.hoTen}"></td>
+						    <td th:text="${order.nhanVien.hoTen}"></td>
 				     		<td class="action-area">
 				     			<a th:href="@{/admin/detail-order/{idDonHang}(idDonHang=${order.idDonHang})}" 
 							    class="btn btn-primary"><i class="fas fa-fw fa-info-circle"></i></a>

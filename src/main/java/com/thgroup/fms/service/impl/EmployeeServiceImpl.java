@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.thgroup.fms.entity.Account;
 import com.thgroup.fms.entity.Employee;
 import com.thgroup.fms.repository.EmployeeRepository;
 import com.thgroup.fms.service.EmployeeService;
@@ -51,6 +52,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public String getMaxId() {
 		return this.employeeRepo.findFirstMaNV();
+	}
+
+	@Override
+	public Employee getByAccount(Account taiKhoan) {
+		return this.employeeRepo.findByTaiKhoan(taiKhoan);
 	}
 
 }

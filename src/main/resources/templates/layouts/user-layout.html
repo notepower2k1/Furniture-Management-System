@@ -50,15 +50,20 @@
                                 <i class="fas fa-chevron-down u-s-m-l-9"></i>
                             </a>
                             <ul class="g-dropdown" style="width: 150px">
+                            <li>
+                                    <a th:href="@{/account}">
+                                        <i class="fas fa-user-circle u-s-m-r-9"></i>
+                                        My Account</a>
+                                </li>
                                 <li>
-                                    <a th:href="@{/orderHistory}">
+                                    <a th:href="@{/order-history}">
                                         <i class="fas fa-cog u-s-m-r-9"></i>
                                         My Order</a>
                                 </li>
                                 <li>
-                                    <a th:href="@{/account}">
+                                    <a th:href="@{/shopping-cart/checkout}">
                                         <i class="far fa-check-circle u-s-m-r-9"></i>
-                                       My Account</a>
+                                       Checkout</a>
                                 </li>
                                 <li>
                                     <form th:action="@{/logout}" method="POST">
@@ -104,9 +109,9 @@
                                 <li>
                                     <a id="mini-cart-trigger">
                                         <i class="ion ion-md-basket"></i>
-                                        <span th:if="${ItemCount} != 0">
-	                                        <span class="item-counter"  th:text="${ItemCount}"></span>
-	                                        <span class="item-price" th:inline="text">[[${#numbers.formatDecimal(ItemTotal, 0, 'COMMA', 0, 'POINT')}]] VND</span>
+                                        <span th:if="${itemCount} != 0">
+	                                        <span class="item-counter"  th:text="${itemCount}"></span>
+	                                        <span class="item-price" th:inline="text">[[${#numbers.formatDecimal(itemTotal, 0, 'COMMA', 0, 'POINT')}]] VND</span>
                                     	</span>
                                     </a>
                                 </li>
@@ -125,7 +130,7 @@
             <div class="fixed-responsive-wrapper">
                 <a href="wishlist.html">
                     <i class="far fa-heart"></i>
-                    <span class="fixed-item-counter" th:text="${ItemCount}"></span>
+                    <span class="fixed-item-counter" th:text="${itemCount}"></span>
                 </a>
             </div>
         </div>
@@ -148,12 +153,12 @@
                 </ul>
                 <div class="mini-shop-total clearfix">
                     <span class="mini-total-heading float-left">Total:</span>
-                    <span class="mini-total-price float-right" th:inline="text">[[${#numbers.formatDecimal(ItemTotal, 0, 'COMMA', 0, 'POINT')}]] VND</span>
+                    <span class="mini-total-price float-right" th:inline="text">[[${#numbers.formatDecimal(itemTotal, 0, 'COMMA', 0, 'POINT')}]] VND</span>
                 </div>
                 <div class="mini-action-anchors">
                 	
                   
-                    <a th:href="${ItemCount}!=0?@{/shopping-cart/views}:@{/shopping-cart/empty}" class="cart-anchor">View Cart</a>
+                    <a th:href="${itemCount}!=0?@{/shopping-cart/views}:@{/shopping-cart/empty}" class="cart-anchor">View Cart</a>
                   
                     <a th:href="@{/shopping-cart/checkout}" class="checkout-anchor">Checkout</a>
                 </div>

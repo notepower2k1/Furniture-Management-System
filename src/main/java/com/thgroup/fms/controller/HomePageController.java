@@ -6,27 +6,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thgroup.fms.entity.Account;
 import com.thgroup.fms.entity.Category;
 import com.thgroup.fms.entity.Customer;
+import com.thgroup.fms.entity.Employee;
 import com.thgroup.fms.entity.Furniture;
 import com.thgroup.fms.entity.Order;
 import com.thgroup.fms.service.AccountService;
 import com.thgroup.fms.service.CategoryService;
 import com.thgroup.fms.service.CustomerService;
+import com.thgroup.fms.service.EmployeeService;
 import com.thgroup.fms.service.FurnitureService;
 import com.thgroup.fms.service.OrderService;
 import com.thgroup.fms.service.ShoppingCartService;
-import com.thgroup.fms.utils.Helper;
-
 @Controller
 public class HomePageController {
 
@@ -36,28 +36,29 @@ public class HomePageController {
 	private CategoryService categoryService;
 	@Autowired
 	private ShoppingCartService cartService;
-	
 	@Autowired
 	private OrderService orderService;
-	
 	@Autowired
 	private AccountService accountService;
-	
 	@Autowired
 	private CustomerService customerService;
+	@Autowired
+	private EmployeeService employeeService;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@GetMapping(value = {"/", "/home"})
 	public String homePage(Model model) {
 		List<Category> categories = this.categoryService.getAllCategories();
-		int ItemCount = 0;
+		int itemCount = 0;
 		if (cartService.getCount() > 0){
-			ItemCount = cartService.getCount();
+			itemCount = cartService.getCount();
 		}
 		model.addAttribute("furnituresList", this.furnitureService.getAllFurnitures());
 		model.addAttribute("categoriesList", categories);
 		model.addAttribute("cartItem",cartService.getAllItem());
-		model.addAttribute("ItemTotal",cartService.getTotal());
-		model.addAttribute("ItemCount",ItemCount);
+		model.addAttribute("itemTotal",cartService.getTotal());
+		model.addAttribute("itemCount",itemCount);
 		
 		return "user/home/homepage";
 	}
@@ -85,69 +86,111 @@ public class HomePageController {
 		
 		return "user/detailFurniture";
 	}
-	@GetMapping("/orderHistory")
+	@GetMapping("/order-history")
 	public String orderHistory(Model model) {
-		int id_taikhoan = 0;
+		Account account = null;
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (!(authentication instanceof AnonymousAuthenticationToken)) {
 		    String currentUserName = authentication.getName();
-		    id_taikhoan = accountService.findidtai_khoan(currentUserName);
+		    account = accountService.getByUsername(currentUserName);
 		}
 		
-		Customer current = customerService.findCustomer(id_taikhoan);	
+		Customer current = customerService.getByAccount(account);	
 		List<Order> orderlist = this.orderService.findOrder(current.getIdKhachHang());			
 		model.addAttribute("orderList",orderlist);
-		return "user/home/OrderHistory";
+		return "user/home/order_history";
 	}
 	
 	
 	@GetMapping("/account")
 	public String account(Model model) {
-		int id_taikhoan = 0;
-
+		Account account = null;
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (!(authentication instanceof AnonymousAuthenticationToken)) {
 		    String currentUserName = authentication.getName();
-		    id_taikhoan = accountService.findidtai_khoan(currentUserName);
-		    model.addAttribute("account",currentUserName);
+		    account = accountService.getByUsername(currentUserName);
+		}
+		if (account.getDsVT().size() == 1) {
+			Customer customer = customerService.getByAccount(account);	
+			model.addAttribute("user", customer);
+		} else if (account.getDsVT().size() > 1) {
+			Employee employee = employeeService.getByAccount(account);	
+			model.addAttribute("user", employee);
 		}
 		
-		Customer current = customerService.findCustomer(id_taikhoan);	
+		return "user/account/account";
 		
-		
-		model.addAttribute("userInfo",current);
-		return "user/home/account";
-		
-	
 	}
 	
-	
-	
-	@GetMapping("/account/update/{idKhachHang}")
-	public String accountUpdate(@PathVariable(value="idKhachHang") int idKhachHang, Model model) {
+	@GetMapping("/account/update-info")
+	public String updateInfoPage(Model model) {
+		Account account = null;
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (!(authentication instanceof AnonymousAuthenticationToken)) {
 		    String currentUserName = authentication.getName();
-		    model.addAttribute("account",currentUserName);
+		    account = accountService.getByUsername(currentUserName);
 		}
-		Customer customer = this.customerService.getCustomerById(idKhachHang);
-		
-		model.addAttribute("customer", customer);
-		return "user/home/accountUpdate";
+		if (account.getDsVT().size() == 1) {
+			Customer customer = customerService.getByAccount(account);	
+			model.addAttribute("user", customer);
+			model.addAttribute("isCustomer", true);
+		} else if (account.getDsVT().size() > 1) {
+			Employee employee = employeeService.getByAccount(account);	
+			model.addAttribute("user", employee);
+			model.addAttribute("isCustomer", false);
+		}
+		return "user/account/update_info";
 	}
-	@PostMapping("/account/save-customer")
-	public String saveCustomer(@ModelAttribute("customer") Customer customer, RedirectAttributes redirectAttrs) {
+	
+	@PostMapping("/account/save-info")
+	public String saveInfo(@RequestParam("id") int id,
+			@RequestParam("name") String name,
+			@RequestParam("email") String email,
+			@RequestParam("address") String address,
+			@RequestParam("phone") String phone,
+			@RequestParam("isCustomer") boolean isCustomer) {
 		
-		
-		if (customer.getMaKH() == null) {
-			String newId = Helper.getNewID(this.customerService.getMaxId(), 2, 1, "KH");
-		    customer.setMaKH(newId);
+		if (isCustomer == true) {
+			Customer customer = this.customerService.getCustomerById(id);
+			customer.setHoTen(name);
+			customer.setDiaChi(address);
+			customer.setSdt(phone);
+			customer.setEmail(email);
+			this.customerService.saveCustomer(customer);
+		} else {
+			Employee employee = this.employeeService.getEmployeeById(id);
+			employee.setHoTen(name);
+			employee.setDiaChi(address);
+			employee.setSdt(phone);
+			employee.setEmail(email);
+			this.employeeService.saveEmployee(employee);
 		}
-		this.customerService.saveCustomer(customer);
 		
-		redirectAttrs.addFlashAttribute("alertType", "success");
-		redirectAttrs.addFlashAttribute("alertText", "Thành công");
 		return "redirect:/account";
 	}
-	
+	@GetMapping("/account/update-account")
+	public String updateAccountPage(Model model) {
+		Account account = null;
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (!(authentication instanceof AnonymousAuthenticationToken)) {
+		    String currentUserName = authentication.getName();
+		    account = accountService.getByUsername(currentUserName);
+		}
+		
+		model.addAttribute("account", account);
+		model.addAttribute("accountId", account.getIdTaiKhoan());
+		return "user/account/update_account";
+	}
+	@PostMapping("/account/update-account")
+	public String updateAccount(@RequestParam("accountId") int accountId,
+			@RequestParam("username") String username,
+			@RequestParam("password") String password) {
+		
+		Account account = this.accountService.getById(accountId);
+		account.setTenTaiKhoan(username);
+		account.setMatKhau(passwordEncoder.encode(password));
+		this.accountService.saveAccount(account);
+		
+		return "redirect:/logout";
+	}
 }

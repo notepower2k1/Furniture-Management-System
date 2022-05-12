@@ -25,7 +25,7 @@ public class Employee implements Serializable {
 	@Column(name = "MaNV", nullable = false)
 	private String maNV;
 	@Column(name = "HoTenNV", nullable = false)
-	private String hoTenNV;
+	private String hoTen;
 	@Column(name = "SDT", nullable = false)
 	private String sdt;
 	@Column(name = "Email", nullable = false)
@@ -40,12 +40,12 @@ public class Employee implements Serializable {
 	public Employee() {
 		super();
 	}
-	public Employee(int idNhanVien, String maNV, String hoTenNV, String sdt, String email, String diaChi,
+	public Employee(int idNhanVien, String maNV, String hoTen, String sdt, String email, String diaChi,
 			List<Order> dsDH, Account taiKhoan) {
 		super();
 		this.idNhanVien = idNhanVien;
 		this.maNV = maNV;
-		this.hoTenNV = hoTenNV;
+		this.hoTen = hoTen;
 		this.sdt = sdt;
 		this.email = email;
 		this.diaChi = diaChi;
@@ -64,11 +64,11 @@ public class Employee implements Serializable {
 	public void setMaNV(String maNV) {
 		this.maNV = maNV;
 	}
-	public String getHoTenNV() {
-		return hoTenNV;
+	public String getHoTen() {
+		return hoTen;
 	}
-	public void setHoTenNV(String hoTenNV) {
-		this.hoTenNV = hoTenNV;
+	public void setHoTen(String hoTen) {
+		this.hoTen = hoTen;
 	}
 	public String getSdt() {
 		return sdt;

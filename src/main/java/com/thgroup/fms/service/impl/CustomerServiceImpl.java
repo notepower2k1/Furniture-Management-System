@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.thgroup.fms.entity.Account;
 import com.thgroup.fms.entity.Customer;
 import com.thgroup.fms.repository.CustomerRepository;
 import com.thgroup.fms.service.CustomerService;
@@ -53,9 +54,10 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Customer findCustomer(int id_tai_khoan) {
-		return this.customerRepo.findCustomer(id_tai_khoan);
+	public Customer getByAccount(Account taiKhoan) {
+		return this.customerRepo.findByTaiKhoan(taiKhoan);
 	}
+
 
 	
 	
