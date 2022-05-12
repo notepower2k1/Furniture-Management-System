@@ -193,4 +193,13 @@ public class HomePageController {
 		
 		return "redirect:/logout";
 	}
+	@GetMapping("/about")
+	public String aboutPage() {
+		return "user/home/about";
+	}
+	
+	@GetMapping("/contact")
+	public String contactPage() {
+		return "user/home/contact";
+	}
 }
