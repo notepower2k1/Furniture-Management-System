@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      	layout:decorate="~{layouts/admin-layout}">
+<div layout:fragment="content">
+<!-- Page Heading -->
+	<h1 class="h3 mb-2 text-gray-800">Cập nhật đơn hàng</h1>
+	<div class="row">
+		<div class="col-5">
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+		        	<h6 class="m-0 font-weight-bold text-primary">Thông tin cơ bản</h6>
+		    	</div>
+				<div class="card-body">
+					<form action="#" th:action="@{/admin/save-order}" th:object="${order}" method="POST">
+				 		
+				 		<input type="hidden" th:field="*{idDonHang}" />
+				 		
+				 		<label>Mã đơn hàng <sup>*</sup></label>
+				 		<input type="text" th:field = "*{maDH}" readonly
+				 		placeholder="Nhập mã đơn hàng" class="form-control mb-4 col-12">
+				 		
+				 		<label>Ngày lập <sup>*</sup></label>
+				 		<input type="date" th:field = "*{ngayLap}" required
+				 		placeholder="Nhập ngày lập" class="form-control mb-4 col-12">
+				 		
+				 		<label>Nhân viên lập <sup>*</sup></label>
+				 		<select th:field="*{nhanVien}" class="form-control mb-4 col-12">	
+						    <option th:each="item: ${employeesList}" th:value="${item.idNhanVien}" th:text="${item.hoTenNV}" name="maNV"></option>
+						</select>
+				 		
+				 		<label>Địa chỉ nhận hàng <sup>*</sup></label>
+				 		<input type="text" th:field = "*{diaChiNhanHang}" required
+				 		placeholder="Địa chỉ nhận hàng" class="form-control mb-4 col-12">
+				 		
+				 		<label>Khách hàng <sup>*</sup></label>
+				 		<select th:field="*{khachHang}" class="form-control mb-4 col-12">	
+						    <option th:each="item: ${customersList}" th:value="${item.idKhachHang}" th:text="${item.hoTenKH}" name="maKH"></option>
+						</select>
+				 		
+				 		<label>Tình trạng <sup>*</sup></label>
+				 		<div class="mb-4">
+				 			<div class="custom-control custom-radio custom-control-inline">
+				 				<input type="radio" id="option1" class="custom-control-input" name="option1" 
+				 				value="1" th:field="*{tinhTrang}">
+	                			<label class="custom-control-label" for="option1">Đã xác nhận</label>
+				 			</div>
+						    <div class="custom-control custom-radio custom-control-inline">
+						    	<input type="radio" id="option2" class="custom-control-input" name="option2" 
+							    value="0" th:field="*{tinhTrang}">
+					            <label class="custom-control-label" for="option2">Chờ xác nhận</label>
+						    </div>
+				 		</div>
+			            
+				 		<label>Ghi chú</label>
+				 		<input type="text" th:field = "*{ghiChu}" 
+				 		placeholder="Nhập ghi chú" class="form-control mb-4 col-12">
+				 	
+				 		<button type="submit" class="btn btn-info">Cập nhật</button>
+				 	</form>
+		   		</div>
+			</div>
+		</div>
+	
+		<div class="col-7">
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+		        	<h6 class="m-0 font-weight-bold text-primary">Thông tin các sản phẩm</h6>
+		    	</div>
+				<div class="card-body">
+					<div class="mx-3">
+						<div class="table-responsive">
+							<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+					        	<thead>
+					            	<tr>
+						     			<th>Tên sản phẩm</th>
+							     		<th>Đơn giá</th>
+						     			<th>Số lượng</th>
+						     			<th>Tác vụ</th>
+					            	</tr>
+					            </thead>
+					            <tbody>
+					                <tr th:each="detail: ${detailsList}">
+									    <td th:text="${detail.noiThat.tenNT}"></td>
+									    <td th:inline="text">[[${#numbers.formatDecimal(detail.giaMua, 0, 'COMMA', 0, 'POINT')}]] VND</td>
+									    <td th:text="${detail.soLuong}"></td>
+									    <td class="action-area">
+										    <a  th:href="@{/admin/update-orderdetail/{idNoiThat}/{idDonHang}(idNoiThat=${detail.noiThat.idNoiThat}, idDonHang=${detail.donDatHang.idDonHang})}"
+										    class="btn btn-primary"><i class="fas fa-fw fa-edit"></i></a>
+											<a class="btn btn-primary deletebtn" th:data-id="${detail.noiThat.idNoiThat} + '/' +${detail.donDatHang.idDonHang}"
+											th:data-type="orderdetail"><i class="fas fa-fw fa-trash"></i></a>
+										</td>
+									</tr>
+					            </tbody>
+							</table>
+				        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-action">
+		<a th:href="@{/admin/order}">Quay lại</a>
+	</div>
+</div>
+</html>

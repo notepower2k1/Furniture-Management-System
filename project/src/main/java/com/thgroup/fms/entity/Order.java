@@ -1,12 +1,17 @@
 package com.thgroup.fms.entity;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,28 +29,35 @@ public class Order {
 	private boolean tinhTrang;
 	@Column(name = "DiaChiNhanHang", nullable = false)
 	private String diaChiNhanHang;
-	@Column(name = "IDKhachHang", nullable = false)
-	private int idKhachHang;
-	@Column(name = "IDNhanVien", nullable = false)
-	private int idNhanVien;
+	@ManyToOne
+	@JoinColumn(name = "idKhachHang", insertable = true, updatable = true)
+	private Customer khachHang;
+	@ManyToOne
+	@JoinColumn(name = "idNhanVien", insertable = true, updatable = true)
+	private Employee nhanVien;
 	@Column(name = "GhiChu", nullable = true)
 	private String ghiChu;
-	
-	public Order() {
-		super();
-	}
+	@OneToMany(mappedBy = "donDatHang")
+    private List<OrderDetails> dsCTDH = new ArrayList<>();
 
-	public Order(int idDonHang, String maDH, Date ngayLap, boolean tinhTrang, String diaChiNhanHang, int idKhachHang,
-			int idNhanVien, String ghiChu) {
+
+	public Order(int idDonHang, String maDH, Date ngayLap, boolean tinhTrang, String diaChiNhanHang, Customer khachHang,
+			Employee nhanVien, String ghiChu, List<OrderDetails> dsCTDH) {
 		super();
 		this.idDonHang = idDonHang;
 		this.maDH = maDH;
 		this.ngayLap = ngayLap;
 		this.tinhTrang = tinhTrang;
 		this.diaChiNhanHang = diaChiNhanHang;
-		this.idKhachHang = idKhachHang;
-		this.idNhanVien = idNhanVien;
+		this.khachHang = khachHang;
+		this.nhanVien = nhanVien;
 		this.ghiChu = ghiChu;
+		this.dsCTDH = dsCTDH;
+	}
+
+	public Order() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public int getIdDonHang() {
@@ -72,7 +84,7 @@ public class Order {
 		this.ngayLap = ngayLap;
 	}
 
-	public boolean isTinhTrang() {
+	public boolean getTinhTrang() {
 		return tinhTrang;
 	}
 
@@ -88,20 +100,20 @@ public class Order {
 		this.diaChiNhanHang = diaChiNhanHang;
 	}
 
-	public int getIdKhachHang() {
-		return idKhachHang;
+	public Customer getKhachHang() {
+		return khachHang;
 	}
 
-	public void setIdKhachHang(int idKhachHang) {
-		this.idKhachHang = idKhachHang;
+	public void setKhachHang(Customer khachHang) {
+		this.khachHang = khachHang;
 	}
 
-	public int getIdNhanVien() {
-		return idNhanVien;
+	public Employee getNhanVien() {
+		return nhanVien;
 	}
 
-	public void setIdNhanVien(int idNhanVien) {
-		this.idNhanVien = idNhanVien;
+	public void setNhanVien(Employee nhanVien) {
+		this.nhanVien = nhanVien;
 	}
 
 	public String getGhiChu() {
@@ -110,6 +122,14 @@ public class Order {
 
 	public void setGhiChu(String ghiChu) {
 		this.ghiChu = ghiChu;
+	}
+
+	public List<OrderDetails> getDsCTDH() {
+		return dsCTDH;
+	}
+
+	public void setDsCTDH(List<OrderDetails> dsCTDH) {
+		this.dsCTDH = dsCTDH;
 	}
 
 }

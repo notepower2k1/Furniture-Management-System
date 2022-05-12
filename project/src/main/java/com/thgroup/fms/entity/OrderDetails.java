@@ -6,57 +6,52 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "chitietddh")
-@IdClass(CompositeKey.class)
+@IdClass(ODPrimaryKey.class)
 public class OrderDetails {
 	@Id
-	@Column(name = "IDDonHang", nullable = false)
-	private int idDonHang;
+	@ManyToOne
+	@JoinColumn(name = "IDDonHang", insertable = true, updatable = true)
+	private Order donDatHang;
 	@Id
-	@Column(name = "IDNoiThat", nullable = false)
-	private int idNoiThat;
-	@Column(name = "DonGiaMua", nullable = false)
-	private int donGiaMua;
+	@ManyToOne
+	@JoinColumn(name = "IDNoiThat", insertable = true, updatable = true)
+	private Furniture noiThat;
 	@Column(name = "SoLuong", nullable = false)
 	private int soLuong;
+	@Column(name = "GiaMua", nullable = false)
+	private float giaMua;
 	
 	public OrderDetails() {
 		super();
 	}
 
-	public OrderDetails(int idDonHang, int idNoiThat, int donGiaMua, int soLuong) {
+	public OrderDetails(Order donDatHang, Furniture noiThat, int soLuong) {
 		super();
-		this.idDonHang = idDonHang;
-		this.idNoiThat = idNoiThat;
-		this.donGiaMua = donGiaMua;
+		this.donDatHang = donDatHang;
+		this.noiThat = noiThat;
 		this.soLuong = soLuong;
 	}
 
-	public int getidDonHang() {
-		return idDonHang;
+	public Order getDonDatHang() {
+		return donDatHang;
 	}
 
-	public void setidDonHang(int idDonHang) {
-		this.idDonHang = idDonHang;
+	public void setDonDatHang(Order donDatHang) {
+		this.donDatHang = donDatHang;
 	}
 
-	public int getIdNoiThat() {
-		return idNoiThat;
+	public Furniture getNoiThat() {
+		return noiThat;
 	}
 
-	public void setIdNoiThat(int idNoiThat) {
-		this.idNoiThat = idNoiThat;
-	}
-
-	public int getDonGiaMua() {
-		return donGiaMua;
-	}
-
-	public void setDonGiaMua(int donGiaMua) {
-		this.donGiaMua = donGiaMua;
+	public void setNoiThat(Furniture noiThat) {
+		this.noiThat = noiThat;
 	}
 
 	public int getSoLuong() {
@@ -66,10 +61,20 @@ public class OrderDetails {
 	public void setSoLuong(int soLuong) {
 		this.soLuong = soLuong;
 	}
+
+	public float getGiaMua() {
+		return giaMua;
+	}
+
+	public void setGiaMua(float giaMua) {
+		this.giaMua = giaMua;
+	}
 	
 }
 
-class CompositeKey implements Serializable {
-    private int idDonHang;
-    private int idNoiThat;
+class ODPrimaryKey implements Serializable {
+	
+	private int donDatHang;
+    private int noiThat;
+    
 }

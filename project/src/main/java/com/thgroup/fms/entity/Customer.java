@@ -1,10 +1,16 @@
 package com.thgroup.fms.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -24,12 +30,17 @@ public class Customer {
 	private String email;
 	@Column(name = "DiaChi", nullable = false)
 	private String diaChi;
-	
+	@OneToMany(mappedBy = "khachHang")
+    private List<Order> dsDH = new ArrayList<>();
+	@OneToOne
+	@JoinColumn(name = "idTaiKhoan", insertable = true, updatable = true)
+	private Account taiKhoan;
 	public Customer() {
 		super();
 	}
 
-	public Customer(int idKhachHang, String maKH, String hoTenKH, String sdt, String email, String diaChi) {
+	public Customer(int idKhachHang, String maKH, String hoTenKH, String sdt, String email, String diaChi,
+			List<Order> dsDH, Account taiKhoan) {
 		super();
 		this.idKhachHang = idKhachHang;
 		this.maKH = maKH;
@@ -37,6 +48,8 @@ public class Customer {
 		this.sdt = sdt;
 		this.email = email;
 		this.diaChi = diaChi;
+		this.dsDH = dsDH;
+		this.taiKhoan = taiKhoan;
 	}
 
 	public int getIdKhachHang() {
@@ -85,6 +98,22 @@ public class Customer {
 
 	public void setDiaChi(String diaChi) {
 		this.diaChi = diaChi;
+	}
+
+	public List<Order> getDsDH() {
+		return dsDH;
+	}
+
+	public void setDsDH(List<Order> dsDH) {
+		this.dsDH = dsDH;
+	}
+
+	public Account getTaiKhoan() {
+		return taiKhoan;
+	}
+
+	public void setTaiKhoan(Account taiKhoan) {
+		this.taiKhoan = taiKhoan;
 	}
 	
 	

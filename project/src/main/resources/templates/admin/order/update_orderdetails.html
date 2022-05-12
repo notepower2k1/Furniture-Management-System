@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      	layout:decorate="~{layouts/admin-layout}">
+<div layout:fragment="content">
+	<h1 class="h3 mb-2 text-gray-800" th:inline="text">
+		Cập nhật đơn hàng id <b>[[${orderD.donDatHang.idDonHang}]]</b> 
+	</h1>
+	<div class="row">
+			<div class="col-6">
+				<div class="card shadow mb-4">
+				<div class="card-header py-3">
+		        	<h6 class="m-0 font-weight-bold text-primary">Thông tin cơ bản</h6>
+		    	</div>
+				<div class="card-body">
+					<form th:action="@{/admin/save-orderdetail}" action="#" th:object="${orderD}" method="POST">
+				 	
+				 		<label>Đơn hàng <sup>*</sup></label>
+				 		<select th:field="*{donDatHang}" class="form-control mb-4 col-12">	
+						    <option th:each="item: ${ordersList}" th:value="${item.idDonHang}" th:text="${item.maDH}" name="maDH"></option>
+						</select>
+				 		
+				 		<label>Sản phẩm <sup>*</sup></label>
+				 		<select th:field="*{noiThat}" class="form-control mb-4 col-12">	
+						    <option th:each="item: ${furnituresList}" th:value="${item.idNoiThat}" th:text="${item.tenNT}" name="maNT"></option>
+						</select>
+				 		
+				 		<label>Đơn giá <sup>*</sup></label>
+				 		<input type="number" th:field = "*{giaMua}" readonly
+				 		placeholder="Nhập đơn giá" class="form-control mb-4 col-12">
+				 		
+				 		<label>Số lượng <sup>*</sup></label>
+				 		<input type="number" th:field = "*{soLuong}" required
+				 		placeholder="Nhập số lượng" class="form-control mb-4 col-12">
+				 		
+				 		<button type="submit" class="btn btn-info">Cập nhật</button>
+				 	</form>
+		   		</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-action">
+		<a th:href="@{/admin/update-order/{idDonHang}(idDonHang=${orderD.donDatHang.idDonHang})}">Quay lại</a>
+	</div>
+</div>
+</html>

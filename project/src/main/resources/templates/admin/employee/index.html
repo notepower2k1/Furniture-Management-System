@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/admin-layout}">
+<div layout:fragment="content">
+<!-- Page Heading -->
+	<h1 class="h3 mb-2 text-gray-800">Bảng nhân viên</h1>
+	<div class="card shadow mb-4">
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+		        	<thead>
+		            	<tr>
+		                	<th>Họ tên</th>
+			     			<th>Số điện thoại</th>
+				     		<th>Email</th>
+			     			<th>Địa chỉ</th>
+		     				<th>Tác vụ </th>
+		            	</tr>
+		            </thead>
+		            <tfoot>
+		               	<tr>
+		                	<th>Họ tên</th>
+			     			<th>Số điện thoại</th>
+				     		<th>Email</th>
+			     			<th>Địa chỉ</th>
+		     				<th>Tác vụ </th>
+		            	</tr>
+		            </tfoot>
+		            <tbody>
+		                <tr th:each="employee: ${employeesList}">
+						   	<td th:text="${employee.hoTenNV}"></td>
+						    <td th:text="${employee.sdt}"></td>
+						    <td th:text="${employee.email}"></td>
+						    <td th:text="${employee.diaChi}"></td>
+				     		<td class="action-area">
+				     			<a th:href="@{/admin/detail-employee/{idNhanVien}(idNhanVien=${employee.idNhanVien})}" 
+							    class="btn btn-primary"><i class="fas fa-fw fa-info-circle"></i></a>
+							    <a th:href="@{/admin/update-employee/{idNhanVien}(idNhanVien=${employee.idNhanVien})}" 
+							    class="btn btn-primary"><i class="fas fa-fw fa-edit"></i></a>
+								<a class="btn btn-primary deletebtn" th:data-id="${employee.idNhanVien}" 
+								th:data-type="employee"><i class="fas fa-fw fa-trash"></i></a>
+							</td>
+						</tr>
+		            </tbody>
+				</table>
+	        </div>
+   		</div>
+	</div>
+</div>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      	layout:decorate="~{layouts/admin-layout}">  
+<div layout:fragment="content">
+	<h1 class="h3 mb-2 text-gray-800">Thông tin sản phẩm</h1>
+	<div class="card shadow mb-4">
+		<div class="card-body">
+			<div class="mx-3">
+				<table cellpadding="2" cellspacing="10" width="400" class="col-md-6 col-12">
+		            <tr>
+		                <td class="form-label">Mã khách hàng</td>
+		                <td class="form-label" th:text="${customer.maKH}"></td>
+		            </tr>
+		            <tr>
+		                <td class="form-label">Họ tên</td>
+		                <td class="form-label" th:text="${customer.hoTenKH}"></td>
+		            </tr>
+		            <tr>
+		                <td class="form-label">Số điện thoại</td>
+		                <td class="form-label" th:text="${customer.sdt}"></td>
+		            </tr>
+		            <tr>
+		                <td class="form-label">Email</td>
+		                <td class="form-label" th:text="${customer.email}"></td>
+		            </tr>
+		            <tr>
+		                <td class="form-label">Địa chỉ</td>
+		                <td class="form-label" th:text="${customer.diaChi}"></td>
+		            </tr>
+		            <tr>
+		                <td class="form-label">Tên tài khoản</td>
+		                <td class="form-label" th:text="${customer.taiKhoan.tenTaiKhoan}"></td>
+		            </tr>	
+		            <tr>
+		            	<td class="form-label">Roles:</td>
+		            	<td class="form-label">
+		            		<span class="mr-3 font-weight-bold" th:each="role: ${customer.taiKhoan.dsVT}" th:text="${#strings.substring(role.tenVT, 5)}"></span>
+		            	</td>
+		            </tr>
+		        </table>
+			</div>
+		</div>
+	</div>
+	<div class="form-action">
+		<a th:href="@{/admin/customer}">Quay lại</a>
+	</div>
+</div>
+</html>

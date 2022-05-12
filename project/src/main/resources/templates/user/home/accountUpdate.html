@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/user-layout}">
+      
+ <section layout:fragment="content">
+<section style="background-color: #eee;">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+              class="rounded-circle img-fluid" style="width: 150px;">
+            <h5 class="my-3" th:text="${customer.hoTenKH}"></h5>
+            <p class="text-muted mb-1" th:inline="text">[[${account}]]</p>
+            <p class="text-muted mb-4" th:text="${customer.diaChi}"></p>      
+          </div>
+        </div>
+       
+      </div>
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+          <form action="#" th:action="@{/account/save-customer}" th:object="${customer}" method="POST">
+          
+          	<input type="hidden" th:field="*{idKhachHang}" />
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Full Name</p>
+              </div>
+              <div class="col-sm-9">
+                	<input type="text" th:field = "*{hoTenKH}" required
+		 		placeholder="Nhập họ tên khách hàng" class="form-control mb-4 col-6">
+		 		
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Email</p>
+              </div>
+              <div class="col-sm-9">
+                <input type="email" th:field = "*{email}" required
+		 		placeholder="Nhập email" class="form-control mb-4 col-6">
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Phone</p>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" th:field = "*{sdt}" required
+		 		placeholder="Nhập số điện thoại" class="form-control mb-4 col-6">
+              </div>
+            </div>
+            <hr>                  
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Address</p>
+              </div>
+              <div class="col-sm-9">
+               <input type="text" th:field = "*{diaChi}" 
+		 		placeholder="Nhập địa chỉ khách hàng" class="form-control mb-4 col-6">
+              </div>
+            </div>
+             <hr> 
+            <input type="hidden" th:field="*{taiKhoan}" />
+            
+             
+            	<div class="d-flex justify-content-end mb-2">
+             <button type="submit" class="btn btn-info">Cập nhật</button>
+            </div>
+            </form>
+          </div>
+        </div>
+       
+                
+             
+         
+          
+        
+      </div>
+    </div>
+  </div>
+</section>
+</section>    
+</html>

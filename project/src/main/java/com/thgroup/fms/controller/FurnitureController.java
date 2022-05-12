@@ -1,10 +1,14 @@
 package com.thgroup.fms.controller;
 
-import java.util.ArrayList;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,95 +16,119 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thgroup.fms.entity.Furniture;
 import com.thgroup.fms.entity.Promotion;
-import com.thgroup.fms.entity.Type;
+import com.thgroup.fms.entity.Category;
+import com.thgroup.fms.service.CategoryService;
 import com.thgroup.fms.service.FurnitureService;
+import com.thgroup.fms.service.PromotionService;
+import com.thgroup.fms.utils.Helper;
 
 @Controller
 public class FurnitureController {
 	@Autowired
 	private FurnitureService furnitureService;
-
+	@Autowired
+	private PromotionService promotionService;
+	@Autowired
+	private CategoryService categoryService;
 	
-	
-	public FurnitureController(FurnitureService furnitureService) {
+	public FurnitureController(FurnitureService furnitureService, PromotionService promotionService,
+			CategoryService categoryService) {
 		super();
 		this.furnitureService = furnitureService;
+		this.promotionService = promotionService;
+		this.categoryService = categoryService;
+	}
+
+	@GetMapping("/admin/furniture")
+	public String furnituresListPage(Model model) {
+		model.addAttribute("furnituresList", this.furnitureService.getAllFurnitures());
+		return "admin/furniture/index";
 	}
 	
-	    // display list of employees
-	@GetMapping("/")
-	    public String viewHomePage(Model model) {
-	        return findPaginated(1, "maNoiThat", "asc", model);
-	 	
+	@GetMapping("/admin/detail-furniture/{idNoiThat}")
+	public String furnitureDetailPage(@PathVariable(value="idNoiThat") int idNoiThat, Model model) {
+		Furniture furniture = this.furnitureService.getFurnitureById(idNoiThat);
+		model.addAttribute("furniture", furniture);
+		return "admin/furniture/detail";
 	}
 	    
-	@GetMapping("/showNewFurnitureForm")
-	  public String showNewEmployeeForm(Model model) {
-	    //create model attribute to bind from data
+	@GetMapping("/admin/create-furniture")
+	public String createFurniturePage(Model model) {
 	    Furniture furniture = new Furniture();
-	    List<Type> types = this.furnitureService.getAllType();
-	    List<Promotion> promotions = this.furnitureService.getAllPromotion();
+	    List<Category> categories = this.categoryService.getAllCategories();
+ 	    List<Promotion> promotions = this.promotionService.getAllPromotions();
 
-	    model.addAttribute("listPro",promotions);
-	    model.addAttribute("listType",types);
-	    model.addAttribute("furniture",furniture);
-	    return "new_furniture";
-	 }
+ 	    String newId = Helper.getNewID(this.furnitureService.getMaxId(), 2, 2, "NT");
+	    furniture.setMaNoiThat(newId);
+ 	    
+	    model.addAttribute("promotionsList", promotions);
+	    model.addAttribute("categoriesList", categories);
+	    model.addAttribute("furniture", furniture);
+	    return "admin/furniture/add_furniture";
+	}
 	    
-	    @PostMapping("/saveFurniture")
-	    public String saveEmployee(@ModelAttribute("employee") Furniture furniture) {
-	    	//save employee to database
-	    	furnitureService.saveFurnitures(furniture);
-	    	return "redirect:/";
-	    }
-	    
-	    @GetMapping("/showFormForUpdate/{idNoiThat}")
-	    public String showFormForUpdate(@PathVariable (value="idNoiThat")int idNoiThat,Model model) {
-	    	// get employee from the service
+	@PostMapping("/admin/save-furniture")
+	public String saveFurniture(@ModelAttribute("furniture") Furniture furniture,
+			@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttrs , @Param("img") String img){
+		
+		if (furniture.getMaNoiThat() == null) {
+			String newId = Helper.getNewID(this.furnitureService.getMaxId(), 2, 2, "NT");
+		    furniture.setMaNoiThat(newId);
+		    furniture.setHinhAnh(file.getOriginalFilename());
+		}
+		
+		else {
+			if (file.isEmpty()) {
+				furniture.setHinhAnh(img);
+			}
+			else
+			{
+				furniture.setHinhAnh(file.getOriginalFilename());
+			}
+		}
+	
 			
-	    	Furniture furniture = furnitureService.getFurnitureById(idNoiThat);
-	    	 List<Type> types = this.furnitureService.getAllType();
-	 	    List<Promotion> promotions = this.furnitureService.getAllPromotion();
+		Furniture isExists = this.furnitureService.saveFurniture(furniture);
+		if (isExists != null) {
+			Path path = Paths.get("src/main/resources/static/admin/img/");
+			try {
+				InputStream inputStream = file.getInputStream();
+				Files.copy(inputStream, path.resolve(file.getOriginalFilename()),
+						StandardCopyOption.REPLACE_EXISTING);
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+		} 
+		redirectAttrs.addFlashAttribute("alertType", "success");
+		redirectAttrs.addFlashAttribute("alertText", "Thành công");
+		return "redirect:/admin/furniture";
+	}
+	
+	@GetMapping("/admin/update-furniture/{idNoiThat}")
+	public String updateFurniturePage(@PathVariable(value="idNoiThat") int idNoiThat, Model model) {
+		Furniture furniture = this.furnitureService.getFurnitureById(idNoiThat);
+		List<Category> categories = this.categoryService.getAllCategories();
+		List<Promotion> promotions = this.promotionService.getAllPromotions();
+		model.addAttribute("promotionsList", promotions);
+	 	model.addAttribute("categoriesList", categories);
+	    model.addAttribute("furniture", furniture);
+	    return "admin/furniture/update_furniture";
+	}
+	
+	@GetMapping("/admin/delete-furniture/{idNoiThat}")
+	public String deleteFurniture(@PathVariable(value="idNoiThat") int idNoiThat, 
+			RedirectAttributes redirectAttrs) {
+		this.furnitureService.removeFurniture(idNoiThat);
+		redirectAttrs.addFlashAttribute("alertType", "success");
+		redirectAttrs.addFlashAttribute("alertText", "Xóa thành công");
+	    return "redirect:/admin/furniture";
+	}
+	
 
-	 	    model.addAttribute("listPro",promotions);
-	 	    model.addAttribute("listType",types);
-	    	model.addAttribute("furniture",furniture);
-	    	
-	    	return "update_furniture";
-	    	
-	    }
-	    
-	    @GetMapping("/showFormForDelete/{idNoiThat}")
-	    public String showFormForDelete(@PathVariable (value="idNoiThat")int idNoiThat,Model model) {
-	    	// get employee from the service
-			
-	    	this.furnitureService.deleteFurniture(idNoiThat);
-			return "redirect:/";
-	    	
-	    }
-	    // /page/1?sortField=name&sortDir=asc
-	    @GetMapping("/page/{pageNo}")
-	    public String findPaginated(@PathVariable(value = "pageNo") int pageNo,
-	        @RequestParam("sortField") String sortField,
-	        @RequestParam("sortDir") String sortDir,
-	        Model model) {
-	        int pageSize = 5;
-
-	        Page <Furniture> page = furnitureService.findPaginated(pageNo, pageSize, sortField, sortDir);
-	        List <Furniture> listFurniture = page.getContent();
-
-	        model.addAttribute("currentPage", pageNo);
-	        model.addAttribute("totalPages", page.getTotalPages());
-	        model.addAttribute("totalItems", page.getTotalElements());
-
-	        model.addAttribute("sortField", sortField);
-	        model.addAttribute("sortDir", sortDir);
-	        model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
-
-	        model.addAttribute("listFurniture", listFurniture);
-	        return "index";
-	    }
 }

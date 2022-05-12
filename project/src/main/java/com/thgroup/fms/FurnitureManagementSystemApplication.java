@@ -9,5 +9,4 @@ public class FurnitureManagementSystemApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FurnitureManagementSystemApplication.class, args);
 	}
-
 }

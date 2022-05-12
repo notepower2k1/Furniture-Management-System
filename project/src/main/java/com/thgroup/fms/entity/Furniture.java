@@ -1,10 +1,16 @@
 package com.thgroup.fms.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,8 +25,8 @@ public class Furniture {
 	@Column(name = "TenNT", nullable = false)
 	private String tenNT;
 	@Column(name = "DonGia", nullable = false)
-	private int donGia;
-	@Column(name = "KichThuoc", nullable = false)
+	private float donGia;
+	@Column(name = "KichThuoc", nullable = true)
 	private String kichThuoc;
 	@Column(name = "TGBaoHanh", nullable = false)
 	private int baoHanh;
@@ -32,12 +38,19 @@ public class Furniture {
 	private String donViTinh;
 	@Column(name = "MoTa", nullable = false)
 	private String moTa;
-	@Column(name = "MaLoai", nullable = true)
-	private String maLoai;
-	@Column(name = "MaKM", nullable = true)
-	private String maKM;
+	@ManyToOne
+	@JoinColumn(name = "idLoai", insertable = true, updatable = true)
+	private Category loai;
+	@ManyToOne
+	@JoinColumn(name = "idKM", insertable = true, updatable = true)
+	private Promotion khuyenMai;
+	@OneToMany(mappedBy = "noiThat")
+    private List<OrderDetails> dsCTDH = new ArrayList<>();
+	@OneToMany(mappedBy = "noiThat")
+    private List<ProductPhotos> dsHA = new ArrayList<>();
+	
 	public Furniture(int idNoiThat, String maNoiThat, String tenNT, int donGia, String kichThuoc, int baoHanh,
-			String hinhAnh, String chatLieu, String moTa, String maLoai, String maKM, String donViTinh) {
+			String hinhAnh, String chatLieu, String moTa, Category loai, Promotion khuyenMai, String donViTinh) {
 		super();
 		this.idNoiThat = idNoiThat;
 		this.maNoiThat = maNoiThat;
@@ -48,8 +61,8 @@ public class Furniture {
 		this.hinhAnh = hinhAnh;
 		this.chatLieu = chatLieu;
 		this.moTa = moTa;
-		this.maLoai = maLoai;
-		this.maKM = maKM;
+		this.loai = loai;
+		this.khuyenMai = khuyenMai;
 		this.donViTinh = donViTinh;
 	}
 	public Furniture() {
@@ -79,10 +92,10 @@ public class Furniture {
 	public void setTenNT(String tenNT) {
 		this.tenNT = tenNT;
 	}
-	public int getDonGia() {
+	public float getDonGia() {
 		return donGia;
 	}
-	public void setDonGia(int donGia) {
+	public void setDonGia(float donGia) {
 		this.donGia = donGia;
 	}
 	public String getKichThuoc() {
@@ -115,17 +128,17 @@ public class Furniture {
 	public void setMoTa(String moTa) {
 		this.moTa = moTa;
 	}
-	public String getMaLoai() {
-		return maLoai;
+	public Category getLoai() {
+		return loai;
 	}
-	public void setMaLoai(String maLoai) {
-		this.maLoai = maLoai;
+	public void setLoai(Category loai) {
+		this.loai = loai;
 	}
-	public String getMaKM() {
-		return maKM;
+	public Promotion getKhuyenMai() {
+		return khuyenMai;
 	}
-	public void setMaKM(String maKM) {
-		this.maKM = maKM;
+	public void setKhuyenMai(Promotion khuyenMai) {
+		this.khuyenMai = khuyenMai;
 	}
 	
 	

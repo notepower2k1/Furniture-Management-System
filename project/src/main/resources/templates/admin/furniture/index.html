@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/admin-layout}">
+<div layout:fragment="content">
+<!-- Page Heading -->
+	<h1 class="h3 mb-2 text-gray-800 d-flex justify-content-between">Bảng sản phẩm</h1>
+	
+	<div class="card shadow mb-4">
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+		        	<thead>
+		            	<tr>
+		                	<th>Mã loại</th>
+			     			<th>Tên</th>
+				     		<th>Đơn giá</th>
+			     			<th>Kích thước</th>
+			     			<th>Loại</th>
+		     				<th>Tác vụ </th>
+		            	</tr>
+		            </thead>
+		            <tfoot>
+		               	<tr>
+		                	<th>Mã loại</th>
+			     			<th>Tên</th>
+				     		<th>Đơn giá</th>
+			     			<th>Kích thước</th>
+			     			<th>Loại</th>
+		     				<th>Tác vụ </th>
+		            	</tr>
+		            </tfoot>
+		            <tbody>
+		                <tr th:each="furniture:${furnituresList}">
+						   	<td th:text="${furniture.maNoiThat}"></td>
+						    <td th:text="${furniture.tenNT}"></td>
+						    <td th:inline="text">[[${#numbers.formatDecimal(furniture.donGia, 0, 'COMMA', 0, 'POINT')}]] VND</td>
+						    <td th:text="${furniture.kichThuoc}"></td>
+						    <td th:text="${furniture.loai.tenLoai}"></td>
+				     		<td class="action-area">
+				     			<a th:href="@{/admin/detail-furniture/{idNoiThat}(idNoiThat=${furniture.idNoiThat})}" 
+							    class="btn btn-primary"><i class="fas fa-fw fa-info-circle"></i></a>
+							    <a th:href="@{/admin/update-furniture/{idNoiThat}(idNoiThat=${furniture.idNoiThat})}" 
+							    class="btn btn-primary"><i class="fas fa-fw fa-edit"></i></a>
+								<a class="btn btn-primary deletebtn" th:data-id="${furniture.idNoiThat}" 
+								th:data-type="furniture"><i class="fas fa-fw fa-trash"></i></a>
+							</td>
+						</tr>
+		            </tbody>
+				</table>
+	        </div>
+   		</div>
+	</div>
+</div>
+</html>

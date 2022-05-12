@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      	layout:decorate="~{layouts/admin-layout}">
+<div layout:fragment="content">
+<!-- Page Heading -->
+	<h1 class="h3 mb-2 text-gray-800">Cập nhật sản phẩm</h1>
+	<div class="card shadow mb-4">
+		<div class="card-body row">
+			<div class="col-6">
+			<form id="uploadFiles" th:action="@{/admin/save-furniture}" th:object="${furniture}" method="POST" enctype="multipart/form-data">
+ 				<!-- Hidden id for update -->
+ 				<input type="hidden" th:field="*{idNoiThat}" />
+ 				
+ 				<label>Mã nội thất <sup>*</sup></label>
+ 				<input type="text" th:field = "*{maNoiThat}" readonly
+		 		placeholder="Nhập mã nội thất" class="form-control mb-4 col-12">
+		 		
+		 		<label>Tên nội thất <sup>*</sup></label>
+		 		<input type="text" th:field = "*{TenNT}"  required
+		 		placeholder="Nhập tên nội thất" class="form-control mb-4 col-12">
+		 		
+		 		<label>Đơn giá <sup>*</sup></label>
+		 		<input type="text" th:field = "*{donGia}" required
+		 		placeholder="Nhập đơn giá" class="form-control mb-4 col-12">
+		 		
+		 		<label>Kích thước <sup>*</sup></label>
+		 		<input type="text" th:field = "*{kichThuoc}" required
+		 		placeholder="Nhập kích thước" class="form-control mb-4 col-12">
+		 		
+		 		<label>Thời gian bảo hành (tháng)</label>
+		 		<input type="text" th:field = "*{baoHanh}" 
+		 		placeholder="Nhập thời gian bảo hành" class="form-control mb-4 col-12">
+		 		
+		 		<label for="hinhAnh">Hình ảnh <sup>*</sup></label>
+		 		<input type="file" th:name="file" required
+		 		class="form-control mb-4 col-12" >
+		 		
+		 		<input type="hidden" th:name="img" th:id ="img" th:value="${furniture.hinhAnh}"/>
+
+		 		<label>Chất liệu <sup>*</sup></label>
+		 		<input type="text" th:field = "*{chatLieu}" required
+		 		placeholder="Chất liệu sản phẩm" class="form-control mb-4 col-12">
+		 		
+		 		<label>Đơn vị tính <sup>*</sup></label>
+		 		<input type="text" th:field = "*{donViTinh}" required
+		 		placeholder="Nhập đơn vị tính" class="form-control mb-4 col-12">
+		 		
+		 		<label>Mô tả</label>
+		 		<textarea rows="5" th:field="*{moTa}" class="form-control mb-4 col-12" placeholder="Nhập mô tả"></textarea>
+		 		
+		 		<label>Loại nội thất <sup>*</sup></label>
+		 		<select th:field="*{loai}" class="form-control mb-4 col-4">	
+				    <option th:each="item: ${categoriesList}" th:value="${item.idLoai}" th:text="${item.tenLoai}" name="maLoai"></option>
+				</select>
+		 	
+		 		<label>Loại khuyến mãi <sup>*</sup></label>
+		 		<select th:field="*{khuyenMai}" class="form-control mb-4 col-4">
+				    <option th:each="item: ${promotionsList}" th:value="${item.idKhuyenMai}" th:text="${item.tenKM}"></option>
+				</select>
+		 		<button type="submit" class="btn btn-info">Cập nhật</button>
+		 		</form>
+			</div>
+   		</div>
+	</div>
+	<div class="form-action">
+		<a th:href="@{/admin/furniture}">Quay lại</a>
+	</div>
+</div>
+</html>
