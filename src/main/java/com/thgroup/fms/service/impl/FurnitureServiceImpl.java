@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.thgroup.fms.entity.Category;
 import com.thgroup.fms.entity.Furniture;
 import com.thgroup.fms.repository.FurnitureRepository;
 
@@ -52,6 +53,15 @@ public class FurnitureServiceImpl implements FurnitureService {
 		return this.furnitureRepo.findFirstMaNoiThat();
 	}
 
+	@Override
+	public List<Furniture> searchid_loai(int idloai) {
+		// TODO Auto-generated method stub
+		return this.furnitureRepo.searchid_loai(idloai);
+	}
+
+	
+
+	
 
 
 }

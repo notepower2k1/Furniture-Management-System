@@ -11,4 +11,5 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 	String findFirstMaNV();
 	
 	Employee findByTaiKhoan(Account taiKhoan);
+	
 }

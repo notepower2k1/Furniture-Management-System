@@ -49,8 +49,22 @@ public class Furniture {
 	@OneToMany(mappedBy = "noiThat")
     private List<ProductPhotos> dsHA = new ArrayList<>();
 	
-	public Furniture(int idNoiThat, String maNoiThat, String tenNT, int donGia, String kichThuoc, int baoHanh,
-			String hinhAnh, String chatLieu, String moTa, Category loai, Promotion khuyenMai, String donViTinh) {
+	public List<OrderDetails> getDsCTDH() {
+		return dsCTDH;
+	}
+	public void setDsCTDH(List<OrderDetails> dsCTDH) {
+		this.dsCTDH = dsCTDH;
+	}
+	public List<ProductPhotos> getDsHA() {
+		return dsHA;
+	}
+	public void setDsHA(List<ProductPhotos> dsHA) {
+		this.dsHA = dsHA;
+	}
+	
+	public Furniture(int idNoiThat, String maNoiThat, String tenNT, float donGia, String kichThuoc, int baoHanh,
+			String hinhAnh, String chatLieu, String donViTinh, String moTa, Category loai, Promotion khuyenMai,
+			List<OrderDetails> dsCTDH, List<ProductPhotos> dsHA) {
 		super();
 		this.idNoiThat = idNoiThat;
 		this.maNoiThat = maNoiThat;
@@ -60,16 +74,19 @@ public class Furniture {
 		this.baoHanh = baoHanh;
 		this.hinhAnh = hinhAnh;
 		this.chatLieu = chatLieu;
+		this.donViTinh = donViTinh;
 		this.moTa = moTa;
 		this.loai = loai;
 		this.khuyenMai = khuyenMai;
-		this.donViTinh = donViTinh;
-	}
-	public Furniture() {
-		super();
+		this.dsCTDH = dsCTDH;
+		this.dsHA = dsHA;
 	}
 	public String getDonViTinh() {
 		return donViTinh;
+	}
+	public Furniture() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	public void setDonViTinh(String donViTinh) {
 		this.donViTinh = donViTinh;

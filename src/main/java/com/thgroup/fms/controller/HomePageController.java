@@ -168,6 +168,7 @@ public class HomePageController {
 		
 		return "redirect:/account";
 	}
+
 	@GetMapping("/account/update-account")
 	public String updateAccountPage(Model model) {
 		Account account = null;
@@ -194,12 +195,25 @@ public class HomePageController {
 		return "redirect:/logout";
 	}
 	@GetMapping("/about")
-	public String aboutPage() {
+	public String aboutPage(Model model) {
+		List<Category> categories = this.categoryService.getAllCategories();
+		model.addAttribute("categoriesList", categories);
+
 		return "user/home/about";
 	}
 	
 	@GetMapping("/contact")
-	public String contactPage() {
+	public String contactPage(Model model) {
+		List<Category> categories = this.categoryService.getAllCategories();
+		model.addAttribute("categoriesList", categories);
 		return "user/home/contact";
+	}
+	
+	@GetMapping("/category-page/{idloai}")
+	public String categoryPage(@PathVariable(value="idloai") int idloai, Model model) {
+	    List<Category> categories = this.categoryService.getAllCategories();
+		model.addAttribute("furnituresList", this.furnitureService.searchid_loai(idloai));
+	    model.addAttribute("categoriesList", categories);
+		return "user/home/categoryPage";
 	}
 }
