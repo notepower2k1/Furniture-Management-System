@@ -23,7 +23,7 @@ public class Customer {
 	@Column(name = "MaKH", nullable = false)
 	private String maKH;
 	@Column(name = "HoTenKH", nullable = false)
-	private String hoTenKH;
+	private String hoTen;
 	@Column(name = "SDT", nullable = false)
 	private String sdt;
 	@Column(name = "Email", nullable = false)
@@ -39,16 +39,15 @@ public class Customer {
 		super();
 	}
 
-	public Customer(int idKhachHang, String maKH, String hoTenKH, String sdt, String email, String diaChi,
-			List<Order> dsDH, Account taiKhoan) {
+	public Customer(int idKhachHang, String maKH, String hoTen, String sdt, String email, String diaChi,
+			Account taiKhoan) {
 		super();
 		this.idKhachHang = idKhachHang;
 		this.maKH = maKH;
-		this.hoTenKH = hoTenKH;
+		this.hoTen = hoTen;
 		this.sdt = sdt;
 		this.email = email;
 		this.diaChi = diaChi;
-		this.dsDH = dsDH;
 		this.taiKhoan = taiKhoan;
 	}
 
@@ -68,12 +67,12 @@ public class Customer {
 		this.maKH = maKH;
 	}
 
-	public String getHoTenKH() {
-		return hoTenKH;
+	public String getHoTen() {
+		return hoTen;
 	}
 
-	public void setHoTenKH(String hoTenKH) {
-		this.hoTenKH = hoTenKH;
+	public void setHoTen(String hoTen) {
+		this.hoTen = hoTen;
 	}
 
 	public String getSdt() {

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.ui.Model;
 
+import com.thgroup.fms.entity.Account;
 import com.thgroup.fms.entity.CartItem;
 import com.thgroup.fms.entity.Customer;
 import com.thgroup.fms.entity.Employee;
@@ -36,7 +37,7 @@ import com.thgroup.fms.utils.Helper;
 
 @Controller
 @RequestMapping("/shopping-cart")
-public class ShoppingCartController {
+public class CartController {
 
 	@Autowired
 	private FurnitureService furnitureService;
@@ -60,21 +61,21 @@ public class ShoppingCartController {
 	private OrderDetailsService orderDService;
 	
 	@Autowired
-	private AccountService accoutService;
+	private AccountService accountService;
 	@GetMapping("/views")
 	public String viewCart(Model model) {
 		model.addAttribute("categoriesList", categoryService.getAllCategories());
-		model.addAttribute("cartItem",cartService.getAllItem());
-		model.addAttribute("total",cartService.getTotal());
-		model.addAttribute("cartItem",cartService.getAllItem());
-		model.addAttribute("ItemTotal",cartService.getTotal());
-		model.addAttribute("ItemCount",cartService.getCount());
+		model.addAttribute("cartItem", cartService.getAllItem());
+		model.addAttribute("total", cartService.getTotal());
+		model.addAttribute("cartItem", cartService.getAllItem());
+		model.addAttribute("itemTotal", cartService.getTotal());
+		model.addAttribute("itemCount", cartService.getCount());
 		return "user/cart/cart";
 	}
 	
 	@GetMapping("/empty")
 	public String cartEmpty(Model model) {
-		return "user/cart/cartEmpty";
+		return "user/cart/cart_empty";
 	}
 	
 	@GetMapping("/add/{id}")
@@ -82,13 +83,13 @@ public class ShoppingCartController {
 		Furniture furniture = furnitureService.getFurnitureById(id);
 		if (furniture!=null) {
 			CartItem item = new CartItem();
-			float Original_Price = furniture.getDonGia();
-			float khuyenmai = furniture.getKhuyenMai().getGiaTri();  
-			float New_Price = Original_Price * (1 - khuyenmai);
+			float originalPrice = furniture.getDonGia();
+			float promotionValue = furniture.getKhuyenMai().getGiaTri();  
+			float newPrice = originalPrice * (1 - promotionValue);
 			
 			item.setProductId(furniture.getIdNoiThat());
 			item.setName(furniture.getTenNT());
-			item.setPrice(New_Price);
+			item.setPrice(newPrice);
 			item.setQuantity(1);
 			cartService.add(item);
 		}
@@ -108,41 +109,40 @@ public class ShoppingCartController {
 	
 	@GetMapping("/checkout")
 	public String checkout(Model model) {
-		int id = 0;
+		Account account = null;
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (!(authentication instanceof AnonymousAuthenticationToken)) {
 		    String currentUserName = authentication.getName();
-		    id = accoutService.findidtai_khoan(currentUserName);
+		    account = accountService.getByUsername(currentUserName);
 		}
-		if (id !=0) {
-			model.addAttribute("userInfo",customerService.findCustomer(id));
+		if (account != null) {
+			model.addAttribute("userInfo", customerService.getByAccount(account));
 		}
 		
 		model.addAttribute("categoriesList", categoryService.getAllCategories());
 		model.addAttribute("cartItem", cartService.getAllItem());
 		model.addAttribute("total", cartService.getTotal());
 		model.addAttribute("cartItem", cartService.getAllItem());
-		model.addAttribute("ItemTotal", cartService.getTotal());
-		model.addAttribute("ItemCount", cartService.getCount());
+		model.addAttribute("itemTotal", cartService.getTotal());
+		model.addAttribute("itemCount", cartService.getCount());
 		return "user/cart/checkout";
 	}
 	
-	@PostMapping("/saveOrder")
+	@PostMapping("/save-order")
 	public String saveOrder(@ModelAttribute("order") Order order,		
 			RedirectAttributes redirectAttrs, @Param("note") String note) {
 		
-		int id = 0;
+		Account account = null;
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (!(authentication instanceof AnonymousAuthenticationToken)) {
 		    String currentUserName = authentication.getName();
-		    id = accoutService.findidtai_khoan(currentUserName);
+		    account = accountService.getByUsername(currentUserName);
 		}
-		Customer current = customerService.findCustomer(id);
+		Customer current = customerService.getByAccount(account);
 		
 		
 		String newId = Helper.getNewID(this.orderService.getMaxId(), 2, 2, "DH");
-			
-		
+
 		
 		java.util.Date utilDate = new java.util.Date();
 		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());

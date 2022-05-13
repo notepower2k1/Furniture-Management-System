@@ -218,7 +218,7 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="DejaVu Sans" size="13"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{order}.getKhachHang().getHoTenKH()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{order}.getKhachHang().getHoTen()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="110" y="86" width="159" height="30" uuid="5277982f-ec11-4764-98c0-b522e520b7fb"/>
@@ -232,7 +232,7 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="DejaVu Sans" size="13"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{order}.getNhanVien().getHoTenNV()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{order}.getNhanVien().getHoTen()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="380" y="86" width="175" height="30" uuid="bd630627-5f4f-4c8d-9684-64f727c4066b"/>

@@ -6,4 +6,5 @@ import com.thgroup.fms.entity.Category;
 
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
+
 }

@@ -64,7 +64,8 @@ public class WebSecurityConfig {
 		protected void configure(HttpSecurity http) throws Exception {
 			http
 	        .authorizeRequests()
-	    		.antMatchers("/**").permitAll()
+	    		.antMatchers("/shopping-cart/checkout", "/shopping-cart/save-order", "/shopping-cart/confirm").authenticated()
+	    		.anyRequest().permitAll()
 	            .and()
 	        .formLogin()
 	            .loginPage("/login").permitAll()
@@ -78,9 +79,6 @@ public class WebSecurityConfig {
 		         .and()
 		    .sessionManagement()
 		         .sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
-	            /*.and()
-	        .exceptionHandling()
-	            .accessDeniedPage("/admin/error");*/
 		}
 	}
 }

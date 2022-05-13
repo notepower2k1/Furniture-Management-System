@@ -26,7 +26,7 @@
 				 		
 				 		<label>Nhân viên lập <sup>*</sup></label>
 				 		<select th:field="*{nhanVien}" class="form-control mb-4 col-12">	
-						    <option th:each="item: ${employeesList}" th:value="${item.idNhanVien}" th:text="${item.hoTenNV}" name="maNV"></option>
+						    <option th:each="item: ${employeesList}" th:value="${item.idNhanVien}" th:text="${item.hoTen}" name="maNV"></option>
 						</select>
 				 		
 				 		<label>Địa chỉ nhận hàng <sup>*</sup></label>
@@ -35,7 +35,7 @@
 				 		
 				 		<label>Khách hàng <sup>*</sup></label>
 				 		<select th:field="*{khachHang}" class="form-control mb-4 col-12">	
-						    <option th:each="item: ${customersList}" th:value="${item.idKhachHang}" th:text="${item.hoTenKH}" name="maKH"></option>
+						    <option th:each="item: ${customersList}" th:value="${item.idKhachHang}" th:text="${item.hoTen}" name="maKH"></option>
 						</select>
 				 		
 				 		<label>Tình trạng <sup>*</sup></label>

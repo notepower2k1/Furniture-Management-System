@@ -36,13 +36,12 @@ public class Account {
 	public Account() {
 		super();
 	}
-	public Account(int idTaiKhoan, String tenTaiKhoan, String matKhau, Set<Role> dsVT, Employee nhanVien) {
+	public Account(int idTaiKhoan, String tenTaiKhoan, String matKhau, Set<Role> dsVT) {
 		super();
 		this.idTaiKhoan = idTaiKhoan;
 		this.tenTaiKhoan = tenTaiKhoan;
 		this.matKhau = matKhau;
 		this.dsVT = dsVT;
-		this.nhanVien = nhanVien;
 	}
 	public int getIdTaiKhoan() {
 		return idTaiKhoan;

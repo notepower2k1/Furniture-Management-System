@@ -3618,3 +3618,22 @@ body {
 .logout-btn:hover {
 	color: #4E73DF;
 }
+
+tr {
+	height: 50px;
+}
+
+td:nth-child(1) {
+        font-weight: bold;
+        height: 40px;
+        width: 250px;
+    }
+
+    td:nth-child(2) {
+        font-weight: 300;
+        max-width: 200px;
+    }
+
+    .form-label {
+        cursor: default;
+    }

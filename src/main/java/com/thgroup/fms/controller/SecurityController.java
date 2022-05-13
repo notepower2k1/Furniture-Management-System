@@ -1,6 +1,8 @@
 package com.thgroup.fms.controller;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,12 +19,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thgroup.fms.entity.Account;
+import com.thgroup.fms.entity.Customer;
 import com.thgroup.fms.entity.Role;
 import com.thgroup.fms.service.AccountService;
+import com.thgroup.fms.service.CustomerService;
 import com.thgroup.fms.service.RoleService;
+import com.thgroup.fms.utils.Helper;
 
 @Controller
 public class SecurityController {
@@ -30,6 +38,8 @@ public class SecurityController {
 	private RoleService roleService;
 	@Autowired
 	private AccountService accountService;
+	@Autowired
+	private CustomerService customerService;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	@GetMapping("/admin/login") 
@@ -81,12 +91,7 @@ public class SecurityController {
         }
         return "redirect:/";
 	}
-	@GetMapping("/register")
-	public String userRegisterPage() {
-		
-		return "";
-	}
-	@PostMapping("/logout")
+	@RequestMapping(value = "/logout", method = {RequestMethod.POST, RequestMethod.GET})
     public String userLogout(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
@@ -95,6 +100,27 @@ public class SecurityController {
         return "redirect:/home";
     }
 	
+	@GetMapping("/register")
+	public String userRegisterPage() {
+		return "user/security/register";
+		
+	}
+	@PostMapping("/user-register")
+	public String userRegister(@RequestParam("username") String username,
+			@RequestParam("email") String email,
+			@RequestParam("password") String password) {
+		Set<Role> roles = new HashSet<>();
+		roles.add(this.roleService.findById(4));
+		Account account = new Account(0, username, passwordEncoder.encode(password), roles);
+		this.accountService.saveAccount(account);
+		
+		String newId = Helper.getNewID(this.customerService.getMaxId(), 2, 1, "KH");
+		Customer customer = new Customer(0, newId, "", "", email, "", account);
+		this.customerService.saveCustomer(customer);
+		
+		return "redirect:/login";
+		
+	}
 }
 
 
