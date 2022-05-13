@@ -8,6 +8,8 @@
 	<div class="card shadow mb-4">
 		<div class="card-body">
 			<form action="#" th:action="@{/admin/save-employee}" th:object="${employee}" method="POST">
+				<input type="hidden" th:value="${accounId != null} ? ${accountId} : -1" name="accountId">
+				
 		 		<label>Mã nhân viên <sup>*</sup></label>
 		 		<input type="text" th:field = "*{maNV}" 
 		 		placeholder="Nhập mã nhân viên" class="form-control mb-4 col-6" readonly>
@@ -29,12 +31,23 @@
 		 		placeholder="Nhập địa chỉ" class="form-control mb-4 col-6">
 		 		
 		 		<label>Tài khoản <sup>*</sup></label>
-		 		<div class="mb-5 col-6" style="padding: 0;">
-		 			<select th:field="*{taiKhoan}" class="form-control mb-1">	
-						<option th:each="item: ${accountsList}" th:value="${item.idTaiKhoan}" th:text="${item.tenTaiKhoan}"></option>
-					</select>
-					<a th:href="@{/admin/create-account}" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm float-right">
-						Thêm tài khoản</a>
+		 		<input type="text" name="accountName" id="accountName" required
+		 		placeholder="Nhập tài khoản" class="form-control mb-4 col-6">
+		 		
+		 		<label>Mật khẩu <sup>*</sup></label>
+		 		<input type="password" name="password" id="accountName" required
+		 		placeholder="Nhập mật khẩu" class="form-control mb-4 col-6">
+		 		
+		 		<label>Roles</label>
+		 		<div class="mb-4 col-6">
+		 			<div class="custom-control custom-checkbox custom-control-inline"
+		 				th:each="role : ${rolesList}">
+		 				<input type="checkbox" name="roles" class="custom-control-input"
+				            th:value="${role.idVaiTro}" th:id="${role.idVaiTro}"
+				        />
+				        <label class="custom-control-label" th:for="${role.idVaiTro}"
+				        	th:text="${#strings.substring(role.tenVT, 5)}"></label>
+				    </div>
 		 		</div>
 		 		
 		 		<button type="submit" class="btn btn-info">Thêm mới</button>

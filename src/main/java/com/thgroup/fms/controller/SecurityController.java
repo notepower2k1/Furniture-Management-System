@@ -64,15 +64,6 @@ public class SecurityController {
     public String adminErrorPage() {
         return "admin/security/error";
     }
-	
-	@GetMapping("/admin/create-account")
-	public String createAccountPage(Model model) {
-		List<Role> rolesList = this.roleService.getAllRoles();
-		Account account = new Account();
-		model.addAttribute("rolesList", rolesList);
-		model.addAttribute("account", account);
-		return "admin/security/add_account";
-	}
 	@PostMapping("/admin/save-account")
 	public String saveAccount(@ModelAttribute("account") Account account,
 			RedirectAttributes redirectAttrs) {
