@@ -1311,11 +1311,8 @@ body {
     clear: both; }
 
 .item-new-price, .item-old-price {
-<<<<<<< HEAD
   font-size: 20px; }
-=======
-  font-size: 17px; }
->>>>>>> ecbba8905a4598b9684d1050d7cc746045642ced
+
 
 .item-new-price {
   float: left;

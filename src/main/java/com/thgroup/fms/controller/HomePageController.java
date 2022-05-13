@@ -150,7 +150,6 @@ public class HomePageController {
 		return "redirect:/account";
 	}
 	
-<<<<<<< HEAD
 	@GetMapping("/about")
 	public String aboutPage() {
 		return "user/home/about";
@@ -160,6 +159,4 @@ public class HomePageController {
 	public String contactPage() {
 		return "user/home/contact";
 	}
-=======
->>>>>>> ecbba8905a4598b9684d1050d7cc746045642ced
 }
