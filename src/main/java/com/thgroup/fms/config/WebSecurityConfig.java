@@ -73,10 +73,7 @@ public class WebSecurityConfig {
 	            .passwordParameter("password")
 	            .defaultSuccessUrl("/home", true)
 	            .failureUrl("/login?error")
-	            .and()
-		    .exceptionHandling()
-		         .accessDeniedPage("/error")
-		         .and()
+	            .and()	    
 		    .sessionManagement()
 		         .sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
 		}

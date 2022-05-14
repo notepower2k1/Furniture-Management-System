@@ -1,5 +1,6 @@
 package com.thgroup.fms.controller;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -81,56 +82,61 @@ public class FurnitureController {
 	public String saveFurniture(@ModelAttribute("furniture") Furniture furniture,
 			@RequestParam("file") MultipartFile file,
 			@RequestParam("subfile") MultipartFile[] subfile, 
-			RedirectAttributes redirectAttrs , @Param("img") String img ,@Param("imgs") String imgs){
-		
+			RedirectAttributes redirectAttrs , @Param("img") String img ,@Param("imgs") String[] imgs){
+		Path path = Paths.get("src/main/resources/static/admin/img/");
+
 		if (furniture.getMaNoiThat() == null) {
 			String newId = Helper.getNewID(this.furnitureService.getMaxId(), 2, 2, "NT");
 		    furniture.setMaNoiThat(newId);
 		    furniture.setHinhAnh(file.getOriginalFilename());
 		}
 		
-		else {
-			if (file.isEmpty()) {
-				furniture.setHinhAnh(img);
-				
+			if (file.isEmpty()){
+				furniture.setHinhAnh(img);				
 			}
-			else
-			{
-				furniture.setHinhAnh(file.getOriginalFilename());
+			if (subfile.length == 0 ) {
+				List<ProductPhotos> fileList = new ArrayList<ProductPhotos>();
+				for (String item : imgs) {		           
+			            ProductPhotos fileModal = new ProductPhotos(furniture,item);		           				
+			            fileList.add(fileModal);
+			            }	  
+				furniture.setDsHA(fileList);
 			}
-		}
+			if(file.isEmpty() == false) {
+				furniture.setHinhAnh(file.getOriginalFilename());		
+			}
+			
+			if(subfile.length != 0)  {
+				try {				
+					  List<ProductPhotos> fileList = new ArrayList<ProductPhotos>();
+					  
+				        for (MultipartFile file1 : subfile) {
+				            String fileName = file1.getOriginalFilename();
+				            ProductPhotos fileModal = new ProductPhotos(furniture,fileName);
+				             
+				            InputStream inputStream1 = file1.getInputStream();
+							Files.copy(inputStream1, path.resolve(file1.getOriginalFilename()),
+									StandardCopyOption.REPLACE_EXISTING);
+							
+				            // Adding file into fileList
+				            fileList.add(fileModal);
+				            }
+				        	productphotoService.deleteByid(furniture.getIdNoiThat());
+				            // Saving all the list item into database
+				        	productphotoService.saveAllFilesList(fileList);
+				}
+					catch(Exception e){
+						e.printStackTrace();
+					}
+			}
+			
+	
+		
 	
 			
-		Furniture isExists = this.furnitureService.saveFurniture(furniture);
-		if (isExists != null) {
-			Path path = Paths.get("src/main/resources/static/admin/img/");
-			try {
-				InputStream inputStream = file.getInputStream();
-				Files.copy(inputStream, path.resolve(file.getOriginalFilename()),
-						StandardCopyOption.REPLACE_EXISTING);
-			  List<ProductPhotos> fileList = new ArrayList<ProductPhotos>();
-			  
-		        for (MultipartFile file1 : subfile) {
-		            String fileName = file1.getOriginalFilename();
-		            ProductPhotos fileModal = new ProductPhotos(furniture,fileName);
-		             
-		            InputStream inputStream1 = file1.getInputStream();
-					Files.copy(inputStream1, path.resolve(file1.getOriginalFilename()),
-							StandardCopyOption.REPLACE_EXISTING);
-					
-		            // Adding file into fileList
-		            fileList.add(fileModal);
-		            }
-		        	
-			        
-		            // Saving all the list item into database
-		        	productphotoService.saveAllFilesList(fileList);
-		}
-			catch(Exception e){
-				e.printStackTrace();
-			}
-		}
-		 
+	
+		
+		this.furnitureService.saveFurniture(furniture);
 		redirectAttrs.addFlashAttribute("alertType", "success");
 		redirectAttrs.addFlashAttribute("alertText", "Thành công");
 		return "redirect:/admin/furniture";

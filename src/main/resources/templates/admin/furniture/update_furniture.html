@@ -33,16 +33,16 @@
 		 		placeholder="Nhập thời gian bảo hành" class="form-control mb-4 col-12">
 		 		
 		 		<label for="hinhAnh">Hình ảnh <sup>*</sup></label>
-		 		<input type="file" th:name="file" required
+		 		<input type="file" th:name="file"
 		 		class="form-control mb-4 col-12" >
 		 		
 		 		<label>Hình ảnh phụ <sup>*</sup></label>
-		 		<input type="file" name="subfile" multiple required
+		 		<input type="file" name="subfile" multiple
 		 		class="form-control mb-4 col-6">
 		 		
 		 		<input type="hidden" th:name="img" th:id ="img" th:value="${furniture.hinhAnh}"/>
 
-				<input type="hidden" th:name="imgs" th:id ="imgs" th:value="${furniture.dsHA}"/>
+				<input type="hidden" th:name="imgs" th:id ="imgs" th:each="item:${furniture.dsHA}" th:value="${item.tenAnh}"/>
 				
 		 		<label>Chất liệu <sup>*</sup></label>
 		 		<input type="text" th:field = "*{chatLieu}" required

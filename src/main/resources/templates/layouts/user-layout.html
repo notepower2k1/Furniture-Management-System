@@ -629,29 +629,7 @@ ga('create', 'UA-XXXXX-Y', 'auto');
 ga('send', 'pageview')
 </script>
 
-	<script th:inline="javascript">
-		var imgsrc = document.getElementById("zoom-pro").src;
-		
-		var zoom_image = document.getElementById("zoom-pro");
-		
-		zoom_image.setAttribute('data-zoom-image',imgsrc); // fruitCount = '12'
-		
-		var a_tag = document.getElementById('gallery').getElementsByTagName('a');
-		console.log(a_tag)
-		
-		for (var i = 0; i < a_tag.length; i++) {
-			a_tag[i].setAttribute('data-image',imgsrc)
-			a_tag[i].setAttribute('data-zoom-image',imgsrc)
-    	}
-		
-		var img_tag = document.getElementById('gallery').getElementsByTagName('img');
-		
-		for (var i = 0; i < img_tag.length; i++) {
-			img_tag[i].src = imgsrc
-    	}
-		
-		
-	</script>
+	
 <script src="https://www.google-analytics.com/analytics.js" async defer></script>
 <!-- Modernizr-JS -->
 <script type="text/javascript" th:src="@{/user/js/vendor/modernizr-custom.min.js}"></script>
