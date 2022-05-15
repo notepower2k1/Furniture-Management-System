@@ -30,26 +30,14 @@
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <!-- Product-zoom-area -->
                     <div class="zoom-area">
-                        <img id="zoom-pro" class="img-fluid" th:src="@{/admin/img/} + ${furniture.hinhAnh}" data-zoom-image="..." alt="Zoom Image">
-                        <div id="gallery" class="u-s-m-t-10">
-                            <a class="active" data-image="images/product/product@4x.jpg" data-zoom-image="images/product/product@4x.jpg">
-                                <img src="images/product/product@2x.jpg" alt="Product">
+                        <img id="zoom-pro" class="img-fluid" th:src="@{/admin/img/} + ${furniture.hinhAnh}" th:attr="data-zoom-image=@{/admin/img/} + ${furniture.hinhAnh}" alt="Zoom Image">
+                        <div id="gallery" class="u-s-m-t-10" >
+                        	 <a th:each="image:${furniture.dsHA}" th:attr="data-image=@{/admin/img/} + ${image.tenAnh},data-zoom-image=@{/admin/img/} + ${image.tenAnh}" >
+                                <img th:src="@{/admin/img/} + ${image.tenAnh}" alt="Product">
                             </a>
-                            <a data-image="images/product/product@4x.jpg" data-zoom-image="images/product/product@4x.jpg">
-                                <img src="images/product/product@2x.jpg" alt="Product">
-                            </a>
-                            <a data-image="images/product/product@4x.jpg" data-zoom-image="images/product/product@4x.jpg">
-                                <img src="images/product/product@2x.jpg" alt="Product">
-                            </a>
-                            <a data-image="images/product/product@4x.jpg" data-zoom-image="images/product/product@4x.jpg">
-                                <img src="images/product/product@2x.jpg" alt="Product">
-                            </a>
-                            <a data-image="images/product/product@4x.jpg" data-zoom-image="images/product/product@4x.jpg">
-                                <img src="images/product/product@2x.jpg" alt="Product">
-                            </a>
-                            <a data-image="images/product/product@4x.jpg" data-zoom-image="images/product/product@4x.jpg">
-                                <img src="images/product/product@2x.jpg" alt="Product">
-                            </a>
+                        	
+                           
+                          
                         </div>
                     </div>
                     <!-- Product-zoom-area /- -->
