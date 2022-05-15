@@ -8,7 +8,7 @@
 	<div class="card shadow mb-4">
 		<div class="card-body">
 			<form action="#" th:action="@{/admin/save-employee}" th:object="${employee}" method="POST">
-				<input type="hidden" th:value="${accounId != null} ? ${accountId} : -1" name="accountId">
+				<input type="hidden" th:value="${accountId != null} ? ${accountId} : -1" name="accountId">
 				
 		 		<label>Mã nhân viên <sup>*</sup></label>
 		 		<input type="text" th:field = "*{maNV}" 

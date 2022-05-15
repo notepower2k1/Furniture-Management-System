@@ -26,7 +26,7 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
-	public Role findById(int id) {
+	public Role getById(int id) {
 		Optional<Role> optional = this.roleRepo.findById(id);
 		Role role = null;
 		if(optional.isPresent()) {

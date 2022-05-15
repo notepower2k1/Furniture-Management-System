@@ -32,25 +32,12 @@
 		 		placeholder="Nhập địa chỉ khách hàng" class="form-control mb-4 col-6">
 		 		
 				<label>Tài khoản <sup>*</sup></label>
-		 		<input type="text" th:value="${employee.taiKhoan.tenTaiKhoan}" name="accountName" id="accountName" required
+		 		<input type="text" th:value="${customer.taiKhoan.tenTaiKhoan}" name="accountName" id="accountName" required
 		 		placeholder="Nhập tài khoản" class="form-control mb-4 col-6">
 		 		
 		 		<label>Mật khẩu <sup>*</sup></label>
 		 		<input type="password" name="password" id="accountName" required
 		 		placeholder="Nhập mật khẩu" class="form-control mb-4 col-6">
-		 		
-		 		<label>Roles</label>
-		 		<div class="mb-4 col-6">
-		 			<div class="custom-control custom-checkbox custom-control-inline"
-		 				th:each="role : ${rolesList}">
-		 				<input type="checkbox" name="roles" class="custom-control-input"
-				            th:value="${role.idVaiTro}" th:field="*{taiKhoan.dsVT}"
-				            th:id="${role.idVaiTro}"
-				        />
-				        <label class="custom-control-label" th:for="${role.idVaiTro}"
-				        	th:text="${#strings.substring(role.tenVT, 5)}"></label>
-				    </div>
-		 		</div>
 		 		
 		 		<button type="submit" class="btn btn-info">Cập nhật</button>
 		 	</form>

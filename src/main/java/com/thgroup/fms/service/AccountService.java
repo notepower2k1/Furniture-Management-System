@@ -9,4 +9,5 @@ public interface AccountService {
 	Account saveAccount(Account account);
 	Account getByUsername(String tenTaiKhoan);
 	Account getById(int idTaiKhoan);
+	void removeAccountById(int idTaiKhoan);
 }

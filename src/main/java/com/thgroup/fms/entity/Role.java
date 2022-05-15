@@ -46,5 +46,13 @@ public class Role implements Serializable {
 	public void setTenVT(String tenVT) {
 		this.tenVT = tenVT;
 	}
+
+	public Set<Account> getDsTK() {
+		return dsTK;
+	}
+
+	public void setDsTK(Set<Account> dsTK) {
+		this.dsTK = dsTK;
+	}
     
 }

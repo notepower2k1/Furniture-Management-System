@@ -1,5 +1,6 @@
 package com.thgroup.fms.controller;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -72,11 +73,11 @@ public class CustomerController {
 			@RequestParam("accountName") String accountName,
 			@RequestParam("accountId") int accountId,
 			@RequestParam("password") String password,
-			@RequestParam(value="roles", required=false) Set<Role> roles,
 			RedirectAttributes redirectAttrs) {
-		
 		Account account = null;
-		if (accountId != -1 && roles == null) {
+		if (accountId != -1) {
+			Set<Role> roles = new HashSet<>();
+			roles.add(this.roleService.getById(4));
 			account = this.accountService.getById(accountId);
 			account.setTenTaiKhoan(accountName);
 			account.setMatKhau(passwordEncoder.encode(password));
@@ -113,7 +114,9 @@ public class CustomerController {
 	@GetMapping("/admin/delete-customer/{idKhachHang}")
 	public String deleteCustomer(@PathVariable(value="idKhachHang") int idKhachHang, 
 			RedirectAttributes redirectAttrs) {
+		Customer customer = this.customerService.getCustomerById(idKhachHang);
 		this.customerService.removeCustomerById(idKhachHang);
+		this.accountService.removeAccountById(customer.getTaiKhoan().getIdTaiKhoan());
 		redirectAttrs.addFlashAttribute("alertType", "success");
 		redirectAttrs.addFlashAttribute("alertText", "Xóa thành công");
 	    return "redirect:/admin/customer";

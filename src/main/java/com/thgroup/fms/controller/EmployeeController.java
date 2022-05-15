@@ -68,17 +68,17 @@ public class EmployeeController {
 			@RequestParam("accountName") String accountName,
 			@RequestParam("accountId") int accountId,
 			@RequestParam("password") String password,
-			@RequestParam(value="roles", required=false) Set<Role> roles,
+			@RequestParam(value = "roles", required = false) Set<Role> roles,
 			RedirectAttributes redirectAttrs) {
 		
 		Account account = null;
-		if (accountId != -1 && roles == null) {
+		if (accountId != -1) {
 			account = this.accountService.getById(accountId);
 			account.setTenTaiKhoan(accountName);
 			account.setMatKhau(passwordEncoder.encode(password));
 			account.setDsVT(roles);
-		} else {
-			account = new Account(0, accountName, passwordEncoder.encode(password), employee.getTaiKhoan().getDsVT());
+		} else if (accountId == -1) {
+			account = new Account(0, accountName, passwordEncoder.encode(password), roles);
 		}
 		this.accountService.saveAccount(account);
 		if (employee.getMaNV() == null) {
@@ -106,7 +106,9 @@ public class EmployeeController {
 	@GetMapping("/admin/delete-employee/{idNhanVien}")
 	public String deleteEmployee(@PathVariable(value="idNhanVien") int idNhanVien,
 			RedirectAttributes redirectAttrs) {
+		Employee employee = this.employeeService.getEmployeeById(idNhanVien);
 		this.employeeService.removeEmployeeById(idNhanVien);
+		this.accountService.removeAccountById(employee.getTaiKhoan().getIdTaiKhoan());
 		redirectAttrs.addFlashAttribute("alertType", "success");
 		redirectAttrs.addFlashAttribute("alertText", "Xóa thành công");
 	    return "redirect:/admin/employee";

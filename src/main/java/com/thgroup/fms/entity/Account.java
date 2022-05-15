@@ -74,4 +74,13 @@ public class Account {
 		this.nhanVien = nhanVien;
 	}
 	
+	/*public void addRole(Role role) {
+        this.dsVT.add(role);
+       role.getDsTK().add(this);
+    }*/
+  
+    public void removeRole(Role role) {
+        this.dsVT.remove(role);
+        role.getDsTK().remove(this);
+    }
 }

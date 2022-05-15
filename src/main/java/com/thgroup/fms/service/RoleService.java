@@ -6,5 +6,5 @@ import com.thgroup.fms.entity.Role;
 
 public interface RoleService {
 	List<Role> getAllRoles();
-	Role findById(int id);
+	Role getById(int id);
 }

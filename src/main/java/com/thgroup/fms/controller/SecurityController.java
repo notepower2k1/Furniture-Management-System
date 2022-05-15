@@ -101,7 +101,7 @@ public class SecurityController {
 			@RequestParam("email") String email,
 			@RequestParam("password") String password) {
 		Set<Role> roles = new HashSet<>();
-		roles.add(this.roleService.findById(4));
+		roles.add(this.roleService.getById(4));
 		Account account = new Account(0, username, passwordEncoder.encode(password), roles);
 		this.accountService.saveAccount(account);
 		
