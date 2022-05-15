@@ -28,12 +28,12 @@
 		 		<input type="text" th:field = "*{baoHanh}" 
 		 		placeholder="Nhập thời gian bảo hành" class="form-control mb-4 col-6">
 		 	
-		 		<label>Hình ảnh <sup>*</sup></label>
-		 		<input type="file" name="file" required
-		 		class="form-control mb-4 col-6">
+		 		<label for="hinhAnh">Hình ảnh <sup>*</sup></label>
+		 		<input type="file" th:name="file" th:value = "*{hinhAnh}" id="hinhanh"
+		 		class="form-control mb-4 col-12" >
 		 		
 		 		<label>Hình ảnh phụ <sup>*</sup></label>
-		 		<input type="file" name="subfile" multiple
+		 		<input type="file" name="subfile" multiple th:value = "*{dsHA}"
 		 		class="form-control mb-4 col-6">
 		 		
 		 		<label>Chất liệu <sup>*</sup></label>

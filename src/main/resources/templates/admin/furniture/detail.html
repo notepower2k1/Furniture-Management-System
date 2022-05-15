@@ -7,54 +7,54 @@
 	<div class="card shadow mb-4">
 		<div class="card-body">
 			<div class="mx-3 row">
-				<table cellpadding="2" cellspacing="10" width="400" class="col-md-6 col-12">
-		            <tr>
-		                <td class="form-label">MÃ£ ná»™i tháº¥t</td>
-		                <td class="form-label" th:text="${furniture.maNoiThat}"></td>
-		            </tr>
-		            <tr>
-		                <td class="form-label">TÃªn ná»™i tháº¥t</td>
-		                <td class="form-label" th:text="${furniture.tenNT}"></td>
-		            </tr>
-		            <tr>
-		                <td class="form-label">Ä�Æ¡n giÃ¡</td>
-		                <td class="form-label" th:inline="text">[[${#numbers.formatDecimal(furniture.donGia, 0, 'COMMA', 0, 'POINT')}]] VND</td>
-		            </tr>
-		            <tr>
-		                <td class="form-label">KÃ­ch thÆ°á»›c</td>
-		                <td class="form-label" th:text="${furniture.kichThuoc}"></td>
-		            </tr>
-		            <tr>
-		                <td class="form-label">Thá»�i gian báº£o hÃ nh</td>
-		                <td class="form-label" th:text="${furniture.baoHanh}"></td>
-		            </tr>
-		            <tr>
-		                <td class="form-label">Cháº¥t liá»‡u</td>
-		                <td class="form-label" th:text="${furniture.chatLieu}"></td>
-		            </tr>
-		            <tr>
-		                <td class="form-label">Ä�Æ¡n vá»‹ tÃ­nh</td>
-		                <td class="form-label" th:text="${furniture.donViTinh}"></td>
-		            </tr>
-		            <tr>
-		                <td class="form-label">Loáº¡i</td>
-		                <td class="form-label" th:text="${furniture.loai.tenLoai}"></td>
-		            </tr>
-		            <tr>
-		                <td class="form-label">Khuyáº¿n mÃ£i</td>
-		                <td class="form-label" th:text="${furniture.khuyenMai}?${furniture.khuyenMai.tenKM}:'KhÃ´ng cÃ³'"></td>
-		            </tr>
-		            <tr>
-		                <td class="form-label" style="display: flex;padding-top: 12px;">ThÃ´ng tin sÆ¡ lÆ°á»£c</td>
-		                <td class="form-label wrap-text" th:text="${furniture.moTa}"></td>
-		            </tr>	
-		            
-		            
-		        </table>
+				<div class="col-md-6 col-12">
+					<table cellpadding="2" cellspacing="10" width="500" class="col-12">
+			            <tr>
+			                <td class="form-label">MÃ£ ná»™i tháº¥t</td>
+			                <td class="form-label" th:text="${furniture.maNoiThat}"></td>
+			            </tr>
+			            <tr>
+			                <td class="form-label">TÃªn ná»™i tháº¥t</td>
+			                <td class="form-label" th:text="${furniture.tenNT}"></td>
+			            </tr>
+			            <tr>
+			                <td class="form-label">Ä�Æ¡n giÃ¡</td>
+			                <td class="form-label" th:inline="text">[[${#numbers.formatDecimal(furniture.donGia, 0, 'COMMA', 0, 'POINT')}]] VND</td>
+			            </tr>
+			            <tr>
+			                <td class="form-label">KÃ­ch thÆ°á»›c</td>
+			                <td class="form-label" th:text="${furniture.kichThuoc}"></td>
+			            </tr>
+			            <tr>
+			                <td class="form-label">Thá»�i gian báº£o hÃ nh</td>
+			                <td class="form-label" th:text="${furniture.baoHanh}"></td>
+			            </tr>
+			            <tr>
+			                <td class="form-label">Cháº¥t liá»‡u</td>
+			                <td class="form-label" th:text="${furniture.chatLieu}"></td>
+			            </tr>
+			            <tr>
+			                <td class="form-label">Ä�Æ¡n vá»‹ tÃ­nh</td>
+			                <td class="form-label" th:text="${furniture.donViTinh}"></td>
+			            </tr>
+			            <tr>
+			                <td class="form-label">Loáº¡i</td>
+			                <td class="form-label" th:text="${furniture.loai.tenLoai}"></td>
+			            </tr>
+			            <tr>
+			                <td class="form-label">Khuyáº¿n mÃ£i</td>
+			                <td class="form-label" th:text="${furniture.khuyenMai}?${furniture.khuyenMai.tenKM}:'KhÃ´ng cÃ³'"></td>
+			            </tr>
+			            <tr>
+			                <td class="form-label" style="display: flex;padding-top: 12px;">ThÃ´ng tin sÆ¡ lÆ°á»£c</td>
+			                <td class="form-label wrap-text" th:text="${furniture.moTa}"></td>
+			            </tr>
+			        </table>
+				</div>
 		        <div class="col-md-6 col-12">
 	   				<img class="img-fluid img-thumbnail" th:src="@{/admin/img/} + ${furniture.hinhAnh}" />
 	   				<div>
-						<img height="150" th:each="item:${furniture.dsHA}" th:src="@{/admin/img/} + ${item.tenAnh}" />
+						<img class="img-fluid p-2" height="150" width="186" th:each="item:${furniture.dsHA}" th:src="@{/admin/img/} + ${item.tenAnh}" />
 	   				</div>
 	   			</div>
 	   			

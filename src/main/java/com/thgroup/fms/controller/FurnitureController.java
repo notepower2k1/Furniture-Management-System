@@ -81,18 +81,14 @@ public class FurnitureController {
 	@PostMapping("/admin/save-furniture")
 	public String saveFurniture(@ModelAttribute("furniture") Furniture furniture,
 			@RequestParam("file") MultipartFile file,
-			@RequestParam("subfile") MultipartFile[] subfile, 
+			@RequestParam("subfile") MultipartFile[] subfile,
 			RedirectAttributes redirectAttrs , @Param("img") String img ,@Param("imgs") String[] imgs){
 		Path path = Paths.get("src/main/resources/static/admin/img/");
 
 		if (furniture.getMaNoiThat() == null) {
 			String newId = Helper.getNewID(this.furnitureService.getMaxId(), 2, 2, "NT");
 		    furniture.setMaNoiThat(newId);	  
-		 
-
 		}
-		
-		
 		if (file.isEmpty()){
 				furniture.setHinhAnh(img);				
 			}
@@ -104,7 +100,7 @@ public class FurnitureController {
 			            }	  
 				furniture.setDsHA(fileList);
 			}
-			if(file.isEmpty() == false) {
+			if (file.isEmpty() == false) {
 				furniture.setHinhAnh(file.getOriginalFilename());	
 				
 				try {						  
