@@ -14,4 +14,6 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 	Customer findCustomer(@Param("id_tai_khoan") int id_tai_khoan);*/
 	
 	Customer findByTaiKhoan(Account taiKhoan);
+	
+	
 }

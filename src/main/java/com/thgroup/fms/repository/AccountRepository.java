@@ -7,4 +7,7 @@ import com.thgroup.fms.entity.Account;
 public interface AccountRepository extends JpaRepository<Account, Integer> {
 	
 	Account findByTenTaiKhoan(String tenTaiKhoan);
+	
+	Account findTopByTenTaiKhoan(String tenTaiKhoan);
+
 }

@@ -2,6 +2,7 @@ package com.thgroup.fms.service;
 
 import java.util.List;
 
+
 import com.thgroup.fms.entity.Account;
 
 public interface AccountService {
@@ -10,4 +11,5 @@ public interface AccountService {
 	Account getByUsername(String tenTaiKhoan);
 	Account getById(int idTaiKhoan);
 	void removeAccountById(int idTaiKhoan);
+	Account findTopByTenTaiKhoan(String tenTaiKhoan);
 }

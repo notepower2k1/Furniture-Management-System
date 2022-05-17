@@ -61,6 +61,7 @@ public class EmployeeController {
 		List<Role> rolesList = this.roleService.getAllRoles();
 		
 		employee.setMaNV(newId);
+		
 	    model.addAttribute("employee", employee);
 	    model.addAttribute("rolesList", rolesList);
 	    return "admin/employee/add_employee";
@@ -98,16 +99,31 @@ public class EmployeeController {
 			} else if (accountId == -1) {
 				account = new Account(0, accountName, passwordEncoder.encode(password), roles);
 			}
-			this.accountService.saveAccount(account);
-			if (employee.getMaNV() == null) {
-				String newId = Helper.getNewID(this.employeeService.getMaxId(), 2, 1, "NV");
-				employee.setMaNV(newId);
+			
+			Account exist_accout = this.accountService.findTopByTenTaiKhoan(accountName);
+			
+			
+			
+			if(exist_accout.getIdTaiKhoan() > 0)
+			{
+				redirectAttrs.addFlashAttribute("alertType", "Fail");
+				redirectAttrs.addFlashAttribute("alertText", "Tài khoản đã tồn tại");
+				return "redirect:/admin/create-employee";
+
 			}
-			employee.setTaiKhoan(account);
-			this.employeeService.saveEmployee(employee);
-			redirectAttrs.addFlashAttribute("alertType", "success");
-			redirectAttrs.addFlashAttribute("alertText", "Thành công");
-			return "redirect:/admin/employee";
+			else {
+				this.accountService.saveAccount(account);
+				if (employee.getMaNV() == null) {
+					String newId = Helper.getNewID(this.employeeService.getMaxId(), 2, 1, "NV");
+					employee.setMaNV(newId);
+				}
+				employee.setTaiKhoan(account);
+				this.employeeService.saveEmployee(employee);
+				redirectAttrs.addFlashAttribute("alertType", "success");
+				redirectAttrs.addFlashAttribute("alertText", "Thành công");
+				return "redirect:/admin/employee";
+			}
+		
 		}
 	}
 	

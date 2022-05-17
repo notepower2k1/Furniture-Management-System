@@ -48,4 +48,12 @@ public class AccountServiceImpl implements AccountService {
 		this.accountRepository.deleteById(idTaiKhoan);
 	}
 
+	@Override
+	public Account findTopByTenTaiKhoan(String tenTaiKhoan) {
+		// TODO Auto-generated method stub
+		return this.accountRepository.findTopByTenTaiKhoan(tenTaiKhoan);
+	}
+
+	
+
 }

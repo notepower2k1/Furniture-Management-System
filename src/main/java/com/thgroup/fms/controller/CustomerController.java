@@ -102,18 +102,33 @@ public class CustomerController {
 			roles.add(this.roleService.getById(4));
 			account = new Account(0, accountName, passwordEncoder.encode(password), roles);
 		}
-		this.accountService.saveAccount(account);
 		
-		if (customer.getMaKH() == null) {
-			String newId = Helper.getNewID(this.customerService.getMaxId(), 2, 1, "KH");
-		    customer.setMaKH(newId);
+		Account exist_accout = this.accountService.findTopByTenTaiKhoan(accountName);
+		
+		
+		
+		if(exist_accout.getIdTaiKhoan() > 0)
+		{
+			redirectAttrs.addFlashAttribute("alertType", "Fail");
+			redirectAttrs.addFlashAttribute("alertText", "Tài khoản đã tồn tại");
+			return "redirect:/admin/create-customer";
+
 		}
-		customer.setTaiKhoan(account);
-		this.customerService.saveCustomer(customer);
+		else {
+			if (customer.getMaKH() == null) {
+				String newId = Helper.getNewID(this.customerService.getMaxId(), 2, 1, "KH");
+			    customer.setMaKH(newId);
+			}
+			this.accountService.saveAccount(account);
+			customer.setTaiKhoan(account);
+			this.customerService.saveCustomer(customer);
+			
+			redirectAttrs.addFlashAttribute("alertType", "success");
+			redirectAttrs.addFlashAttribute("alertText", "Thành công");
+			return "redirect:/admin/customer";
+		}
+	
 		
-		redirectAttrs.addFlashAttribute("alertType", "success");
-		redirectAttrs.addFlashAttribute("alertText", "Thành công");
-		return "redirect:/admin/customer";
 	}
 	
 	@GetMapping("/admin/update-customer/{idKhachHang}")
