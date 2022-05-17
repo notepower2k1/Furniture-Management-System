@@ -48,16 +48,16 @@
                         <div class="section-1-title-breadcrumb-rating">
                             <div class="product-title">
                                 <h1>
-                                    <a href="single-product.html" th:text="${furniture.tenNT}"></a>
+                                    <span th:text="${furniture.tenNT}"></span>
                                 </h1>
                             </div>
                             <ul class="bread-crumb">
                                 <li class="has-separator">
-                                    <a href="home.html">Home</a>
+                                    <a th:href="@{/home}">Home</a>
                                 </li>
                                
                                 <li class="is-marked">
-                                    <a href="shop-v3-sub-sub-category.html" th:text="${furniture.loai.tenLoai}"></a>
+                                    <a th:href="@{/category-page/{idloai}(idloai = ${furniture.loai.idLoai})}" th:text="${furniture.loai.tenLoai}"></a>
                                 </li>
                             </ul>
                             <div class="product-rating">
@@ -104,14 +104,7 @@
                         </div>
                         <div class="section-6-social-media-quantity-actions u-s-p-y-14">
                             <form action="#" class="post-form">
-                                <div class="quantity-wrapper u-s-m-b-22">
-                                    <span>Quantity:</span>
-                                    <div class="quantity">
-                                        <input type="text" class="quantity-text-field" value="1">
-                                        <a class="plus-a" data-max="1000">&#43;</a>
-                                        <a class="minus-a" data-min="1">&#45;</a>
-                                    </div>
-                                </div>
+                                
                                 <div>
                                     <a th:href="@{/shopping-cart/add/{id}(id=${furniture.idNoiThat})}" class="button button-outline-secondary" type="submit">Add to cart</a>
                                     <button class="button button-outline-secondary far fa-envelope u-s-m-l-6"></button>
@@ -131,10 +124,7 @@
                             <ul class="nav single-product-nav justify-content-center">
                                 <li class="nav-item">
                                     <a class="nav-link active" data-toggle="tab" href="#description">Description</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#specification">Specifications</a>
-                                </li>
+                                </li>                    
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#review">Reviews (15)</a>
                                 </li>
@@ -151,73 +141,7 @@
                             </div>
                             <!-- Description-Tab /- -->
                             <!-- Specifications-Tab -->
-                            <div class="tab-pane fade" id="specification">
-                                <div class="specification-whole-container">
-                                    <div class="spec-ul u-s-m-b-50">
-                                        <h4 class="spec-heading">Key Features</h4>
-                                        <ul>
-                                            <li>Heather Grey</li>
-                                            <li>Black</li>
-                                            <li>White</li>
-                                        </ul>
-                                    </div>
-                                    <div class="u-s-m-b-50">
-                                        <h4 class="spec-heading">What's in the Box?</h4>
-                                        <h3 class="spec-answer">1 x hoodie</h3>
-                                    </div>
-                                    <div class="spec-table u-s-m-b-50">
-                                        <h4 class="spec-heading">General Information</h4>
-                                        <table>
-                                            <tr>
-                                                <td>Sku</td>
-                                                <td>AY536FA08JT86NAFAMZ</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <div class="spec-table u-s-m-b-50">
-                                        <h4 class="spec-heading">Product Information</h4>
-                                        <table>
-                                            <tr>
-                                                <td>Main Material</td>
-                                                <td>Cotton</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Color</td>
-                                                <td>Heather Grey, Black, White</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Sleeves</td>
-                                                <td>Long Sleeve</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Top Fit</td>
-                                                <td>Regular</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Print</td>
-                                                <td>Not Printed</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Neck</td>
-                                                <td>Round Neck</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Pieces Count</td>
-                                                <td>1 piece</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Occasion</td>
-                                                <td>Casual</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Shipping Weight (kg)</td>
-                                                <td>0.5</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Specifications-Tab /- -->
+                          
                             <!-- Reviews-Tab -->
                             <div class="tab-pane fade" id="review">
                                 <div class="review-whole-container">
@@ -457,276 +381,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Detail-Tabs /- -->
-            <!-- Different-Product-Section -->
-            <div class="detail-different-product-section u-s-p-t-80">
-                <!-- Similar-Products -->
-                <section class="section-maker">
-                    <div class="container">
-                        <div class="sec-maker-header text-center">
-                            <h3 class="sec-maker-h3">Similar Products</h3>
-                        </div>
-                        <div class="slider-fouc">
-                            <div class="products-slider owl-carousel" data-item="4">
-                                <div class="item">
-                                    <div class="image-container">
-                                        <a class="item-img-wrapper-link" href="single-product.html">
-                                            <img class="img-fluid" src="images/product/product@3x.jpg" alt="Product">
-                                        </a>
-                                        <div class="item-action-behaviors">
-                                            <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look</a>
-                                            <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                            <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                            <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="item-content">
-                                        <div class="what-product-is">
-                                            <ul class="bread-crumb">
-                                                <li class="has-separator">
-                                                    <a href="shop-v1-root-category.html">Men's</a>
-                                                </li>
-                                                <li class="has-separator">
-                                                    <a href="shop-v2-sub-category.html">Tops</a>
-                                                </li>
-                                                <li>
-                                                    <a href="shop-v3-sub-sub-category.html">Hoodies</a>
-                                                </li>
-                                            </ul>
-                                            <h6 class="item-title">
-                                                <a href="single-product.html">Casual Hoodie Full Cotton</a>
-                                            </h6>
-                                            <div class="item-stars">
-                                                <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                    <span style='width:0'></span>
-                                                </div>
-                                                <span>(0)</span>
-                                            </div>
-                                        </div>
-                                        <div class="price-template">
-                                            <div class="item-new-price">
-                                                $55.00
-                                            </div>
-                                            <div class="item-old-price">
-                                                $60.00
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tag new">
-                                        <span>NEW</span>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="image-container">
-                                        <a class="item-img-wrapper-link" href="single-product.html">
-                                            <img class="img-fluid" src="images/product/product@3x.jpg" alt="Product">
-                                        </a>
-                                        <div class="item-action-behaviors">
-                                            <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look</a>
-                                            <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                            <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                            <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="item-content">
-                                        <div class="what-product-is">
-                                            <ul class="bread-crumb">
-                                                <li class="has-separator">
-                                                    <a href="shop-v1-root-category.html">Men's</a>
-                                                </li>
-                                                <li class="has-separator">
-                                                    <a href="shop-v2-sub-category.html">Outwear</a>
-                                                </li>
-                                                <li>
-                                                    <a href="shop-v3-sub-sub-category.html">Jackets</a>
-                                                </li>
-                                            </ul>
-                                            <h6 class="item-title">
-                                                <a href="single-product.html">Fern Green Men's Jacket</a>
-                                            </h6>
-                                            <div class="item-stars">
-                                                <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                    <span style='width:0'></span>
-                                                </div>
-                                                <span>(0)</span>
-                                            </div>
-                                        </div>
-                                        <div class="price-template">
-                                            <div class="item-new-price">
-                                                $55.00
-                                            </div>
-                                            <div class="item-old-price">
-                                                $60.00
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tag hot">
-                                        <span>HOT</span>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="image-container">
-                                        <a class="item-img-wrapper-link" href="single-product.html">
-                                            <img class="img-fluid" src="images/product/product@3x.jpg" alt="Product">
-                                        </a>
-                                        <div class="item-action-behaviors">
-                                            <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look</a>
-                                            <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                            <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                            <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="item-content">
-                                        <div class="what-product-is">
-                                            <ul class="bread-crumb">
-                                                <li class="has-separator">
-                                                    <a href="shop-v1-root-category.html">Men's</a>
-                                                </li>
-                                                <li class="has-separator">
-                                                    <a href="shop-v2-sub-category.html">Sunglasses</a>
-                                                </li>
-                                                <li>
-                                                    <a href="shop-v3-sub-sub-category.html">Round</a>
-                                                </li>
-                                            </ul>
-                                            <h6 class="item-title">
-                                                <a href="single-product.html">Brown Dark Tan Round Double Bridge Sunglasses</a>
-                                            </h6>
-                                            <div class="item-stars">
-                                                <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                    <span style='width:0'></span>
-                                                </div>
-                                                <span>(0)</span>
-                                            </div>
-                                        </div>
-                                        <div class="price-template">
-                                            <div class="item-new-price">
-                                                $55.00
-                                            </div>
-                                            <div class="item-old-price">
-                                                $60.00
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tag hot">
-                                        <span>HOT</span>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="image-container">
-                                        <a class="item-img-wrapper-link" href="single-product.html">
-                                            <img class="img-fluid" src="images/product/product@3x.jpg" alt="Product">
-                                        </a>
-                                        <div class="item-action-behaviors">
-                                            <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look</a>
-                                            <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                            <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                            <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="item-content">
-                                        <div class="what-product-is">
-                                            <ul class="bread-crumb">
-                                                <li class="has-separator">
-                                                    <a href="shop-v1-root-category.html">Men's</a>
-                                                </li>
-                                                <li class="has-separator">
-                                                    <a href="shop-v2-sub-category.html">Sunglasses</a>
-                                                </li>
-                                                <li>
-                                                    <a href="shop-v3-sub-sub-category.html">Round</a>
-                                                </li>
-                                            </ul>
-                                            <h6 class="item-title">
-                                                <a href="single-product.html">Black Round Double Bridge Sunglasses</a>
-                                            </h6>
-                                            <div class="item-stars">
-                                                <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                    <span style='width:0'></span>
-                                                </div>
-                                                <span>(0)</span>
-                                            </div>
-                                        </div>
-                                        <div class="price-template">
-                                            <div class="item-new-price">
-                                                $55.00
-                                            </div>
-                                            <div class="item-old-price">
-                                                $60.00
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tag hot">
-                                        <span>HOT</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- Similar-Products /- -->
-                <!-- Recently-View-Products  -->
-                <section class="section-maker">
-                    <div class="container">
-                        <div class="sec-maker-header text-center">
-                            <h3 class="sec-maker-h3">Recently View</h3>
-                        </div>
-                        <div class="slider-fouc">
-                            <div class="products-slider owl-carousel" data-item="4">
-                                <div class="item">
-                                    <div class="image-container">
-                                        <a class="item-img-wrapper-link" href="single-product.html">
-                                            <img class="img-fluid" src="images/product/product@3x.jpg" alt="Product">
-                                        </a>
-                                        <div class="item-action-behaviors">
-                                            <a class="item-quick-look" data-toggle="modal" href="#quick-view">Quick Look</a>
-                                            <a class="item-mail" href="javascript:void(0)">Mail</a>
-                                            <a class="item-addwishlist" href="javascript:void(0)">Add to Wishlist</a>
-                                            <a class="item-addCart" href="javascript:void(0)">Add to Cart</a>
-                                        </div>
-                                    </div>
-                                    <div class="item-content">
-                                        <div class="what-product-is">
-                                            <ul class="bread-crumb">
-                                                <li class="has-separator">
-                                                    <a href="shop-v1-root-category.html">Men's</a>
-                                                </li>
-                                                <li class="has-separator">
-                                                    <a href="shop-v2-sub-category.html">Outwear</a>
-                                                </li>
-                                                <li>
-                                                    <a href="shop-v3-sub-sub-category.html">Jackets</a>
-                                                </li>
-                                            </ul>
-                                            <h6 class="item-title">
-                                                <a href="single-product.html">Maire Battlefield Jeep Men's Jacket</a>
-                                            </h6>
-                                            <div class="item-stars">
-                                                <div class='star' title="0 out of 5 - based on 0 Reviews">
-                                                    <span style='width:0'></span>
-                                                </div>
-                                                <span>(0)</span>
-                                            </div>
-                                        </div>
-                                        <div class="price-template">
-                                            <div class="item-new-price">
-                                                $55.00
-                                            </div>
-                                            <div class="item-old-price">
-                                                $60.00
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tag hot">
-                                        <span>HOT</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- Recently-View-Products /- -->
-            </div>
+   
             <!-- Different-Product-Section /- -->
         </div>
     </div>

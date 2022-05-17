@@ -14,5 +14,5 @@ public interface FurnitureService {
 	Furniture getFurnitureById(int idNoiThat);
 	String getMaxId();
 	List<Furniture> searchid_loai(@Param("id_loai") int idloai);
-
+	List<Furniture> findbyTenNT(String tenNT);
 }

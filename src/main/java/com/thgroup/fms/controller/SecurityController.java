@@ -42,6 +42,7 @@ public class SecurityController {
 	private CustomerService customerService;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
 	@GetMapping("/admin/login") 
     public String adminLoginPage(RedirectAttributes redirectAttrs) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

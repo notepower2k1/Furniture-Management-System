@@ -59,6 +59,13 @@ public class FurnitureServiceImpl implements FurnitureService {
 		return this.furnitureRepo.searchid_loai(idloai);
 	}
 
+	@Override
+	public List<Furniture> findbyTenNT(String tenNT) {
+		// TODO Auto-generated method stub
+		return this.furnitureRepo.findbyTenNT(tenNT);
+	}
+
+	
 	
 
 	

@@ -94,10 +94,18 @@ public class HomePageController {
 		    String currentUserName = authentication.getName();
 		    account = accountService.getByUsername(currentUserName);
 		}
+		if (account.getDsVT().size() == 1) {
+			Customer customer = customerService.getByAccount(account);	
+			List<Order> orderlist = this.orderService.findOrder(customer.getIdKhachHang());	
+			model.addAttribute("orderList",orderlist);
+
+		} else if (account.getDsVT().size() > 1) {
+			Employee employee = employeeService.getByAccount(account);	
+			List<Order> orderlist = this.orderService.findOrder(employee.getIdNhanVien());	
+			model.addAttribute("orderList",orderlist);
+
+		}
 		
-		Customer current = customerService.getByAccount(account);	
-		List<Order> orderlist = this.orderService.findOrder(current.getIdKhachHang());			
-		model.addAttribute("orderList",orderlist);
 		return "user/home/order_history";
 	}
 	
@@ -215,5 +223,22 @@ public class HomePageController {
 		model.addAttribute("furnituresList", this.furnitureService.searchid_loai(idloai));
 	    model.addAttribute("categoriesList", categories);
 		return "user/home/categoryPage";
+	}
+	
+	@GetMapping("/search-page")
+	public String searchPage(String tenNT, Model model) {
+	    List<Category> categories = this.categoryService.getAllCategories();
+	    model.addAttribute("categoriesList", categories);
+
+	    List<Furniture> dsSP = this.furnitureService.findbyTenNT(tenNT);
+	    if (dsSP.size()!=0) {
+			model.addAttribute("furnituresList", dsSP);
+			model.addAttribute("searchtext",tenNT);
+			model.addAttribute("totalItem",dsSP.size());
+			return "user/home/searchpage";
+	    }
+	    else {
+			return "user/home/product-not-found";
+	    }
 	}
 }

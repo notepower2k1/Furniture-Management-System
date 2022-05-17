@@ -18,5 +18,9 @@ public interface FurnitureRepository extends JpaRepository<Furniture, Integer> {
 	@Query(value="Select * From noithat where id_loai = :#{#id_loai}", nativeQuery = true)
 	List<Furniture> searchid_loai(@Param("id_loai") int idloai);
 
+	@Query(value="SELECT * FROM noithat WHERE tennt like %:tenNT%", nativeQuery = true)
+	List<Furniture> findbyTenNT(@Param("tenNT") String tenNT);
+
+	
 }
 

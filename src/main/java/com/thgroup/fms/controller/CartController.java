@@ -1,6 +1,7 @@
 package com.thgroup.fms.controller;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -113,12 +114,23 @@ public class CartController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (!(authentication instanceof AnonymousAuthenticationToken)) {
 		    String currentUserName = authentication.getName();
-		    account = accountService.getByUsername(currentUserName);
-		}
-		if (account != null) {
-			model.addAttribute("userInfo", customerService.getByAccount(account));
+		    account = accountService.getByUsername(currentUserName);  
+		    
 		}
 		
+		if (account.getDsVT().size() == 1) {
+			Customer customer = customerService.getByAccount(account);	
+			model.addAttribute("userInfo",customer);
+
+
+		} else if (account.getDsVT().size() > 1) {
+			Employee employee = employeeService.getByAccount(account);	
+			model.addAttribute("userInfo",employee);
+
+
+		}
+		
+	
 		model.addAttribute("categoriesList", categoryService.getAllCategories());
 		model.addAttribute("cartItem", cartService.getAllItem());
 		model.addAttribute("total", cartService.getTotal());
