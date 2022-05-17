@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "dondathang")
@@ -23,8 +24,10 @@ public class Order {
 	private int idDonHang;
 	@Column(name = "MaDH", nullable = false)
 	private String maDH;
+	@NotBlank(message = "Nhập ngày lập đơn")
 	@Column(name = "NgayLap", nullable = false)
 	private Date ngayLap;
+	@NotBlank(message = "Chọn tình trạng của đơn mua")
 	@Column(name = "TinhTrang", nullable = false)
 	private boolean tinhTrang;
 	@Column(name = "DiaChiNhanHang", nullable = false)

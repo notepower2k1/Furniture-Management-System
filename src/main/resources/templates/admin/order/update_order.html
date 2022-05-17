@@ -22,8 +22,10 @@
 				 		
 				 		<label>Ngày lập <sup>*</sup></label>
 				 		<input type="date" th:field = "*{ngayLap}" required
-				 		placeholder="Nhập ngày lập" class="form-control mb-4 col-12">
-				 		
+				 		placeholder="Nhập ngày lập" class="form-control col-12">
+				 		<label th:if="${#fields.hasErrors('ngayLap')}" th:errors="*{ngayLap}" class="text-danger font-italic d-block"></label>
+		 				<div class="mb-4"></div>
+		 				
 				 		<label>Nhân viên lập <sup>*</sup></label>
 				 		<select th:field="*{nhanVien}" class="form-control mb-4 col-12">	
 						    <option th:each="item: ${employeesList}" th:value="${item.idNhanVien}" th:text="${item.hoTen}" name="maNV"></option>
@@ -39,7 +41,7 @@
 						</select>
 				 		
 				 		<label>Tình trạng <sup>*</sup></label>
-				 		<div class="mb-4">
+				 		<div>
 				 			<div class="custom-control custom-radio custom-control-inline">
 				 				<input type="radio" id="option1" class="custom-control-input" name="option1" 
 				 				value="1" th:field="*{tinhTrang}">
@@ -51,7 +53,9 @@
 					            <label class="custom-control-label" for="option2">Chờ xác nhận</label>
 						    </div>
 				 		</div>
-			            
+			            <label th:if="${#fields.hasErrors('tinhTrang')}" th:errors="*{tinhTrang}" class="text-danger font-italic d-block"></label>
+		 				<div class="mb-4"></div>
+		 				
 				 		<label>Ghi chú</label>
 				 		<input type="text" th:field = "*{ghiChu}" 
 				 		placeholder="Nhập ghi chú" class="form-control mb-4 col-12">

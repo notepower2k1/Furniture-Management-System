@@ -4,10 +4,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,9 +20,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thgroup.fms.entity.Account;
 import com.thgroup.fms.entity.Customer;
+import com.thgroup.fms.entity.Order;
 import com.thgroup.fms.entity.Role;
 import com.thgroup.fms.service.AccountService;
 import com.thgroup.fms.service.CustomerService;
+import com.thgroup.fms.service.OrderService;
 import com.thgroup.fms.service.RoleService;
 import com.thgroup.fms.utils.Helper;
 
@@ -29,6 +34,8 @@ public class CustomerController {
 	private CustomerService customerService;
 	@Autowired
 	private AccountService accountService;
+	@Autowired
+	private OrderService orderService;
 	@Autowired
 	private RoleService roleService;
 	@Autowired
@@ -56,24 +63,32 @@ public class CustomerController {
 	@GetMapping("/admin/create-customer")
 	public String createCustomerPage(Model model) {
 	    Customer customer = new Customer();
-	    List<Account> accountsList = this.accountService.getAllAccounts();
-	    List<Role> rolesList = this.roleService.getAllRoles();
 	    
 	    String newId = Helper.getNewID(this.customerService.getMaxId(), 2, 1, "KH");
 	    customer.setMaKH(newId);
 	    
-	    model.addAttribute("accountsList", accountsList);
-	    model.addAttribute("rolesList", rolesList);
 	    model.addAttribute("customer", customer);
 	    return "admin/customer/add_customer";
 	}
 	    
 	@PostMapping("/admin/save-customer")
-	public String saveCustomer(@ModelAttribute("customer") Customer customer, 
+	public String saveCustomer(@Valid @ModelAttribute("customer") Customer customer, 
+			BindingResult bindingResult,
 			@RequestParam("accountName") String accountName,
-			@RequestParam("accountId") int accountId,
 			@RequestParam("password") String password,
-			RedirectAttributes redirectAttrs) {
+			@RequestParam("accountId") int accountId,
+			RedirectAttributes redirectAttrs,
+			Model model) {
+		if (bindingResult.hasErrors()) {
+			if (accountId == -1) {
+				return "admin/customer/add_customer";
+			} else {
+				model.addAttribute("accountId", accountId);
+				model.addAttribute("customer", customer);
+				model.addAttribute("account", this.accountService.getById(accountId));
+			    return "admin/customer/update_customer";
+			}
+		}
 		Account account = null;
 		if (accountId != -1) {
 			Set<Role> roles = new HashSet<>();
@@ -83,7 +98,9 @@ public class CustomerController {
 			account.setMatKhau(passwordEncoder.encode(password));
 			account.setDsVT(roles);
 		} else {
-			account = new Account(0, accountName, passwordEncoder.encode(password), customer.getTaiKhoan().getDsVT());
+			Set<Role> roles = new HashSet<>();
+			roles.add(this.roleService.getById(4));
+			account = new Account(0, accountName, passwordEncoder.encode(password), roles);
 		}
 		this.accountService.saveAccount(account);
 		
@@ -102,13 +119,11 @@ public class CustomerController {
 	@GetMapping("/admin/update-customer/{idKhachHang}")
 	public String updateCustomerPage(@PathVariable(value="idKhachHang") int idKhachHang, Model model) {
 		Customer customer = this.customerService.getCustomerById(idKhachHang);
-		List<Account> accountsList = this.accountService.getAllAccounts();
-		List<Role> rolesList = this.roleService.getAllRoles();
 	    
-	    model.addAttribute("rolesList", rolesList);
-	    model.addAttribute("accountsList", accountsList);
+		model.addAttribute("accountId", customer.getTaiKhoan().getIdTaiKhoan());
 		model.addAttribute("customer", customer);
-	    return "admin/customer/update_Customer";
+		model.addAttribute("account", this.accountService.getById(customer.getTaiKhoan().getIdTaiKhoan()));
+	    return "admin/customer/update_customer";
 	}
 	
 	@GetMapping("/admin/delete-customer/{idKhachHang}")

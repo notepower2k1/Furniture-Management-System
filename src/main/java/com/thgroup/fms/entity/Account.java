@@ -12,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "taikhoan")
@@ -20,8 +21,10 @@ public class Account {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDTaiKhoan", nullable = false)
 	private int idTaiKhoan;
+	//@Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Tên tài khoản không nên bắt đầu bằng ký tự số")
 	@Column(name = "TenTaiKhoan", nullable = false)
 	private String tenTaiKhoan;
+	//@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$", message = "Mật khẩu chứa ít nhất 1 ký tự hoa, thường và số")
 	@Column(name = "MatKhau", nullable = false)
 	private String matKhau;
 	@ManyToMany
@@ -33,6 +36,8 @@ public class Account {
     private Set<Role> dsVT;
 	@OneToOne(mappedBy = "taiKhoan")
     private Employee nhanVien;
+	@OneToOne(mappedBy = "taiKhoan")
+    private Customer khachHang;
 	public Account() {
 		super();
 	}

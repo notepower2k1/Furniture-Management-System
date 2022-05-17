@@ -9,6 +9,7 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 
 @Entity
 @Table(name = "chitietddh")
@@ -22,8 +23,10 @@ public class OrderDetails {
 	@ManyToOne
 	@JoinColumn(name = "IDNoiThat", insertable = true, updatable = true)
 	private Furniture noiThat;
+	@Min(0)
 	@Column(name = "SoLuong", nullable = false)
 	private int soLuong;
+	@Min(0)
 	@Column(name = "GiaMua", nullable = false)
 	private float giaMua;
 	
