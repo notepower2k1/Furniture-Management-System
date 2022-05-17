@@ -103,31 +103,76 @@ public class CustomerController {
 			account = new Account(0, accountName, passwordEncoder.encode(password), roles);
 		}
 		
-		Account exist_accout = this.accountService.findTopByTenTaiKhoan(accountName);
 		
-		
-		
-		if(exist_accout.getIdTaiKhoan() > 0)
-		{
-			redirectAttrs.addFlashAttribute("alertType", "Fail");
-			redirectAttrs.addFlashAttribute("alertText", "Tài khoản đã tồn tại");
-			return "redirect:/admin/create-customer";
-
+		if (customer.getMaKH() == null) {
+			String newId = Helper.getNewID(this.customerService.getMaxId(), 2, 1, "KH");
+		    customer.setMaKH(newId);
 		}
-		else {
-			if (customer.getMaKH() == null) {
-				String newId = Helper.getNewID(this.customerService.getMaxId(), 2, 1, "KH");
-			    customer.setMaKH(newId);
-			}
-			this.accountService.saveAccount(account);
-			customer.setTaiKhoan(account);
-			this.customerService.saveCustomer(customer);
-			
-			redirectAttrs.addFlashAttribute("alertType", "success");
-			redirectAttrs.addFlashAttribute("alertText", "Thành công");
-			return "redirect:/admin/customer";
+		this.accountService.saveAccount(account);
+		customer.setTaiKhoan(account);
+		this.customerService.saveCustomer(customer);
+		
+		redirectAttrs.addFlashAttribute("alertType", "success");
+		redirectAttrs.addFlashAttribute("alertText", "Thành công");
+		return "redirect:/admin/customer";
 		}
 	
+		@PostMapping("/admin/add-customer")
+		public String addCustomer(@Valid @ModelAttribute("customer") Customer customer, 
+				BindingResult bindingResult,
+				@RequestParam("accountName") String accountName,
+				@RequestParam("password") String password,
+				@RequestParam("accountId") int accountId,
+				RedirectAttributes redirectAttrs,
+				Model model) {
+			if (bindingResult.hasErrors()) {
+				if (accountId == -1) {
+					return "admin/customer/add_customer";
+				} else {
+					model.addAttribute("accountId", accountId);
+					model.addAttribute("customer", customer);
+					model.addAttribute("account", this.accountService.getById(accountId));
+				    return "admin/customer/update_customer";
+				}
+			}
+			Account account = null;
+			if (accountId != -1) {
+				Set<Role> roles = new HashSet<>();
+				roles.add(this.roleService.getById(4));
+				account = this.accountService.getById(accountId);
+				account.setTenTaiKhoan(accountName);
+				account.setMatKhau(passwordEncoder.encode(password));
+				account.setDsVT(roles);
+			} else {
+				Set<Role> roles = new HashSet<>();
+				roles.add(this.roleService.getById(4));
+				account = new Account(0, accountName, passwordEncoder.encode(password), roles);
+			}
+			
+			Account exist_accout = this.accountService.findTopByTenTaiKhoan(accountName);
+			
+			
+			
+			if(exist_accout.getIdTaiKhoan() > 0)
+			{
+				redirectAttrs.addFlashAttribute("alertType", "Fail");
+				redirectAttrs.addFlashAttribute("alertText", "Tài khoản đã tồn tại");
+				return "redirect:/admin/create-customer";
+
+			}
+			else {
+				if (customer.getMaKH() == null) {
+					String newId = Helper.getNewID(this.customerService.getMaxId(), 2, 1, "KH");
+				    customer.setMaKH(newId);
+				}
+				this.accountService.saveAccount(account);
+				customer.setTaiKhoan(account);
+				this.customerService.saveCustomer(customer);
+				
+				redirectAttrs.addFlashAttribute("alertType", "success");
+				redirectAttrs.addFlashAttribute("alertText", "Thành công");
+				return "redirect:/admin/customer";
+			}
 		
 	}
 	

@@ -7,7 +7,7 @@
 	<h1 class="h3 mb-2 text-gray-800">Thêm nhân viên</h1>
 	<div class="card shadow mb-4">
 		<div class="card-body">
-			<form action="#" th:action="@{/admin/save-employee}" th:object="${employee}" method="POST">
+			<form action="#" th:action="@{/admin/add-employee}" th:object="${employee}" method="POST">
 				<input type="hidden" th:value="${accountId != null} ? ${accountId} : -1" name="accountId">
 				
 		 		<label>Mã nhân viên <sup>*</sup></label>

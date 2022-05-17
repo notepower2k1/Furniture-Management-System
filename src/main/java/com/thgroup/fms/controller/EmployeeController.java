@@ -67,8 +67,8 @@ public class EmployeeController {
 	    return "admin/employee/add_employee";
 	}
 	    
-	@PostMapping("/admin/save-employee")
-	public String saveEmployee(@Valid @ModelAttribute("employee") Employee employee,
+	@PostMapping("/admin/add-employee")
+	public String addEmployee(@Valid @ModelAttribute("employee") Employee employee,
 			BindingResult bindingResult,
 			@RequestParam("accountName") String accountName,
 			@RequestParam("accountId") int accountId,
@@ -127,6 +127,58 @@ public class EmployeeController {
 		}
 	}
 	
+	@PostMapping("/admin/save-employee")
+	public String saveEmployee(@Valid @ModelAttribute("employee") Employee employee,
+			BindingResult bindingResult,
+			@RequestParam("accountName") String accountName,
+			@RequestParam("accountId") int accountId,
+			@RequestParam("password") String password,
+			@RequestParam(value = "roles") Set<Role> roles,
+			RedirectAttributes redirectAttrs,
+			Model model) {
+		
+		if (bindingResult.hasErrors()) {
+			List<Role> rolesList = this.roleService.getAllRoles();
+			if (accountId == -1) {
+				model.addAttribute("rolesList", rolesList);
+				return "admin/employee/add_employee";
+			} else {
+				model.addAttribute("rolesList", rolesList);
+				model.addAttribute("accountId", accountId);
+				model.addAttribute("customer", employee);
+				model.addAttribute("account", this.accountService.getById(accountId));
+			    return "admin/employee/update_employee";
+			}
+		} else {
+			Account account = null;
+			if (accountId != -1) {
+				account = this.accountService.getById(accountId);
+				account.setTenTaiKhoan(accountName);
+				account.setMatKhau(passwordEncoder.encode(password));
+				account.setDsVT(roles);
+			} else if (accountId == -1) {
+				account = new Account(0, accountName, passwordEncoder.encode(password), roles);
+			}
+			
+			Account exist_accout = this.accountService.findTopByTenTaiKhoan(accountName);
+			
+			
+			
+		
+				this.accountService.saveAccount(account);
+				if (employee.getMaNV() == null) {
+					String newId = Helper.getNewID(this.employeeService.getMaxId(), 2, 1, "NV");
+					employee.setMaNV(newId);
+				}
+				employee.setTaiKhoan(account);
+				this.employeeService.saveEmployee(employee);
+				redirectAttrs.addFlashAttribute("alertType", "success");
+				redirectAttrs.addFlashAttribute("alertText", "Thành công");
+				return "redirect:/admin/employee";
+			
+		
+		}
+	}
 	@GetMapping("/admin/update-employee/{idNhanVien}")
 	public String updateEmployeePage(@PathVariable(value="idNhanVien") int idNhanVien, Model model) {
 		Employee employee = this.employeeService.getEmployeeById(idNhanVien);
