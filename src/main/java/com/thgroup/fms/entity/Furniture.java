@@ -3,7 +3,6 @@ package com.thgroup.fms.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "noithat")
@@ -23,12 +25,18 @@ public class Furniture {
 	private int idNoiThat;
 	@Column(name = "MaNoiThat", nullable = false)
 	private String maNoiThat;
+	@NotEmpty(message = "Không để trống tên sản phẩm")
 	@Column(name = "TenNT", nullable = false)
 	private String tenNT;
+	@Min(0)
+	@NotEmpty(message = "Không để trống đơn giá của sản phẩm")
 	@Column(name = "DonGia", nullable = false)
 	private float donGia;
+	@NotBlank(message = "Không để trống kích thước")
 	@Column(name = "KichThuoc", nullable = true)
 	private String kichThuoc;
+	@Min(0)
+	@NotEmpty(message = "Không để trống thời gian bảo hành")
 	@Column(name = "TGBaoHanh", nullable = false)
 	private int baoHanh;
 	@Column(name = "HinhAnh", nullable = false)

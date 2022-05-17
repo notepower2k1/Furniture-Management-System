@@ -13,21 +13,29 @@
 		 		placeholder="Nhập mã nội thất" class="form-control mb-4 col-6" readonly>
 		 		
 		 		<label>Tên nội thất <sup>*</sup></label>
-		 		<input type="text" th:field = "*{TenNT}" required
+		 		<input type="text" th:field = "*{tenNT}" required
 		 		placeholder="Nhập tên nội thất" class="form-control mb-4 col-6">
+		 		<label th:if="${#fields.hasErrors('tenNT')}" th:errors="*{tenNT}" class="text-danger font-italic d-block"></label>
+		 		<div class="mb-4"></div>
 		 		
 		 		<label>Đơn giá <sup>*</sup></label>
 		 		<input type="text" th:field = "*{donGia}" required
 		 		placeholder="Nhập đơn giá" class="form-control mb-4 col-6">
+		 		<label th:if="${#fields.hasErrors('donGia')}" th:errors="*{donGia}" class="text-danger font-italic d-block"></label>
+		 		<div class="mb-4"></div>
 		 		
 		 		<label>Kích thước <sup>*</sup></label>
 		 		<input type="text" th:field = "*{kichThuoc}" required
 		 		placeholder="Nhập kích thước" class="form-control mb-4 col-6">
+		 		<label th:if="${#fields.hasErrors('kichThuoc')}" th:errors="*{kichThuoc}" class="text-danger font-italic d-block"></label>
+		 		<div class="mb-4"></div>
 		 		
 		 		<label>Thời gian bảo hành (tháng)</label>
 		 		<input type="text" th:field = "*{baoHanh}" 
 		 		placeholder="Nhập thời gian bảo hành" class="form-control mb-4 col-6">
-		 	
+		 		<label th:if="${#fields.hasErrors('baoHanh')}" th:errors="*{baoHanh}" class="text-danger font-italic d-block"></label>
+		 		<div class="mb-4"></div>
+		 		
 		 		<label for="hinhAnh">Hình ảnh <sup>*</sup></label>
 		 		<input type="file" th:name="file" th:value = "*{hinhAnh}" id="hinhanh"
 		 		class="form-control mb-4 col-12" >

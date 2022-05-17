@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "nhanvien")
@@ -24,10 +26,13 @@ public class Employee implements Serializable {
 	private int idNhanVien;
 	@Column(name = "MaNV", nullable = false)
 	private String maNV;
+	@NotBlank(message = "Tên nhân viên không để trống")
 	@Column(name = "HoTenNV", nullable = false)
 	private String hoTen;
+	@Pattern(regexp = "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$", message = "Số điện thoại không hợp lệ")
 	@Column(name = "SDT", nullable = false)
 	private String sdt;
+	@Pattern(regexp = "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$", message = "Email không hợp lệ")
 	@Column(name = "Email", nullable = false)
 	private String email;
 	@Column(name = "DiaChi", nullable = false)
