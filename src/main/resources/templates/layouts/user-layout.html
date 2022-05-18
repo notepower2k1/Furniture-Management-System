@@ -43,28 +43,28 @@
                     	<li sec:authorize ="!isAuthenticated()">
                         	<a th:href="@{/login}">
                             	<i class="fas fa-sign-in-alt u-s-m-r-9"></i>
-                            	Login</a>
+                            	Đăng nhập</a>
                         </li>
                         <li sec:authorize ="isAuthenticated()">
-                            <a>My Account
+                            <a>Tài khoản của tôi
                                 <i class="fas fa-chevron-down u-s-m-l-9"></i>
                             </a>
                             <ul class="g-dropdown" style="width: 150px">
                             <li>
                                     <a th:href="@{/account}">
                                         <i class="fas fa-user-circle u-s-m-r-9"></i>
-                                        My Account</a>
+                                        Thông tin tài khoản</a>
                                 </li>
                                 <li>
                                     <a th:href="@{/order-history}">
                                         <i class="fas fa-cog u-s-m-r-9"></i>
-                                        My Order</a>
+                                        Lịch sử đơn mua</a>
                                 </li>                      
                                 <li>
                                     <form th:action="@{/logout}" method="POST">
                                     	<button type="submit" class="btn btn-default p-0 bg-transparent logout-btn" style="font-size: 13px;">
 	                                        <i class="fas fa-sign-out-alt u-s-m-r-9"></i>
-	                                        Logout
+	                                        Đăng xuất
 	                                    </button>
                                     </form>
                                 </li>
@@ -88,8 +88,8 @@
                     </div>
                     <div class="col-lg-6 u-d-none-lg">
                         <form class="form-searchbox" th:action="@{/search-page}">
-                            <label class="sr-only" for="search-landscape">Search</label>
-                            <input id="search-landscape" type="text" class="text-field" placeholder="Search everything"  name="tenNT" th:value="${tenNT}">                          
+                            <label class="sr-only" for="search-landscape">Tìm kiếm</label>
+                            <input id="search-landscape" type="text" class="text-field" placeholder="Nhập thông tin tìm kiếm..."  name="tenNT" th:value="${tenNT}">                          
                             <button id="btn-search" type="submit" class="button button-primary fas fa-search"></button>
                         </form>
                     </div>
@@ -128,7 +128,7 @@
         <div class="mini-cart-wrapper">
             <div class="mini-cart">
                 <div class="mini-cart-header">
-                    YOUR CART
+                    Giỏ hàng của bạn
                     <button type="button" class="button ion ion-md-close" id="mini-cart-close"></button>
                 </div>
                 <ul class="mini-cart-list">
@@ -141,15 +141,15 @@
                     </li>                                            
                 </ul>
                 <div class="mini-shop-total clearfix">
-                    <span class="mini-total-heading float-left">Total:</span>
+                    <span class="mini-total-heading float-left">Tổng:</span>
                     <span class="mini-total-price float-right" th:inline="text">[[${#numbers.formatDecimal(itemTotal, 0, 'COMMA', 0, 'POINT')}]] VND</span>
                 </div>
                 <div class="mini-action-anchors">
                 	
                   
-                    <a th:href="${itemCount}!=0?@{/shopping-cart/views}:@{/shopping-cart/empty}" class="cart-anchor">View Cart</a>
+                    <a th:href="${itemCount}!=0?@{/shopping-cart/views}:@{/shopping-cart/empty}" class="cart-anchor">Xem giỏ hàng</a>
                   
-                    <a th:href="${itemCount}!=0?@{/shopping-cart/checkout}:@{/shopping-cart/empty}" class="checkout-anchor">Checkout</a>
+                    <a th:href="${itemCount}!=0?@{/shopping-cart/checkout}:@{/shopping-cart/empty}" class="checkout-anchor">Đặt hàng</a>
                 </div>
             </div>
         </div>
@@ -162,7 +162,7 @@
                         <div class="v-menu v-close">
                             <span class="v-title">
                                 <i class="ion ion-md-menu"></i>
-                                All Categories
+                                Danh mục
                                 <i class="fas fa-angle-down"></i>
                             </span>
                             <nav>
@@ -180,7 +180,7 @@
                                  		<li>
                                             <a class="v-more">
                                                 <i class="ion ion-md-add"></i>
-                                                <span>View More</span>
+                                                <span>Xem thêm</span>
                                             </a>	
                                         </li>
                                     </ul>
@@ -191,15 +191,15 @@
                     <div class="col-lg-9">
                         <ul class="bottom-nav g-nav u-d-none-lg">
                             <li class="mx-4">
-                                <a th:href="@{/home}">Home
+                                <a th:href="@{/home}">Trang chủ
                                 </a>
                             </li>
                             <li class="mx-4">
-                                <a th:href="@{/about}">About
+                                <a th:href="@{/about}">Chúng tôi
                                 </a>
                             </li>
                            	<li class="mx-4">
-                                <a th:href="@{/contact}">Contact
+                                <a th:href="@{/contact}">Liên hệ
                                 </a>
                             </li>
                       
@@ -220,13 +220,13 @@
             <!-- Outer-Footer -->
             <div class="outer-footer-wrapper u-s-p-y-80">
                 <h6>
-                    For special offers and other discount information
+                    Đối với các ưu đãi đặc biệt và thông tin giảm giá
                 </h6>
                 <h1>
-                    Subscribe to our Newsletter
+                    Hãy đăng ký với Newsletter của chúng tôi
                 </h1>
                 <p>
-                    Subscribe to the mailing list to receive updates on promotions, new arrivals, discount and coupons.
+                    Từ đó để nhận các thông tin cập nhật về các chương trình khuyến mãi, hàng mới, chiết khấu,...
                 </p>
                 <form class="newsletter-form">
                     <label class="sr-only" for="newsletter-field">Enter your Email</label>

@@ -12,31 +12,28 @@
                 <ul class="bread-crumb">
                     <li class="has-separator">
                         <i class="ion ion-md-home"></i>
-                        <a href="home.html">Home</a>
+                        <a href="home.html">Trang chủ</a>
                     </li>
                     <li class="is-marked">
-                        <a href="cart.html">Cart</a>
+                        <a href="cart.html">Giỏ hàng</a>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-    <!-- Page Introduction Wrapper /- -->
-    <!-- Cart-Page -->
     <div class="page-cart u-s-p-t-80">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     
-                        <!-- Products-List-Wrapper -->
                         <div class="table-wrapper u-s-m-b-60">
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>Product</th>
-                                        <th>Price</th>
-                                        <th>Quantity</th>
-                                        <th>Subtotal</th>
+                                        <th>Sản phẩm</th>
+                                        <th>Đơn giá</th>
+                                        <th>Số lượng</th>
+                                        <th>Tổng</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -46,9 +43,7 @@
                                     	<input type="hidden" name="id" th:value="${item.productId}"/>
                                         <td>
                                             <div class="cart-anchor-image">
-                                          
-                                                    <h6 th:text="${item.name}"></h6>
-                                               
+                                            	<h6 th:text="${item.name}"></h6>
                                             </div>
                                         </td>
                                         <td>
@@ -78,37 +73,24 @@
                                 </tbody>
                             </table>
                         </div>
-                        <!-- Products-List-Wrapper /- -->
-                        <!-- Coupon -->
                         <div class="coupon-continue-checkout u-s-m-b-60">
-                            <div class="coupon-area">
-                                <h6>Enter your coupon code if you have one.</h6>
-                                <div class="coupon-field">
-                                    <label class="sr-only" for="coupon-code">Apply Coupon</label>
-                                    <input id="coupon-code" type="text" class="text-field" placeholder="Coupon Code">
-                                    <button type="submit" class="button">Apply Coupon</button>
-                                </div>
-                            </div>
                             <div class="button-area">
-                                <a th:href="@{/home}" class="continue">Continue Shopping</a>
-                                <a th:href="@{/shopping-cart/checkout}" class="checkout">Proceed to Checkout</a>
+                                <a th:href="@{/home}" class="continue">Tiếp tục mua hàng</a>
+                                <a th:href="@{/shopping-cart/checkout}" class="checkout">Tiến hành đặt hàng</a>
                             </div>
                         </div>
-                        <!-- Coupon /- -->
-                   
-                    <!-- Billing -->
                     <div class="calculation u-s-m-b-60">
                         <div class="table-wrapper-2">
                             <table>
                                 <thead>
                                     <tr>
-                                        <th colspan="2">Cart Totals</th>
+                                        <th colspan="2">Tổng tiền giỏ hàng</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <h3 class="calc-h3 u-s-m-b-0">Subtotal</h3>
+                                            <h3 class="calc-h3 u-s-m-b-0">Tổng</h3>
                                         </td>
                                         <td>
                                             <span class="calc-text" th:inline="text">[[${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT')}]] VND</span>
@@ -116,10 +98,8 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <h3 class="calc-h3 u-s-m-b-8">Shipping</h3>
-                                            <div class="calc-choice-text u-s-m-b-4">Free Shipping</div>
-                                           
-                                          
+                                            <h3 class="calc-h3 u-s-m-b-8">Giao hàng</h3>
+                                            <div class="calc-choice-text u-s-m-b-4">Miễn phí</div>
                                         </td>
                                         <td>
                                         </td>
@@ -135,7 +115,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <h3 class="calc-h3 u-s-m-b-0">Total</h3>
+                                            <h3 class="calc-h3 u-s-m-b-0">Tổng</h3>
                                         </td>
                                         <td>
                                             <span class="calc-text" th:inline="text">[[${#numbers.formatDecimal(total + total*0.1, 0, 'COMMA', 0, 'POINT')}]] VND</span>
@@ -145,12 +125,10 @@
                             </table>
                         </div>
                     </div>
-                    <!-- Billing /- -->
                 </div>
             </div>
         </div>
     </div>
-    <!-- Cart-Page /- -->
 </section>
 <script>
 

@@ -3,50 +3,50 @@
 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       	layout:decorate="~{layouts/admin-layout}">  
 <div layout:fragment="content">
-	<h1 class="h3 mb-2 text-gray-800">ThÃ´ng tin sáº£n pháº©m</h1>
+	<h1 class="h3 mb-2 text-gray-800">Thông tin sản phẩm</h1>
 	<div class="card shadow mb-4">
 		<div class="card-body">
 			<div class="mx-3 row">
 				<div class="col-md-6 col-12">
 					<table cellpadding="2" cellspacing="10" width="500" class="col-12">
 			            <tr>
-			                <td class="form-label">MÃ£ ná»™i tháº¥t</td>
+			                <td class="form-label">Mã nội thất</td>
 			                <td class="form-label" th:text="${furniture.maNoiThat}"></td>
 			            </tr>
 			            <tr>
-			                <td class="form-label">TÃªn ná»™i tháº¥t</td>
+			                <td class="form-label">Tên nội thất</td>
 			                <td class="form-label" th:text="${furniture.tenNT}"></td>
 			            </tr>
 			            <tr>
-			                <td class="form-label">Ä�Æ¡n giÃ¡</td>
+			                <td class="form-label">Đơn giá</td>
 			                <td class="form-label" th:inline="text">[[${#numbers.formatDecimal(furniture.donGia, 0, 'COMMA', 0, 'POINT')}]] VND</td>
 			            </tr>
 			            <tr>
-			                <td class="form-label">KÃ­ch thÆ°á»›c</td>
+			                <td class="form-label">Kích thước</td>
 			                <td class="form-label" th:text="${furniture.kichThuoc}"></td>
 			            </tr>
 			            <tr>
-			                <td class="form-label">Thá»�i gian báº£o hÃ nh</td>
+			                <td class="form-label">Thời gian bảo hành</td>
 			                <td class="form-label" th:text="${furniture.baoHanh}"></td>
 			            </tr>
 			            <tr>
-			                <td class="form-label">Cháº¥t liá»‡u</td>
+			                <td class="form-label">Chất liệu</td>
 			                <td class="form-label" th:text="${furniture.chatLieu}"></td>
 			            </tr>
 			            <tr>
-			                <td class="form-label">Ä�Æ¡n vá»‹ tÃ­nh</td>
+			                <td class="form-label">Đơn vị tính</td>
 			                <td class="form-label" th:text="${furniture.donViTinh}"></td>
 			            </tr>
 			            <tr>
-			                <td class="form-label">Loáº¡i</td>
+			                <td class="form-label">Loại</td>
 			                <td class="form-label" th:text="${furniture.loai.tenLoai}"></td>
 			            </tr>
 			            <tr>
-			                <td class="form-label">Khuyáº¿n mÃ£i</td>
-			                <td class="form-label" th:text="${furniture.khuyenMai}?${furniture.khuyenMai.tenKM}:'KhÃ´ng cÃ³'"></td>
+			                <td class="form-label">Khuyến mãi</td>
+			                <td class="form-label" th:text="${furniture.khuyenMai}?${furniture.khuyenMai.tenKM}:'Không có'"></td>
 			            </tr>
 			            <tr>
-			                <td class="form-label" style="display: flex;padding-top: 12px;">ThÃ´ng tin sÆ¡ lÆ°á»£c</td>
+			                <td class="form-label" style="display: flex;padding-top: 12px;">Thông tin chi tiết</td>
 			                <td class="form-label wrap-text" th:text="${furniture.moTa}"></td>
 			            </tr>
 			        </table>
@@ -62,7 +62,7 @@
 		</div>
 	</div>
 	<div class="form-action">
-		<a th:href="@{/admin/furniture}">Quay láº¡i</a>
+		<a th:href="@{/admin/furniture}">Quay lại</a>
 	</div>
 </div>
 </html>

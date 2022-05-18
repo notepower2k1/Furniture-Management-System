@@ -13,10 +13,10 @@
                 <ul class="bread-crumb">
                     <li class="has-separator">
                         <i class="ion ion-md-home"></i>
-                        <a href="home.html">Home</a>
+                        <a href="home.html">Trang chủ</a>
                     </li>
                     <li class="is-marked">
-                        <a href="shop-v6-search-results.html">Shop</a>
+                        <a href="shop-v6-search-results.html">Cửa hàng</a>
                     </li>
                 </ul>
             </div>
@@ -28,7 +28,7 @@
         <div class="container">
             <!-- Search-Results -->
             <div class="search-results-wrapper u-s-p-b-80">
-                <h4 th:inline="text">WE FOUND [[${totalItem}]] RESULTS FOR
+                <h4 th:inline="text">CHÚNG TÔI TÌM THẤY [[${totalItem}]] KẾT QUẢ CHO
                     <i th:text="${searchtext}"></i>
                 </h4>
                
@@ -39,7 +39,7 @@
                 <div class="col-lg-3 col-md-3 col-sm-12">
                     <!-- Fetch-Categories-from-Root-Category  -->
                     <div class="fetch-categories">
-                        <h3 class="title-name">Browse Categories</h3>
+                        <h3 class="title-name">Danh mục</h3>
                         <ul>
                        		 <li th:each="item: ${categoriesList}">
                                             <a th:href="@{/category-page/{idloai}(idloai = ${item.idLoai})}">
