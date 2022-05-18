@@ -12,10 +12,10 @@
                 <ul class="bread-crumb">
                     <li class="has-separator">
                         <i class="ion ion-md-home"></i>
-                        <a th:href="@{/home}">Home</a>
+                        <a th:href="@{/home}">Trang chủ</a>
                     </li>
                     <li class="is-marked">
-                        <a th:href="@{/detail-furniture/{idNoiThat}(idNoiThat=${furniture.idNoiThat})}">Detail</a>
+                        <a th:href="@{/detail-furniture/{idNoiThat}(idNoiThat=${furniture.idNoiThat})}">Sản phẩm</a>
                     </li>
                 </ul>
             </div>
@@ -53,7 +53,7 @@
                             </div>
                             <ul class="bread-crumb">
                                 <li class="has-separator">
-                                    <a th:href="@{/home}">Home</a>
+                                    <a th:href="@{/home}">Trang chủ</a>
                                 </li>
                                
                                 <li class="is-marked">
@@ -68,7 +68,7 @@
                             </div>
                         </div>
                         <div class="section-2-short-description u-s-p-y-14">
-                            <h6 class="information-heading u-s-m-b-8">Description:</h6>
+                            <h6 class="information-heading u-s-m-b-8">Mô tả:</h6>
                             <p th:text="${furniture.moTa}">
                             </p>
                         </div>
@@ -78,35 +78,35 @@
                             </div>
                       
                             <div class="original-price">
-                                <span>Original Price:</span>
+                                <span>Giá gốc:</span>
                                 <span th:inline="text">[[${#numbers.formatDecimal(furniture.donGia, 0, 'COMMA', 0, 'POINT')}]] VND</span>
                             </div>
                             <div class="discount-price" th:with="discount = ${furniture.getKhuyenMai().getGiaTri()  * 100}">
-                                <span>Discount:</span>
+                                <span>Khuyến mãi:</span>
                                 <span th:text="${discount}"></span>
                                 <span>%</span>
                             </div>
                             <div class="total-save">
-                                <span>Save:</span>
+                                <span>Tiết kiệm:</span>
                                 <span th:inline="text">[[${#numbers.formatDecimal(save_money, 0, 'COMMA', 0, 'POINT')}]] VND</span>
                             </div>
                         </div>
                         <div class="section-4-sku-information u-s-p-y-14">
                             <h6 class="information-heading u-s-m-b-8">Sku Information:</h6>
                             <div class="availability">
-                                <span>Availability:</span>
-                                <span>In Stock</span>
+                                <span>Tình trạng:</span>
+                                <span>Còn hàng</span>
                             </div>
                             <div class="left">
-                                <span>Only:</span>
-                                <span>50 left</span>
+                                <span>Số lượng:</span>
+                                <span>50 sản phẩm</span>
                             </div>
                         </div>
                         <div class="section-6-social-media-quantity-actions u-s-p-y-14">
                             <form action="#" class="post-form">
                                 
                                 <div>
-                                    <a th:href="@{/shopping-cart/add/{id}(id=${furniture.idNoiThat})}" class="button button-outline-secondary" type="submit">Add to cart</a>
+                                    <a th:href="@{/shopping-cart/add/{id}(id=${furniture.idNoiThat})}" class="button button-outline-secondary" type="submit">Thêm vào giỏ</a>
                                     <button class="button button-outline-secondary far fa-envelope u-s-m-l-6"></button>
                                 </div>
                             </form>
@@ -123,10 +123,10 @@
                         <div class="detail-nav-wrapper u-s-m-b-30">
                             <ul class="nav single-product-nav justify-content-center">
                                 <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="tab" href="#description">Description</a>
+                                    <a class="nav-link active" data-toggle="tab" href="#description">Mô tả</a>
                                 </li>                    
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#review">Reviews (15)</a>
+                                    <a class="nav-link" data-toggle="tab" href="#review">Nhận xét (15)</a>
                                 </li>
                             </ul>
                         </div>
@@ -148,11 +148,11 @@
                                     <div class="row r-1 u-s-m-b-26 u-s-p-b-22">
                                         <div class="col-lg-6 col-md-6">
                                             <div class="total-score-wrapper">
-                                                <h6 class="review-h6">Average Rating</h6>
+                                                <h6 class="review-h6">Đánh giá trung bình</h6>
                                                 <div class="circle-wrapper">
                                                     <h1>4.5</h1>
                                                 </div>
-                                                <h6 class="review-h6">Based on 23 Reviews</h6>
+                                                <h6 class="review-h6">Dựa trên 23 nhận xét</h6>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-md-6">
@@ -198,8 +198,7 @@
                                     <div class="row r-2 u-s-m-b-26 u-s-p-b-22">
                                         <div class="col-lg-12">
                                             <div class="your-rating-wrapper">
-                                                <h6 class="review-h6">Your Review is matter.</h6>
-                                                <h6 class="review-h6">Have you used this product before?</h6>
+                                                <h6 class="review-h6">Bạn đã sử dụng sản phẩm này?</h6>
                                                 <div class="star-wrapper u-s-m-b-8">
                                                     <div class="star">
                                                         <span id="your-stars" style='width:0'></span>
@@ -209,7 +208,7 @@
                                                     <span id="star-comment"></span>
                                                 </div>
                                                 <form>
-                                                    <label for="your-name">Name
+                                                    <label for="your-name">Họ tên
                                                         <span class="astk"> *</span>
                                                     </label>
                                                     <input id="your-name" type="text" class="text-field" placeholder="Your Name">
@@ -217,15 +216,15 @@
                                                         <span class="astk"> *</span>
                                                     </label>
                                                     <input id="your-email" type="text" class="text-field" placeholder="Your Email">
-                                                    <label for="review-title">Review Title
+                                                    <label for="review-title">Tiêu đề nhận xét
                                                         <span class="astk"> *</span>
                                                     </label>
                                                     <input id="review-title" type="text" class="text-field" placeholder="Review Title">
-                                                    <label for="review-text-area">Review
+                                                    <label for="review-text-area">Nhận xét
                                                         <span class="astk"> *</span>
                                                     </label>
                                                     <textarea class="text-area u-s-m-b-8" id="review-text-area" placeholder="Review"></textarea>
-                                                    <button class="button button-outline-secondary">Submit Review</button>
+                                                    <button class="button button-outline-secondary">Xác nhận</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -235,16 +234,16 @@
                                         <!-- Review-Options -->
                                         <div class="review-options u-s-m-b-16">
                                             <div class="review-option-heading">
-                                                <h6>Reviews
+                                                <h6>Nhận xét
                                                     <span> (15) </span>
                                                 </h6>
                                             </div>
                                             <div class="review-option-box">
                                                 <div class="select-box-wrapper">
-                                                    <label class="sr-only" for="review-sort">Review Sorter</label>
+                                                    <label class="sr-only" for="review-sort">Sắp xếp đánh giá</label>
                                                     <select class="select-box" id="review-sort">
-                                                        <option value="">Sort by: Best Rating</option>
-                                                        <option value="">Sort by: Worst Rating</option>
+                                                        <option value="">Sắp xếp theo: đánh giá tốt nhất</option>
+                                                        <option value="">Sắp xếp theo: đánh giá thấp nhất</option>
                                                     </select>
                                                 </div>
                                             </div>

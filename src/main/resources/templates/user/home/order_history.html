@@ -13,10 +13,10 @@
                 <ul class="bread-crumb">
                     <li class="has-separator">
                         <i class="ion ion-md-home"></i>
-                        <a th:href="@{/home}">Home</a>
+                        <a th:href="@{/home}">Trang chủ</a>
                     </li>
                     <li class="is-marked">
-                        <a th:href="@{/home/orderHistory}">My Order</a>
+                        <a th:href="@{/home/orderHistory}">Đơn hàng của tôi</a>
                     </li>
                 </ul>
             </div>
@@ -27,18 +27,18 @@
 <div class="container">
 	<div th:if ="${not #lists.isEmpty(orderList)}">
 	<article class="card  my-3" th:each="item: ${orderList}">
-        <header class="card-header"> My Orders / Tracking </header>
+        <header class="card-header"> Đơn hàng của tôi / Kiểm tra </header>
         <div class="card-body">
-            <h6 th:inline="text">OrderId: [[${item.maDH}]]</h6>
+            <h6 th:inline="text">Mã đơn: [[${item.maDH}]]</h6>
             <article class="card">
                 <div class="card-body row">
-                    <div class="col" th:inline="text"> <strong>Estimated Delivery time:</strong> <br>[[${item.ngayLap}]]</div>
-                    <div class="col" th:inline="text"> <strong>Address:</strong> <br> [[${item.diaChiNhanHang}]]</div>
-                    <div class="col" th:inline="text"> <strong>Phone:</strong><br><i class="fa fa-phone"></i>
+                    <div class="col" th:inline="text"> <strong>Ngày lập đơn hàng:</strong> <br>[[${item.ngayLap}]]</div>
+                    <div class="col" th:inline="text"> <strong>Địa chỉ giao hàng:</strong> <br> [[${item.diaChiNhanHang}]]</div>
+                    <div class="col" th:inline="text"> <strong>Số điện thoại của khách:</strong><br><i class="fa fa-phone"></i>
                      [[${item.khachHang.sdt}]]</div>                
-                    <div class="col" th:switch="${item.tinhTrang}"> <strong>Status:</strong> <br>
-                    		<span th:case="false" class="text-warning font-weight-bold">Waiting</span>
-				             <span th:case="true" class="text-info font-weight-bold">Shipping</span>
+                    <div class="col" th:switch="${item.tinhTrang}"> <strong>Tình trạng:</strong> <br>
+                    		<span th:case="false" class="text-warning font-weight-bold">Chờ xác nhận</span>
+				             <span th:case="true" class="text-info font-weight-bold">Đang giao hàng</span>
                     </div>
                 </div>
             </article>
@@ -70,7 +70,7 @@
             
            
                       
-             <span th:inline="text">Total:
+             <span th:inline="text">Tổng:
 		[[${#numbers.formatDecimal(#aggregates.sum(item.dsCTDH.![soLuong *giaMua]), 0, 'COMMA', 0, 'POINT')}]] VND</span>
            
            
@@ -83,10 +83,10 @@
     		<div class="text-center">
 	                <h1>Em
 	                    <i class="fas fa-child"></i>ty!</h1>
-	                <h5>Your Order is currently empty.</h5>
+	                <h5>Hiện bạn chưa có đơn hàng nào.</h5>
 	                <div class="redirect-link-wrapper u-s-p-t-25">
 	                    <a class="redirect-link" th:href="@{/home}">
-	                        <span>Return to Shop</span>
+	                        <span>Quay lại cửa hàng</span>
 	                    </a>
 	                </div>
                 </div>

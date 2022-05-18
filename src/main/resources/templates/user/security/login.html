@@ -24,37 +24,25 @@
         	<div class="row justify-content-center">
                <div class="col-lg-6">
                     <div class="login-wrapper">
-                        <h2 class="account-h2 u-s-m-b-20">Ä�Äƒng nháº­p</h2>
-                        <h6 class="account-h6 u-s-m-b-30">Welcome back! Sign in to your account.</h6>
+                        <h2 class="account-h2 u-s-m-b-20">Đăng nhập</h2>
+                        <h6 class="account-h6 u-s-m-b-30">Welcome back! Đăng nhập vào tài khoản của bạn.</h6>
                         <form th:action="@{/login}" class="user" method="POST">
                             <div class="u-s-m-b-30">
-                                <label for="user-name-email">TÃ i khoáº£n
+                                <label for="user-name-email">Tài khoản
                                     <span class="astk">*</span>
                                 </label>
                                 <input type="text" id="user-name-email" class="text-field" 
-                                name="account" placeholder="Nháº­p tÃªn tÃ i khoáº£n">
+                                name="account" placeholder="Nhập tên tài khoản">
                             </div>
                             <div class="u-s-m-b-30">
-                               <label for="login-password">Máº­t kháº©u
+                               <label for="login-password">Mật khẩu
                                     <span class="astk">*</span>
                                 </label>
                                 <input type="password" id="login-password" class="text-field" 
-                                name="password" placeholder="Nháº­p máº­t kháº©u">
-                            </div>
-                            <div class="group-inline u-s-m-b-30">
-                                <div class="group-1">
-                                    <input type="checkbox" class="check-box" id="remember-me-token">
-                                    <label class="label-text" for="remember-me-token">Remember me</label>
-                                </div>
-                                <div class="group-2 text-right">
-                                    <div class="page-anchor">
-                                        <a href="lost-password.html">
-                                            <i class="fas fa-circle-o-notch u-s-m-r-9"></i>Lost your password?</a>
-                                    </div>
-                                </div>
+                                name="password" placeholder="Nhập mật khẩu">
                             </div>
                             <div class="m-b-45">
-                                <button type="submit" class="button button-outline-secondary w-100">Login</button>
+                                <button type="submit" class="button button-outline-secondary w-100">Đăng nhập</button>
                             </div>
                         </form>
                     </div>
@@ -62,38 +50,32 @@
                 
                  <div class="col-lg-6">
                     <div class="reg-wrapper">
-                        <h2 class="account-h2 u-s-m-b-20">Ä�Äƒng kÃ½</h2>
-                        <h6 class="account-h6 u-s-m-b-30">Registering for this site allows you to access your order status and history.</h6>
+                        <h2 class="account-h2 u-s-m-b-20">Đăng ký</h2>
+                        <h6 class="account-h6 u-s-m-b-30">Đăng ký nhằm cho phép bạn truy cập vào lịch sử đơn và nhận các ưu đãi.</h6>
                         <form th:action="@{/user-register}" method="POST">
                             <div class="u-s-m-b-30">
-                                <label for="username">TÃ i khoáº£n
+                                <label for="username">Tài khoản
                                     <span class="astk">*</span>
                                 </label>
                                 <input type="text" id="username" name="username" 
-                                class="text-field" placeholder="Nháº­p tÃªn tÃ i khoáº£n" required>
+                                class="text-field" placeholder="Nhập tên tài khoản" required>
                             </div>
                             <div class="u-s-m-b-30">
                                 <label for="email">Email
                                     <span class="astk">*</span>
                                 </label>
                                 <input type="text" id="email" name="email" 
-                                class="text-field" placeholder="Nháº­p email" required>
+                                class="text-field" placeholder="Nhập email" required>
                             </div>
                             <div class="u-s-m-b-30">
-                                <label for="password">Máº­t kháº©u
+                                <label for="password">Mật khẩu
                                     <span class="astk">*</span>
                                 </label>
                                 <input type="text" id="password" name="password" 
-                                class="text-field" placeholder="Password" required>
-                            </div>
-                            <div class="u-s-m-b-30">
-                                <input type="checkbox" class="check-box" id="accept">
-                                <label class="label-text no-color" for="accept">I've read and accept the
-                                    <a href="terms-and-conditions.html" class="u-c-brand">terms & conditions</a>
-                                </label>
+                                class="text-field" placeholder="Nhập mật khẩu" required>
                             </div>
                             <div class="u-s-m-b-45">
-                                <button type="submit" class="button button-primary w-100">Register</button>
+                                <button type="submit" class="button button-primary w-100">Đăng ký</button>
                             </div>
                         </form>
                     </div>

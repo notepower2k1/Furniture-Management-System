@@ -15,10 +15,10 @@
                 <ul class="bread-crumb">
                     <li class="has-separator">
                         <i class="ion ion-md-home"></i>
-                        <a th:href="@{/home}">Home</a>
+                        <a th:href="@{/home}">Trang chủ</a>
                     </li>
                     <li class="is-marked">
-                        <a th:href="@{/shopping-cart/checkout}">Checkout</a>
+                        <a th:href="@{/shopping-cart/checkout}">Đặt hàng</a>
                     </li>
                 </ul>
             </div>
@@ -30,26 +30,6 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12">
-                    
-                    <div>
-                        <div class="message-open u-s-m-b-24">
-                            Have a coupon?
-                            <strong>
-                                <a class="u-c-brand" data-toggle="collapse" href="#showcoupon">Click here to enter your code</a>
-                            </strong>
-                        </div>
-                        <div class="collapse u-s-m-b-24" id="showcoupon">
-                            <h6 class="collapse-h6">
-                                Enter your coupon code if you have one.
-                            </h6>
-                            <div class="coupon-field">
-                                <label class="sr-only" for="coupon-code">Apply Coupon</label>
-                                <input id="coupon-code" type="text" class="text-field" placeholder="Coupon Code">
-                                <button type="submit" class="button">Apply Coupon</button>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Second Accordion /- -->
                    <form th:action="@{/shopping-cart/save-order}" th:object="${order}" method="POST">
                         <div class="row">                     
                             <!-- Billing-&-Shipping-Details -->
@@ -58,14 +38,14 @@
                                 <!-- Form-Fields -->
                                 <div class="group-inline u-s-m-b-13" th:with ="name=${#strings.arraySplit(userInfo.hoTen,' ')} ">
                                     <div class="group-1 u-s-p-r-16">
-                                        <label for="name">Name
+                                        <label for="name">Họ tên
                                             <span class="astk">*</span>
                                         </label>
                                        <input type="text" id="name" class="text-field" th:value="${userInfo.hoTen}">
                                     </div>
                                 </div>                           
                                 <div class="street-address u-s-m-b-13">
-                                    <label for="req-st-address">Address
+                                    <label for="req-st-address">Địa chỉ giao hàng
                                         <span class="astk">*</span>
                                     </label>
                                     <input type="text" id="req-st-address" class="text-field" th:value="${userInfo.diaChi}"
@@ -79,7 +59,7 @@
                                         <input type="text" id="email" class="text-field" required th:value="${userInfo.email}"> 
                                     </div>
                                     <div class="group-2">
-                                        <label for="phone">Phone
+                                        <label for="phone">Số điện thoại
                                             <span class="astk">*</span>
                                         </label>
                                         <input type="text" id="phone" class="text-field" required th:value="${userInfo.sdt}">
@@ -87,7 +67,7 @@
                                 </div>                         
                                 
                                 <div>
-                                    <label for="order-notes">Note	</label>
+                                    <label for="order-notes">Ghi chú</label>
                                     <textarea class="text-area" th:name="note" th:id ="note" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                                 </div>
                             </div>
@@ -101,8 +81,8 @@
                                     <table class="u-s-m-b-13">
                                         <thead>
                                             <tr>
-                                                <th>Product</th>
-                                                <th>Total</th>
+                                                <th>Sản phẩm</th>
+                                                <th>Tổng</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -119,7 +99,7 @@
                                              
                                             <tr>
                                                 <td>
-                                                    <h3 class="order-h3">Subtotal</h3>
+                                                    <h3 class="order-h3">Tổng</h3>
                                                 </td>
                                                 <td>
                                                     <h3 class="order-h3" th:inline="text">[[${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT')}]] VND</h3>
@@ -127,10 +107,10 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <h3 class="order-h3">Shipping</h3>
+                                                    <h3 class="order-h3">Giao hàng</h3>
                                                 </td>
                                                 <td>
-                                                    <h3 class="order-h3">Free Ship</h3>
+                                                    <h3 class="order-h3">Miễn phí</h3>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -143,7 +123,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <h3 class="order-h3">Total</h3>
+                                                    <h3 class="order-h3">Tổng</h3>
                                                 </td>
                                                 <td>
                                                     <h3 class="order-h3"  th:inline="text">[[${#numbers.formatDecimal(total + total*0.1, 0, 'COMMA', 0, 'POINT')}]] VND</h3>
@@ -153,14 +133,13 @@
                                     </table>
                                     <div class="u-s-m-b-13">
                                         <input type="checkbox" class="check-box" id="accept">
-                                        <label class="label-text no-color" for="accept">Iï¿½ve read and accept the
-                                            <a href="terms-and-conditions.html" class="u-c-brand">terms & conditions</a>
+                                        <label class="label-text no-color" for="accept">Tôi đã đọc và chấp nhận các
+                                            <a href="terms-and-conditions.html" class="u-c-brand">điều khoản của cửa hàng</a>
                                         </label>
                                     </div>
-                                    <button type="submit" class="button button-outline-secondary">Place Order</button>
+                                    <button type="submit" class="button button-outline-secondary">Đặt hàng</button>
                                 </div>
                             </div>
-                            <!-- Checkout /- -->
                         </div>
                     </form>
                 </div>
