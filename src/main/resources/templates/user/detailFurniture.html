@@ -29,9 +29,12 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <!-- Product-zoom-area -->
-                    <div class="zoom-area">
-                        <img id="zoom-pro" class="img-fluid" th:src="@{/admin/img/} + ${furniture.hinhAnh}" th:attr="data-zoom-image=@{/admin/img/} + ${furniture.hinhAnh}" alt="Zoom Image">
+                    <div class="zoom-area" >
+                        <img id="zoom-pro" width='500px' height='500px' th:src="@{/admin/img/} + ${furniture.hinhAnh}" th:attr="data-zoom-image=@{/admin/img/} + ${furniture.hinhAnh}" alt="Zoom Image">
                         <div id="gallery" class="u-s-m-t-10" >
+                        	<a th:attr="data-image=@{/admin/img/} + ${furniture.hinhAnh},data-zoom-image=@{/admin/img/} + ${furniture.hinhAnh}" > 
+                        	          <img th:src="@{/admin/img/} + ${furniture.hinhAnh}" alt="Product">                   	
+                        	</a>
                         	 <a th:each="image:${furniture.dsHA}" th:attr="data-image=@{/admin/img/} + ${image.tenAnh},data-zoom-image=@{/admin/img/} + ${image.tenAnh}" >
                                 <img th:src="@{/admin/img/} + ${image.tenAnh}" alt="Product">
                             </a>
