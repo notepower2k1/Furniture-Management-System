@@ -4,48 +4,48 @@
       layout:decorate="~{layouts/admin-layout}">
 <div layout:fragment="content">
 	<div class="d-sm-flex align-items-center justify-content-between">
-		<h1 class="h3 mb-2 text-gray-800" >ThÃ´ng tin Ä‘Æ¡n hÃ ng</h1>
+		<h1 class="h3 mb-2 text-gray-800" >Thông tin đơn hàng</h1>
 		<a th:href="@{/pdf/{idDonHang}(idDonHang=${order.idDonHang})}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-            	class="fas fa-download fa-sm text-white-50"></i> In Ä‘Æ¡n hÃ ng</a>
+            	class="fas fa-download fa-sm text-white-50"></i> In đơn hàng</a>
 	</div>
 	<div class="row">
 		<div class="col-5">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-		        	<h6 class="m-0 font-weight-bold text-primary">ThÃ´ng tin cÆ¡ báº£n</h6>
+		        	<h6 class="m-0 font-weight-bold text-primary">Thông tin cơ bản</h6>
 		    	</div>
 				<div class="card-body">
 					<div class="mx-3">
 						<table cellpadding="2" cellspacing="10" width="400" class="col-12">
 				            <tr>
-				                <td class="form-label">MÃ£ Ä‘Æ¡n hÃ ng</td>
+				                <td class="form-label">Mã đơn hàng</td>
 				                <td class="form-label" th:text="${order.maDH}"></td>
 				            </tr>
 				            <tr>
-				                <td class="form-label">NgÃ y láº­p</td>
+				                <td class="form-label">Ngày lập</td>
 				                <td class="form-label" th:text="${order.ngayLap}"></td>
 				            </tr>
 				            <tr>
-				                <td class="form-label">NhÃ¢n viÃªn láº­p</td>
+				                <td class="form-label">Nhân viên lập</td>
 				                <td class="form-label" th:text="${order.nhanVien.hoTen}"></td>
 				            </tr>
 				            <tr>
-				                <td class="form-label">Ä�á»‹a chá»‰ nháº­n hÃ ng</td>
+				                <td class="form-label">Địa chỉ nhận hàng</td>
 				                <td class="form-label" th:text="${order.diaChiNhanHang}"></td>
 				            </tr>
 				            <tr>
-				                <td class="form-label">KhÃ¡ch hÃ ng</td>
+				                <td class="form-label">Khách hàng</td>
 				                <td class="form-label" th:text="${order.khachHang!=null}?${order.khachHang.hoTen}:${order.nhanVien.hoTen}"></td>
 				            </tr>
 				            <tr>
-				                <td class="form-label">TÃ¬nh tráº¡ng</td>
+				                <td class="form-label">Tình Trạng</td>
 				                <td class="form-label" th:switch="${order.tinhTrang}" >
-				                	<span th:case=0 class="text-warning font-weight-bold">Chá»� xÃ¡c nháº­n</span>
-				                	<span th:case=1 class="text-info font-weight-bold">Ä�Ã£ xÃ¡c nháº­n</span>
+				                	<span th:case=0 class="text-warning font-weight-bold">Chờ xác nhận</span>
+				                	<span th:case=1 class="text-info font-weight-bold">Đã xác nhận</span>
 				                </td>
 				            </tr>
 				            <tr>
-				                <td class="form-label">Ghi chÃº</td>
+				                <td class="form-label">Ghi chú</td>
 				                <td class="form-label" th:text="${order.ghiChu}"></td>
 				            </tr>
 				        </table>
@@ -56,7 +56,7 @@
 		<div class="col-7">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-		        	<h6 class="m-0 font-weight-bold text-primary">ThÃ´ng tin cÃ¡c sáº£n pháº©m</h6>
+		        	<h6 class="m-0 font-weight-bold text-primary">Thông tin các sản phẩm</h6>
 		    	</div>
 				<div class="card-body">
 					<div class="mx-3">
@@ -64,9 +64,9 @@
 							<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 					        	<thead>
 					            	<tr>
-						     			<th>TÃªn sáº£n pháº©m</th>
-							     		<th>Ä�Æ¡n giÃ¡</th>
-						     			<th>Sá»‘ lÆ°á»£ng</th>
+						     			<th>Tên sản phẩm</th>
+							     		<th>Đơn giá</th>
+						     			<th>Số lượng</th>
 					            	</tr>
 					            </thead>
 					            <tbody>
@@ -86,7 +86,7 @@
 		</div>
 	</div>
 	<div class="form-action">
-		<a th:href="@{/admin/order}">Quay láº¡i</a>
+		<a th:href="@{/admin/order}">Quay lại</a>
 	</div>
 </div>
 </html>

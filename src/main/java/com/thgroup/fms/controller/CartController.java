@@ -1,7 +1,6 @@
 package com.thgroup.fms.controller;
 
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -126,11 +125,7 @@ public class CartController {
 		} else if (account.getDsVT().size() > 1) {
 			Employee employee = employeeService.getByAccount(account);	
 			model.addAttribute("userInfo",employee);
-
-
 		}
-		
-	
 		model.addAttribute("categoriesList", categoryService.getAllCategories());
 		model.addAttribute("cartItem", cartService.getAllItem());
 		model.addAttribute("total", cartService.getTotal());
@@ -153,33 +148,26 @@ public class CartController {
 		
 		if (account.getDsVT().size() == 1) {
 			Customer customer = customerService.getByAccount(account);	
-			Customer current = customer;
-			order.setDiaChiNhanHang(current.getDiaChi());
-			order.setKhachHang(current);
-
-
-
+			order.setDiaChiNhanHang(customer.getDiaChi());
+			order.setKhachHang(customer);
+			order.setNhanVien(employeeService.getEmployeeById(2));
 		} else if (account.getDsVT().size() > 1) {
 			Employee employee = employeeService.getByAccount(account);	
-			Employee current = employee;
-			order.setDiaChiNhanHang(current.getDiaChi());
+			order.setDiaChiNhanHang(employee.getDiaChi());
 			order.setKhachHang(null);
+			order.setNhanVien(employee);
 		}
-
 		
 		String newId = Helper.getNewID(this.orderService.getMaxId(), 2, 2, "DH");
 
-		
 		java.util.Date utilDate = new java.util.Date();
 		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-		
-		Employee b = this.employeeService.getEmployeeById(3);
 		
 		order.setMaDH(newId);
 		order.setGhiChu(note);
 		order.setNgayLap(sqlDate);
 		order.setTinhTrang(0);
-		order.setNhanVien(b);
+		order.setNhanVien(null);
 		this.orderService.saveOrder(order);
 		
 		Collection<CartItem> ds = this.cartService.getAllItem();
