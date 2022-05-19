@@ -38,6 +38,12 @@ public class Account {
     private Employee nhanVien;
 	@OneToOne(mappedBy = "taiKhoan")
     private Customer khachHang;
+	public Customer getKhachHang() {
+		return khachHang;
+	}
+	public void setKhachHang(Customer khachHang) {
+		this.khachHang = khachHang;
+	}
 	public Account() {
 		super();
 	}

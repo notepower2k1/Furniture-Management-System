@@ -96,15 +96,16 @@ public class HomePageController {
 		}
 		if (account.getDsVT().size() == 1) {
 			Customer customer = customerService.getByAccount(account);	
-			List<Order> orderlist = this.orderService.findOrder(customer.getIdKhachHang());	
-			model.addAttribute("orderList",orderlist);
+			model.addAttribute("phoneNumber",customer.getSdt());
+
 
 		} else if (account.getDsVT().size() > 1) {
 			Employee employee = employeeService.getByAccount(account);	
-			List<Order> orderlist = this.orderService.findOrder(employee.getIdNhanVien());	
-			model.addAttribute("orderList",orderlist);
+			model.addAttribute("phoneNumber",employee.getSdt());
 
 		}
+		List<Order> orderlist = this.orderService.findOrder(account.getIdTaiKhoan());	
+		model.addAttribute("orderList",orderlist);
 		
 		return "user/home/order_history";
 	}
@@ -191,12 +192,10 @@ public class HomePageController {
 		return "user/account/update_account";
 	}
 	@PostMapping("/account/update-account")
-	public String updateAccount(@RequestParam("accountId") int accountId,
-			@RequestParam("username") String username,
+	public String updateAccount(@RequestParam("accountId") int accountId,		
 			@RequestParam("password") String password) {
 		
 		Account account = this.accountService.getById(accountId);
-		account.setTenTaiKhoan(username);
 		account.setMatKhau(passwordEncoder.encode(password));
 		this.accountService.saveAccount(account);
 		

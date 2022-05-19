@@ -34,29 +34,37 @@ public class Order {
 	@Column(name = "DiaChiNhanHang", nullable = false)
 	private String diaChiNhanHang;
 	@ManyToOne
-	@JoinColumn(name = "idKhachHang", insertable = true, updatable = true)
-	private Customer khachHang;
-	@ManyToOne
-	@JoinColumn(name = "idNhanVien", insertable = true, updatable = true)
-	private Employee nhanVien;
+	@JoinColumn(name = "id_tai_khoan", insertable = true, updatable = true)
+	private Account account;
+	
 	@Column(name = "GhiChu", nullable = true)
 	private String ghiChu;
 	@OneToMany(mappedBy = "donDatHang")
     private List<OrderDetails> dsCTDH = new ArrayList<>();
 
 
-	public Order(int idDonHang, String maDH, Date ngayLap, int tinhTrang, String diaChiNhanHang, Customer khachHang,
-			Employee nhanVien, String ghiChu, List<OrderDetails> dsCTDH) {
+	
+
+	public Order(int idDonHang, String maDH, @NotNull(message = "Nhập ngày lập đơn") Date ngayLap,
+			@NotNull(message = "Chọn tình trạng của đơn mua") int tinhTrang, String diaChiNhanHang, Account account,
+			String ghiChu, List<OrderDetails> dsCTDH) {
 		super();
 		this.idDonHang = idDonHang;
 		this.maDH = maDH;
 		this.ngayLap = ngayLap;
 		this.tinhTrang = tinhTrang;
 		this.diaChiNhanHang = diaChiNhanHang;
-		this.khachHang = khachHang;
-		this.nhanVien = nhanVien;
+		this.account = account;
 		this.ghiChu = ghiChu;
 		this.dsCTDH = dsCTDH;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
 	public Order() {
@@ -104,21 +112,7 @@ public class Order {
 		this.diaChiNhanHang = diaChiNhanHang;
 	}
 
-	public Customer getKhachHang() {
-		return khachHang;
-	}
 
-	public void setKhachHang(Customer khachHang) {
-		this.khachHang = khachHang;
-	}
-
-	public Employee getNhanVien() {
-		return nhanVien;
-	}
-
-	public void setNhanVien(Employee nhanVien) {
-		this.nhanVien = nhanVien;
-	}
 
 	public String getGhiChu() {
 		return ghiChu;

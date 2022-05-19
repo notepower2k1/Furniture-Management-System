@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.thgroup.fms.entity.Account;
 import com.thgroup.fms.entity.Customer;
 import com.thgroup.fms.entity.Employee;
 import com.thgroup.fms.entity.Order;
 import com.thgroup.fms.entity.OrderDetails;
+import com.thgroup.fms.service.AccountService;
 import com.thgroup.fms.service.CustomerService;
 import com.thgroup.fms.service.EmployeeService;
 import com.thgroup.fms.service.OrderDetailsService;
@@ -27,17 +29,16 @@ public class OrderController {
 	private OrderService orderService;
 	@Autowired
 	private OrderDetailsService orderDetailService;
+
+	
 	@Autowired
-	private EmployeeService employeeService;
-	@Autowired
-	private CustomerService customerService;
+	private AccountService accountService;
 	
 	public OrderController(OrderService orderService, EmployeeService employeeService,
 			CustomerService customerService) {
 		super();
 		this.orderService = orderService;
-		this.employeeService = employeeService;
-		this.customerService = customerService;
+	
 	}
 
 	@GetMapping("/admin/order")
@@ -58,12 +59,10 @@ public class OrderController {
 	@GetMapping("/admin/update-order/{idDonHang}")
 	public String updateEmployeePage(@PathVariable(value="idDonHang") int idDonHang, Model model) {
 		Order order = this.orderService.getOrderById(idDonHang);
-		List<Customer> customersList = this.customerService.getAllCustomers();
-		List<Employee> employeesList = this.employeeService.getAllEmployees(); 
+		List<Account> accountList = this.accountService.getAllAccounts();
 		List<OrderDetails> detailsList = this.orderDetailService.getByOrderId(idDonHang);
 	    model.addAttribute("order", order);
-	    model.addAttribute("customersList", customersList);
-	    model.addAttribute("employeesList", employeesList);
+	    model.addAttribute("accountList", accountList);
 	    model.addAttribute("detailsList", detailsList);
 	    return "admin/order/update_order";
 	}

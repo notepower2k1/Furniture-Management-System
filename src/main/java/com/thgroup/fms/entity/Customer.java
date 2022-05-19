@@ -36,8 +36,6 @@ public class Customer {
 	private String email;
 	@Column(name = "DiaChi", nullable = false)
 	private String diaChi;
-	@OneToMany(mappedBy = "khachHang", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<Order> dsDH = new ArrayList<>();
 	@OneToOne
 	@JoinColumn(name = "idTaiKhoan", insertable = true, updatable = true)
 	private Account taiKhoan;
@@ -105,13 +103,6 @@ public class Customer {
 		this.diaChi = diaChi;
 	}
 
-	public List<Order> getDsDH() {
-		return dsDH;
-	}
-
-	public void setDsDH(List<Order> dsDH) {
-		this.dsDH = dsDH;
-	}
 
 	public Account getTaiKhoan() {
 		return taiKhoan;

@@ -69,9 +69,9 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<Order> findOrder(int id_kh) {
+	public List<Order> findOrder(int id_tk) {
 		// TODO Auto-generated method stub
-		return this.orderRepo.findOrder(id_kh);
+		return this.orderRepo.getOrderInfo(id_tk);
 	}
 
 }

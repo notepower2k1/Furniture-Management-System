@@ -126,6 +126,7 @@ public class CartController {
 			Employee employee = employeeService.getByAccount(account);	
 			model.addAttribute("userInfo",employee);
 		}
+		
 		model.addAttribute("categoriesList", categoryService.getAllCategories());
 		model.addAttribute("cartItem", cartService.getAllItem());
 		model.addAttribute("total", cartService.getTotal());
@@ -137,7 +138,7 @@ public class CartController {
 	
 	@PostMapping("/save-order")
 	public String saveOrder(@ModelAttribute("order") Order order,		
-			RedirectAttributes redirectAttrs, @Param("note") String note) {
+			RedirectAttributes redirectAttrs, @Param("note") String note , @Param("diachinhanhang") String diachinhanhang) {
 		
 		Account account = null;
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -146,28 +147,18 @@ public class CartController {
 		    account = accountService.getByUsername(currentUserName);
 		}
 		
-		if (account.getDsVT().size() == 1) {
-			Customer customer = customerService.getByAccount(account);	
-			order.setDiaChiNhanHang(customer.getDiaChi());
-			order.setKhachHang(customer);
-			order.setNhanVien(employeeService.getEmployeeById(2));
-		} else if (account.getDsVT().size() > 1) {
-			Employee employee = employeeService.getByAccount(account);	
-			order.setDiaChiNhanHang(employee.getDiaChi());
-			order.setKhachHang(null);
-			order.setNhanVien(employee);
-		}
+		
 		
 		String newId = Helper.getNewID(this.orderService.getMaxId(), 2, 2, "DH");
 
 		java.util.Date utilDate = new java.util.Date();
 		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-		
+		order.setAccount(account);
 		order.setMaDH(newId);
 		order.setGhiChu(note);
 		order.setNgayLap(sqlDate);
 		order.setTinhTrang(0);
-		order.setNhanVien(null);
+		order.setDiaChiNhanHang(diachinhanhang);
 		this.orderService.saveOrder(order);
 		
 		Collection<CartItem> ds = this.cartService.getAllItem();

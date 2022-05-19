@@ -15,10 +15,10 @@
                 <ul class="bread-crumb">
                     <li class="has-separator">
                         <i class="ion ion-md-home"></i>
-                        <a th:href="@{/home}">Trang chủ</a>
+                        <a th:href="@{/home}">Trang chá»§</a>
                     </li>
                     <li class="is-marked">
-                        <a th:href="@{/shopping-cart/checkout}">Đặt hàng</a>
+                        <a th:href="@{/shopping-cart/checkout}">Ä�áº·t hÃ ng</a>
                     </li>
                 </ul>
             </div>
@@ -34,21 +34,21 @@
                         <div class="row">                     
                             <!-- Billing-&-Shipping-Details -->
                             <div class="col-lg-6">
-                                <h4 class="section-h4">Thông tin đơn</h4>
+                                <h4 class="section-h4">ThÃ´ng tin Ä‘Æ¡n</h4>
                                 <!-- Form-Fields -->
                                 <div class="group-inline u-s-m-b-13" th:with ="name=${#strings.arraySplit(userInfo.hoTen,' ')} ">
                                     <div class="group-1 u-s-p-r-16">
-                                        <label for="name">Họ tên
+                                        <label for="name">Há»� tÃªn
                                             <span class="astk">*</span>
                                         </label>
                                        <input type="text" id="name" class="text-field" th:value="${userInfo.hoTen}">
                                     </div>
                                 </div>                           
                                 <div class="street-address u-s-m-b-13">
-                                    <label for="req-st-address">Địa chỉ giao hàng
+                                    <label for="req-st-address">Ä�á»‹a chá»‰ giao hÃ ng
                                         <span class="astk">*</span>
                                     </label>
-                                    <input type="text" id="req-st-address" class="text-field" th:value="${userInfo.diaChi}"
+                                    <input type="text" id="diachinhanhang" class="text-field" name="diachinhanhang"
                                     required>                              
                                 </div>                           
                                 <div class="group-inline u-s-m-b-13">
@@ -59,7 +59,7 @@
                                         <input type="text" id="email" class="text-field" required th:value="${userInfo.email}"> 
                                     </div>
                                     <div class="group-2">
-                                        <label for="phone">Số điện thoại
+                                        <label for="phone">Sá»‘ Ä‘iá»‡n thoáº¡i
                                             <span class="astk">*</span>
                                         </label>
                                         <input type="text" id="phone" class="text-field" required th:value="${userInfo.sdt}">
@@ -67,7 +67,7 @@
                                 </div>                         
                                 
                                 <div>
-                                    <label for="order-notes">Ghi chú</label>
+                                    <label for="order-notes">Ghi chÃº</label>
                                     <textarea class="text-area" th:name="note" th:id ="note" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
                                 </div>
                             </div>
@@ -76,13 +76,13 @@
                             <!-- Billing-&-Shipping-Details /- -->
                             <!-- Checkout -->
                             <div class="col-lg-6">
-                                <h4 class="section-h4">Chi tiết đơn mua</h4>
+                                <h4 class="section-h4">Chi tiáº¿t Ä‘Æ¡n mua</h4>
                                 <div class="order-table">
                                     <table class="u-s-m-b-13">
                                         <thead>
                                             <tr>
-                                                <th>Sản phẩm</th>
-                                                <th>Tổng</th>
+                                                <th>Sáº£n pháº©m</th>
+                                                <th>Tá»•ng</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -99,7 +99,7 @@
                                              
                                             <tr>
                                                 <td>
-                                                    <h3 class="order-h3">Tổng</h3>
+                                                    <h3 class="order-h3">Tá»•ng</h3>
                                                 </td>
                                                 <td>
                                                     <h3 class="order-h3" th:inline="text">[[${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT')}]] VND</h3>
@@ -107,10 +107,10 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <h3 class="order-h3">Giao hàng</h3>
+                                                    <h3 class="order-h3">Giao hÃ ng</h3>
                                                 </td>
                                                 <td>
-                                                    <h3 class="order-h3">Miễn phí</h3>
+                                                    <h3 class="order-h3">Miá»…n phÃ­</h3>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -123,7 +123,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <h3 class="order-h3">Tổng</h3>
+                                                    <h3 class="order-h3">Tá»•ng</h3>
                                                 </td>
                                                 <td>
                                                     <h3 class="order-h3"  th:inline="text">[[${#numbers.formatDecimal(total + total*0.1, 0, 'COMMA', 0, 'POINT')}]] VND</h3>
@@ -133,11 +133,11 @@
                                     </table>
                                     <div class="u-s-m-b-13">
                                         <input type="checkbox" class="check-box" id="accept">
-                                        <label class="label-text no-color" for="accept">Tôi đã đọc và chấp nhận các
-                                            <a href="terms-and-conditions.html" class="u-c-brand">điều khoản của cửa hàng</a>
+                                        <label class="label-text no-color" for="accept">TÃ´i Ä‘Ã£ Ä‘á»�c vÃ  cháº¥p nháº­n cÃ¡c
+                                            <a href="terms-and-conditions.html" class="u-c-brand">Ä‘iá»�u khoáº£n cá»§a cá»­a hÃ ng</a>
                                         </label>
                                     </div>
-                                    <button type="submit" class="button button-outline-secondary">Đặt hàng</button>
+                                    <button type="submit" class="button button-outline-secondary">Ä�áº·t hÃ ng</button>
                                 </div>
                             </div>
                         </div>

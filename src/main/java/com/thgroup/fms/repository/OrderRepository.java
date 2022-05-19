@@ -18,8 +18,8 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 	@Query(value = "Select count(iddon_hang) From dondathang Where tinh_trang = 0", nativeQuery = true)
 	public int getPendingOrderQtt();
 		
-	@Query(value ="SELECT * FROM dondathang WHERE id_khach_hang = :#{#id_kh}", nativeQuery = true)
-	List<Order> findOrder(@Param("id_kh")int id_kh);
+	@Query(value ="SELECT * FROM dondathang WHERE id_tai_khoan = :#{#id_tk}", nativeQuery = true)
+	List<Order> getOrderInfo(@Param("id_tk")int id_tk);
 	
 	
 }

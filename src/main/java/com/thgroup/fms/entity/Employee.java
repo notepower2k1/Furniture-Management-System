@@ -37,8 +37,6 @@ public class Employee implements Serializable {
 	private String email;
 	@Column(name = "DiaChi", nullable = false)
 	private String diaChi;
-	@OneToMany(mappedBy = "nhanVien")
-    private List<Order> dsDH = new ArrayList<>();
 	@OneToOne
 	@JoinColumn(name = "idTaiKhoan", insertable = true, updatable = true)
 	private Account taiKhoan;
@@ -54,7 +52,6 @@ public class Employee implements Serializable {
 		this.sdt = sdt;
 		this.email = email;
 		this.diaChi = diaChi;
-		this.dsDH = dsDH;
 		this.taiKhoan = taiKhoan;
 	}
 	public int getIdNhanVien() {
@@ -92,12 +89,6 @@ public class Employee implements Serializable {
 	}
 	public void setDiaChi(String diaChi) {
 		this.diaChi = diaChi;
-	}
-	public List<Order> getDsDH() {
-		return dsDH;
-	}
-	public void setDsDH(List<Order> dsDH) {
-		this.dsDH = dsDH;
 	}
 	public Account getTaiKhoan() {
 		return taiKhoan;

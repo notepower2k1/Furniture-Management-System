@@ -14,5 +14,5 @@ public interface OrderService {
 	int getConfirmOrderQtt();
 	int getPendingOrderQtt();
 	int getOrderTotal();
-	List<Order> findOrder(int id_kh);
+	List<Order> findOrder(int id_tk);
 }
