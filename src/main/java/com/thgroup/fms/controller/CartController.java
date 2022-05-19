@@ -150,8 +150,22 @@ public class CartController {
 		    String currentUserName = authentication.getName();
 		    account = accountService.getByUsername(currentUserName);
 		}
-		Customer current = customerService.getByAccount(account);
 		
+		if (account.getDsVT().size() == 1) {
+			Customer customer = customerService.getByAccount(account);	
+			Customer current = customer;
+			order.setDiaChiNhanHang(current.getDiaChi());
+			order.setKhachHang(current);
+
+
+
+		} else if (account.getDsVT().size() > 1) {
+			Employee employee = employeeService.getByAccount(account);	
+			Employee current = employee;
+			order.setDiaChiNhanHang(current.getDiaChi());
+			order.setKhachHang(null);
+		}
+
 		
 		String newId = Helper.getNewID(this.orderService.getMaxId(), 2, 2, "DH");
 
@@ -160,12 +174,11 @@ public class CartController {
 		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 		
 		Employee b = this.employeeService.getEmployeeById(3);
-		order.setDiaChiNhanHang(current.getDiaChi());
+		
 		order.setMaDH(newId);
 		order.setGhiChu(note);
-		order.setKhachHang(current);
 		order.setNgayLap(sqlDate);
-		order.setTinhTrang(false);
+		order.setTinhTrang(0);
 		order.setNhanVien(b);
 		this.orderService.saveOrder(order);
 		

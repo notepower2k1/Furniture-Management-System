@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "dondathang")
@@ -24,12 +25,12 @@ public class Order {
 	private int idDonHang;
 	@Column(name = "MaDH", nullable = false)
 	private String maDH;
-	@NotBlank(message = "Nhập ngày lập đơn")
+	@NotNull(message = "Nhập ngày lập đơn")
 	@Column(name = "NgayLap", nullable = false)
 	private Date ngayLap;
-	@NotBlank(message = "Chọn tình trạng của đơn mua")
+	@NotNull(message = "Chọn tình trạng của đơn mua")
 	@Column(name = "TinhTrang", nullable = false)
-	private boolean tinhTrang;
+	private int tinhTrang;
 	@Column(name = "DiaChiNhanHang", nullable = false)
 	private String diaChiNhanHang;
 	@ManyToOne
@@ -44,7 +45,7 @@ public class Order {
     private List<OrderDetails> dsCTDH = new ArrayList<>();
 
 
-	public Order(int idDonHang, String maDH, Date ngayLap, boolean tinhTrang, String diaChiNhanHang, Customer khachHang,
+	public Order(int idDonHang, String maDH, Date ngayLap, int tinhTrang, String diaChiNhanHang, Customer khachHang,
 			Employee nhanVien, String ghiChu, List<OrderDetails> dsCTDH) {
 		super();
 		this.idDonHang = idDonHang;
@@ -87,11 +88,11 @@ public class Order {
 		this.ngayLap = ngayLap;
 	}
 
-	public boolean getTinhTrang() {
+	public int getTinhTrang() {
 		return tinhTrang;
 	}
 
-	public void setTinhTrang(boolean tinhTrang) {
+	public void setTinhTrang(int tinhTrang) {
 		this.tinhTrang = tinhTrang;
 	}
 

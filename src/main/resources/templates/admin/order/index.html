@@ -4,29 +4,29 @@
       layout:decorate="~{layouts/admin-layout}">
 <div layout:fragment="content">
 <!-- Page Heading -->
-	<h1 class="h3 mb-2 text-gray-800">Bảng đơn hàng</h1>
+	<h1 class="h3 mb-2 text-gray-800">Báº£ng Ä‘Æ¡n hÃ ng</h1>
 	<div class="card shadow mb-4">
 		<div class="card-body">
 			<div class="table-responsive">
 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 		        	<thead>
 		            	<tr>
-		                	<th>Mã đơn</th>
-			     			<th>Ngày lập</th>
-			     			<th>Địa chỉ giao</th>
-				     		<th>Khách hàng</th>	
-				     		<th>Nhân viên lập</th>
-		     				<th>Tác vụ </th>
+		                	<th>MÃ£ Ä‘Æ¡n</th>
+			     			<th>NgÃ y láº­p</th>
+			     			<th>Ä�á»‹a chá»‰ giao</th>
+				     		<th>KhÃ¡ch hÃ ng</th>	
+				     		<th>NhÃ¢n viÃªn láº­p</th>
+		     				<th>TÃ¡c vá»¥ </th>
 		            	</tr>
 		            </thead>
 		            <tfoot>
 		               	<tr>
-		                	<th>Mã đơn</th>
-			     			<th>Ngày lập</th>
-			     			<th>Địa chỉ giao</th>
-				     		<th>Khách hàng</th>
-				     		<th>Nhân viên lập</th>
-		     				<th>Tác vụ </th>
+		                	<th>MÃ£ Ä‘Æ¡n</th>
+			     			<th>NgÃ y láº­p</th>
+			     			<th>Ä�á»‹a chá»‰ giao</th>
+				     		<th>KhÃ¡ch hÃ ng</th>
+				     		<th>NhÃ¢n viÃªn láº­p</th>
+		     				<th>TÃ¡c vá»¥ </th>
 		            	</tr>
 		            </tfoot>
 		            <tbody>
@@ -34,7 +34,7 @@
 						   	<td th:text="${order.maDH}"></td>
 						    <td th:text="${order.ngayLap}"></td>
 						    <td th:text="${order.diaChiNhanHang}"></td>
-						    <td th:text="${order.khachHang.hoTen}"></td>
+						    <td th:text="${order.khachHang!=null}?${order.khachHang.hoTen}:${order.nhanVien.hoTen}"></td>
 						    <td th:text="${order.nhanVien.hoTen}"></td>
 				     		<td class="action-area">
 				     			<a th:href="@{/admin/detail-order/{idDonHang}(idDonHang=${order.idDonHang})}" 
