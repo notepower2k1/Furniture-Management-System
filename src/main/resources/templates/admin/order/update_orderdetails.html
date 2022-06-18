@@ -4,7 +4,7 @@
       	layout:decorate="~{layouts/admin-layout}">
 <div layout:fragment="content">
 	<h1 class="h3 mb-2 text-gray-800" th:inline="text">
-		Cập nhật đơn hàng id <b>[[${orderD.donDatHang.idDonHang}]]</b> 
+		Cập đơn chi tiết đơn hàng id <b>[[${orderD.donDatHang.idDonHang}]]</b> 
 	</h1>
 	<div class="row">
 			<div class="col-6">
@@ -25,7 +25,7 @@
 						    <option th:each="item: ${furnituresList}" th:value="${item.idNoiThat}" th:text="${item.tenNT}" name="maNT"></option>
 						</select>
 				 		
-				 		<label>Đơn giá <sup>*</sup></label>
+				 		<label>Đơn giá<sup>*</sup></label>
 				 		<input type="number" th:field = "*{giaMua}" readonly
 				 		placeholder="Nhập đơn giá" class="form-control mb-4 col-12">
 				 		

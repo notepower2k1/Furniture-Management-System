@@ -102,11 +102,9 @@ public class EmployeeController {
 			
 			Account exist_accout = this.accountService.findTopByTenTaiKhoan(accountName);
 			
-			
-			
-			if(exist_accout.getIdTaiKhoan() > 0)
+			if(exist_accout != null)
 			{
-				redirectAttrs.addFlashAttribute("alertType", "Fail");
+				redirectAttrs.addFlashAttribute("alertType", "danger");
 				redirectAttrs.addFlashAttribute("alertText", "Tài khoản đã tồn tại");
 				return "redirect:/admin/create-employee";
 

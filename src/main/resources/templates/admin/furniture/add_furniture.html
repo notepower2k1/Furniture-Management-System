@@ -4,35 +4,35 @@
       	layout:decorate="~{layouts/admin-layout}">   	
 <div layout:fragment="content">
 	<h1 class="h3 mb-2 text-gray-800">Thêm sản phẩm</h1>
-	<div class="card shadow mb-4">
+	<div class="card shadow mb-4 col-6">
 		<div class="card-body">
 			<form id="uploadFiles" th:action="@{/admin/add-furniture}" th:object="${furniture}" method="POST" enctype="multipart/form-data">
 		 		
-		 		<label>Mã nội thất <sup>*</sup></label>
+		 		<label>Mã sản phẩm <sup>*</sup></label>
 		 		<input type="text" th:field = "*{maNoiThat}" required
-		 		placeholder="Nhập mã nội thất" class="form-control mb-4 col-6" readonly>
+		 		placeholder="Nhập mã sản phẩm" class="form-control mb-4 col-12" readonly>
 		 		
-		 		<label>Tên nội thất <sup>*</sup></label>
+		 		<label>Tên sản phẩm <sup>*</sup></label>
 		 		<input type="text" th:field = "*{tenNT}" required
-		 		placeholder="Nhập tên nội thất" class="form-control mb-4 col-6">
+		 		placeholder="Nhập tên sản phẩm" class="form-control mb-4 col-12">
 		 		<label th:if="${#fields.hasErrors('tenNT')}" th:errors="*{tenNT}" class="text-danger font-italic d-block"></label>
 		 		<div class="mb-4"></div>
 		 		
 		 		<label>Đơn giá <sup>*</sup></label>
 		 		<input type="text" th:field = "*{donGia}" required
-		 		placeholder="Nhập đơn giá" class="form-control mb-4 col-6">
+		 		placeholder="Nhập đơn giá" class="form-control mb-4 col-12">
 		 		<label th:if="${#fields.hasErrors('donGia')}" th:errors="*{donGia}" class="text-danger font-italic d-block"></label>
 		 		<div class="mb-4"></div>
 		 		
 		 		<label>Kích thước <sup>*</sup></label>
 		 		<input type="text" th:field = "*{kichThuoc}" required
-		 		placeholder="Nhập kích thước" class="form-control mb-4 col-6">
+		 		placeholder="Nhập kích thước" class="form-control mb-4 col-12">
 		 		<label th:if="${#fields.hasErrors('kichThuoc')}" th:errors="*{kichThuoc}" class="text-danger font-italic d-block"></label>
 		 		<div class="mb-4"></div>
 		 		
 		 		<label>Thời gian bảo hành (tháng)</label>
 		 		<input type="text" th:field = "*{baoHanh}" 
-		 		placeholder="Nhập thời gian bảo hành" class="form-control mb-4 col-6">
+		 		placeholder="Nhập thời gian bảo hành" class="form-control mb-4 col-12">
 		 		<label th:if="${#fields.hasErrors('baoHanh')}" th:errors="*{baoHanh}" class="text-danger font-italic d-block"></label>
 		 		<div class="mb-4"></div>
 		 		
@@ -42,26 +42,26 @@
 		 		
 		 		<label>Hình ảnh phụ <sup>*</sup></label>
 		 		<input type="file" name="subfile" multiple th:value = "*{dsHA}"
-		 		class="form-control mb-4 col-6">
+		 		class="form-control mb-4 col-12">
 		 		
 		 		<label>Chất liệu <sup>*</sup></label>
 		 		<input type="text" th:field = "*{chatLieu}" required
-		 		placeholder="Chất liệu sản phẩm" class="form-control mb-4 col-6">
+		 		placeholder="Nhập chất liệu sản phẩm" class="form-control mb-4 col-12">
 		 		
 		 		<label>Đơn vị tính <sup>*</sup></label>
 		 		<input type="text" th:field = "*{donViTinh}" required
-		 		placeholder="Nhập đơn vị tính" class="form-control mb-4 col-6">
+		 		placeholder="Nhập đơn vị tính" class="form-control mb-4 col-12">
 		 		
 		 		<label>Mô tả</label>
-		 		<textarea rows="5" th:field="*{moTa}" class="form-control mb-4 col-6" placeholder="Nhập mô tả"></textarea>
+		 		<textarea rows="5" th:field="*{moTa}" class="form-control mb-4 col-12" placeholder="Nhập mô tả"></textarea>
 		 		
 		 		<label>Loại nội thất <sup>*</sup></label>
-		 		<select th:field="*{loai}" class="form-control mb-4 col-6">	
+		 		<select th:field="*{loai}" class="form-control mb-4 col-12">	
 				    <option th:each="item: ${categoriesList}" th:value="${item.idLoai}" th:text="${item.tenLoai}" name="maLoai"></option>
 				</select>
 		 	
 		 		<label>Loại khuyến mãi <sup>*</sup></label>
-		 		<select th:field="*{khuyenMai}" class="form-control mb-4 col-6">
+		 		<select th:field="*{khuyenMai}" class="form-control mb-4 col-12">
 				    <option th:each="item: ${promotionsList}" th:value="${item.idKhuyenMai}" th:text="${item.tenKM}"></option>
 				</select>
 		 		<button type="submit" class="btn btn-info">Thêm mới</button>

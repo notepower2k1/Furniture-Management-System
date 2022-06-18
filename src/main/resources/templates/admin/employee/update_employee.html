@@ -5,7 +5,7 @@
 <div layout:fragment="content">
 <!-- Page Heading -->
 	<h1 class="h3 mb-2 text-gray-800">Cập nhật nhân viên</h1>
-	<div class="card shadow mb-4">
+	<div class="card shadow mb-4 col-6">
 		<div class="card-body">
 			<form action="#" th:action="@{/admin/save-employee}" th:object="${employee}" method="POST">
 		 		<input type="hidden" th:value="${accountId != null} ? ${accountId} : -1" name="accountId">
@@ -13,41 +13,41 @@
 		 		
 		 		<label>Mã nhân viên <sup>*</sup></label>
 		 		<input type="text" th:field = "*{maNV}" 
-		 		placeholder="Nhập mã nhân viên" class="form-control col-6" readonly>
+		 		placeholder="Nhập mã nhân viên" class="form-control col-12" readonly>
 		 		<div class="mb-4"></div>
 		 		
 		 		<label>Họ tên <sup>*</sup></label>
 		 		<input type="text" th:field = "*{hoTen}" required
-		 		placeholder="Nhập họ tên nhân viên" class="form-control col-6">
+		 		placeholder="Nhập họ tên nhân viên" class="form-control col-12">
 		 		<label th:if="${#fields.hasErrors('hoTen')}" th:errors="*{hoTen}" class="text-danger font-italic d-block"></label>
 		 		<div class="mb-4"></div>
 		 		
 		 		<label>Số điện thoại <sup>*</sup></label>
 		 		<input type="text" th:field = "*{sdt}" required
-		 		placeholder="Nhập số điện thoại" class="form-control col-6">
+		 		placeholder="Nhập số điện thoại" class="form-control col-12">
 		 		<label th:if="${#fields.hasErrors('sdt')}" th:errors="*{sdt}" class="text-danger font-italic d-block"></label>
 		 		<div class="mb-4"></div>
 		 		
 		 		<label>Email <sup>*</sup></label>
 		 		<input type="email" th:field = "*{email}" required
-		 		placeholder="Nhập email" class="form-control col-6">
+		 		placeholder="Nhập email" class="form-control col-12">
 		 		<label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger font-italic d-block"></label>
 		 		<div class="mb-4"></div>
 		 		
 		 		<label>Địa chỉ</label>
 		 		<input type="text" th:field = "*{diaChi}" 
-		 		placeholder="Nhập địa chỉ" class="form-control mb-4 col-6">
+		 		placeholder="Nhập địa chỉ" class="form-control mb-4 col-12">
 		 		
 		 		<label>Tài khoản <sup>*</sup></label>
 		 		<input type="text" th:value="${account.tenTaiKhoan}" name="accountName" id="accountName" required readonly
-		 		placeholder="Nhập tài khoản" class="form-control mb-4 col-6">
+		 		placeholder="Nhập tài khoản" class="form-control mb-4 col-12">
 		 		
 		 		<label>Mật khẩu <sup>*</sup></label>
 		 		<input type="password" name="password" id="password" required
-		 		placeholder="Nhập mật khẩu" class="form-control mb-4 col-6">
+		 		placeholder="Nhập mật khẩu" class="form-control mb-4 col-12">
 		 		
 		 		<label>Roles</label>
-		 		<div class="mb-4 col-6">
+		 		<div class="mb-4 col-12">
 		 			<div class="custom-control custom-checkbox custom-control-inline"
 		 				th:each="role : ${rolesList}">
 		 				<input type="checkbox" name="roles" class="custom-control-input"

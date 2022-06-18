@@ -30,12 +30,12 @@
 				                <td class="form-label" th:text="${order.account.tenTaiKhoan}"></td>
 				            </tr>
 				            <tr>
-				                <td class="form-label">Địa chỉ nhận hàng</td>
+				                <td class="form-label">Địa chỉ giao hàng</td>
 				                <td class="form-label" th:text="${order.diaChiNhanHang}"></td>
 				            </tr>
 				         
 				            <tr>
-				                <td class="form-label">Tình Trạng</td>
+				                <td class="form-label">Tình trạng</td>
 				                <td class="form-label" th:switch="${order.tinhTrang}" >
 				                	<span th:case=0 class="text-warning font-weight-bold">Chờ xác nhận</span>
 				                	<span th:case=1 class="text-info font-weight-bold">Đã xác nhận</span>

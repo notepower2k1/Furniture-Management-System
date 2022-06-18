@@ -20,7 +20,7 @@
 				 		<input type="text" th:field = "*{maDH}" readonly
 				 		 class="form-control mb-4 col-12">
 				 		
-				 		<label>Ngày đặt<sup>*</sup></label>
+				 		<label>Ngày lập<sup>*</sup></label>
 				 		<input type="date" th:field = "*{ngayLap}" required
 				 		placeholder="Nhập ngày lập" class="form-control col-12">
 				 		<label th:if="${#fields.hasErrors('ngayLap')}" th:errors="*{ngayLap}" class="text-danger font-italic d-block"></label>
@@ -41,12 +41,12 @@
 				 			<div class="custom-control custom-radio custom-control-inline">
 				 				<input type="radio" id="option1" class="custom-control-input" name="option1" 
 				 				value="1" th:field="*{tinhTrang}">
-	                			<label class="custom-control-label" for="option1">Xác nhận</label>
+	                			<label class="custom-control-label" for="option1">Đã xác nhận</label>
 				 			</div>
 						    <div class="custom-control custom-radio custom-control-inline">
 						    	<input type="radio" id="option2" class="custom-control-input" name="option2" 
 							    value="0" th:field="*{tinhTrang}">
-					            <label class="custom-control-label" for="option2">Chưa xác nhận</label>
+					            <label class="custom-control-label" for="option2">Chờ xác nhận</label>
 						    </div>
 				 		</div>
 			            <label th:if="${#fields.hasErrors('tinhTrang')}" th:errors="*{tinhTrang}" class="text-danger font-italic d-block"></label>
@@ -54,7 +54,7 @@
 		 				
 				 		<label>Ghi chú</label>
 				 		<input type="text" th:field = "*{ghiChu}" 
-				 		placeholder="Nhập ghi chú" class="form-control mb-4 col-12">
+				 		placeholder="Nháº­p ghi chÃº" class="form-control mb-4 col-12">
 				 	
 				 		<button type="submit" class="btn btn-info">Cập nhật</button>
 				 	</form>

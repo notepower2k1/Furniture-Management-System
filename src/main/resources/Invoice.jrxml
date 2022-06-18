@@ -126,7 +126,7 @@
 			</textField>
 			<image hAlign="Center">
 				<reportElement x="0" y="0" width="80" height="69" uuid="94883631-a913-43e2-b182-ab8d77d0181e"/>
-				<imageExpression><![CDATA["static/admin/img/invoice_logo.png"]]></imageExpression>
+				<imageExpression><![CDATA["static/user/images/main-logo/logo.png"]]></imageExpression>
 			</image>
 			<textField pattern="EEEEE dd MMMMM yyyy">
 				<reportElement x="465" y="30" width="84" height="20" uuid="3836ce65-eca3-4cad-a6de-b1818def0a2b"/>
@@ -151,7 +151,7 @@
 				<textElement>
 					<font fontName="DejaVu Sans" size="19" isBold="true"/>
 				</textElement>
-				<text><![CDATA[TH GROUP]]></text>
+				<text><![CDATA[KHANG LAM CO.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="95" y="55" width="235" height="15" uuid="b8cc42fd-b569-497d-834d-7e854040ad18"/>
@@ -218,7 +218,7 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="DejaVu Sans" size="13"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{order}.getKhachHang().getHoTen()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{order}.getAccount().getKhachHang()!=null?$P{order}.getAccount().getKhachHang().getHoTen():$P{order}.getAccount().getNhanVien().getHoTen()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="110" y="86" width="159" height="30" uuid="5277982f-ec11-4764-98c0-b522e520b7fb"/>
@@ -232,7 +232,7 @@
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="DejaVu Sans" size="13"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{order}.getNhanVien().getHoTen()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{order}.getAccount().getNhanVien()!=null?$P{order}.getAccount().getNhanVien().getHoTen():$P{order}.getAccount().getNhanVien().getHoTen()]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="380" y="86" width="175" height="30" uuid="bd630627-5f4f-4c8d-9684-64f727c4066b"/>

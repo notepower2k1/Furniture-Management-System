@@ -12,27 +12,27 @@
 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 		        	<thead>
 		            	<tr>
-		                	<th>Mã loại</th>
+		                	<th>Hình ảnh</th>
 			     			<th>Tên</th>
 				     		<th>Đơn giá</th>
 			     			<th>Kích thước</th>
 			     			<th>Loại</th>
-		     				<th>Tác vụ </th>
+		     				<th>Tác vụ</th>
 		            	</tr>
 		            </thead>
 		            <tfoot>
 		               	<tr>
-		                	<th>Mã loại</th>
+		                	<th>Hình ảnh</th>
 			     			<th>Tên</th>
 				     		<th>Đơn giá</th>
 			     			<th>Kích thước</th>
 			     			<th>Loại</th>
-		     				<th>Tác vụ </th>
+		     				<th>Tác vụ</th>
 		            	</tr>
 		            </tfoot>
 		            <tbody>
 		                <tr th:each="furniture:${furnituresList}">
-						   	<td th:text="${furniture.maNoiThat}"></td>
+						   	<td><img class="img-thumbnail img-fluid" th:src="@{/admin/img/} + ${furniture.hinhAnh}" style="height: 150px; width: 250px;" /></td>
 						    <td th:text="${furniture.tenNT}"></td>
 						    <td th:inline="text">[[${#numbers.formatDecimal(furniture.donGia, 0, 'COMMA', 0, 'POINT')}]] VND</td>
 						    <td th:text="${furniture.kichThuoc}"></td>

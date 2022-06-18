@@ -25,10 +25,8 @@ public class Customer {
 	private int idKhachHang;
 	@Column(name = "MaKH", nullable = false)
 	private String maKH;
-	@NotBlank(message = "Tên khách hàng không để trống")
 	@Column(name = "HoTenKH", nullable = false)
 	private String hoTen;
-	@Pattern(regexp = "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$", message = "Số điện thoại không hợp lệ")
 	@Column(name = "SDT", nullable = false)
 	private String sdt;
 	@Pattern(regexp = "^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$", message = "Email không hợp lệ")

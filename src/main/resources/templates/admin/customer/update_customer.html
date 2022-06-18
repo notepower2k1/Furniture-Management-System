@@ -5,7 +5,7 @@
 <div layout:fragment="content">
 <!-- Page Heading -->
 	<h1 class="h3 mb-2 text-gray-800">Cập nhật khách hàng</h1>
-	<div class="card shadow mb-4">
+	<div class="card shadow mb-4 col-6">
 		<div class="card-body">
 			<form action="#" th:action="@{/admin/save-customer}" th:object="${customer}" method="POST">
 		 		
@@ -14,38 +14,38 @@
 		 		
 		 		<label>Mã khách hàng <sup>*</sup></label>
 		 		<input type="text" th:field = "*{maKH}" 
-		 		placeholder="Nhập mã khách hàng" class="form-control col-6" readonly>
+		 		placeholder="Nhập mã khách hàng" class="form-control col-12" readonly>
 		 		<div class="mb-4"></div>
 		 		
-		 		<label>Họ tên <sup>*</sup></label>
+		 		<label>Họ tên<sup>*</sup></label>
 		 		<input type="text" th:field = "*{hoTen}" required
-		 		placeholder="Nhập họ tên khách hàng" class="form-control col-6" >
+		 		placeholder="Nhập họ tên khách hàng" class="form-control col-12" >
 		 		<label th:if="${#fields.hasErrors('hoTen')}" th:errors="*{hoTen}" class="text-danger font-italic d-block"></label>
 		 		<div class="mb-4"></div>
 		 		
 		 		<label>Số điện thoại <sup>*</sup></label>
 		 		<input type="text" th:field = "*{sdt}" required
-		 		placeholder="Nhập số điện thoại" class="form-control col-6">
+		 		placeholder="Nhập số điện thoại" class="form-control col-12">
 		 		<label th:if="${#fields.hasErrors('sdt')}" th:errors="*{sdt}" class="text-danger font-italic d-block"></label>
 		 		<div class="mb-4"></div>
 		 		
 		 		<label>Email <sup>*</sup></label>
 		 		<input type="email" th:field = "*{email}" required
-		 		placeholder="Nhập email khách hàng" class="form-control col-6">
+		 		placeholder="Nhập email khách hàng" class="form-control col-12">
 		 		<label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger font-italic d-block"></label>
 		 		<div class="mb-4"></div>
 		 		
 		 		<label>Địa chỉ</label>
 		 		<input type="text" th:field = "*{diaChi}" required
-		 		placeholder="Nhập địa chỉ khách hàng" class="form-control mb-4 col-6">
+		 		placeholder="Nhập địa chỉ khách hàng" class="form-control mb-4 col-12">
 		 		
 				<label>Tài khoản <sup>*</sup></label>
 		 		<input type="text" name="accountName" id="accountName" th:value="${account.tenTaiKhoan}" readonly
-		 		placeholder="Nhập tài khoản" class="form-control mb-4 col-6">
+		 		placeholder="Nhập tài khoản" class="form-control mb-4 col-12">
 		 		
 		 		<label>Mật khẩu <sup>*</sup></label>
 		 		<input type="password" name="password" id="password" required
-		 		placeholder="Nhập mật khẩu" class="form-control mb-4 col-6">
+		 		placeholder="Nhập mật khẩu" class="form-control mb-4 col-12">
 		 		
 		 		<button type="submit" class="btn btn-info">Cập nhật</button>
 		 	</form>
