@@ -1,4 +1,4 @@
-# Furniture-Management-System-Using-Spring-Boot
+# RGB, CMY, HSI color system
 * RGB
    - Dùng để hiển thị hình ảnh, video trên các thiết bị điện tử, màn hình tivi, màn hình điện tử,...
    - Hệ màu RGB hoạt động bằng cách phát các điểm sáng màu khác nhau để tạo ra hình ảnh, màu sắc trên nền đen như tivi, máy ảnh, máy tính,….Dải màu của RGB rộng hơn CMYK, đặc biệt là các màu nằm trong huỳnh quang sáng. Bởi vậy chúng thường được sử dụng để quan sát hình ảnh, thiết kế,….
